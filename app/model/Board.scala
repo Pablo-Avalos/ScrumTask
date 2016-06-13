@@ -1,5 +1,5 @@
 package model
 
-class Tablero(idT:Integer) {
+class Tableroi(idT:Integer) {
   var id = idT: Integer
 }
