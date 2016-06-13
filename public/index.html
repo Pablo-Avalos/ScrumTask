@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scrum Task</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="javascripts/utilUi.js"></script>
+ <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+  
+<style>
+#feedback {
+	font-size: 1.4em;
+}
+
+#selectable .ui-selecting {
+	background: #FECA40;
+}
+
+#selectable .ui-selected {
+	background: #F39814;
+	color: white;
+}
+
+#selectable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#selectable li {
+	margin: 3px;
+	padding: 0.4em;
+	font-size: 0.8em;
+	height: 18px;
+}
+</style>
+<script>
+	$(function() {
+		$("#selectable").selectable();
+	});
+</script>
+</head>
+<body>
+
+	<table width="100%" height="600px" cellspacing="1px" border="1px">
+		<tr height="50px">
+			<td colspan="2px">
+				<table title="Banner" border="0">
+					<tr>
+						<td><div>Scrum Task</div></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr height="200px">
+			<td>
+				<table title="Menu" border="0" width="100px">
+					<tr>
+						<td class="topleft-Proyectos">
+							<h4>Proyectos</h4>
+							<div>
+								<ol id="selectable">
+									<li class="ui-widget-content">Projecto 1</li>
+									<li class="ui-widget-content">Projecto 2</li>
+									<li class="ui-widget-content">Projecto 3</li>
+								</ol>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table title="Contenido" border="0" height="100%" width="100%">
+					<tr>
+						<td><div id="tabs" height="100%" width="100%">
+  <div><ul>
+    <li><a href="#tabs-1">Reuniones</a></li>
+    <li><a href="#tabs-2">Miembros</a></li>
+    <li><a href="#tabs-3">Tablero</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+  </div>
+  <div id="tabs-2">
+    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+  </div>
+  <div id="tabs-3">
+    <div class="column">Iteracion 1
+ 
+  <div class="portlet">
+    <div class="portlet-header">ID: 1</div>
+    <div class="portlet-content">Como: Scrum Master <br> Quiero: Crear un proyecto <br> Para: Darle de alta en el sistema </div>
+  </div>
+ 
+  <div class="portlet">
+    <div class="portlet-header">ID: 2</div>
+    <div class="portlet-content">Como: Scrum Master <br> Quiero: Crear un proyecto <br> Para: Darle de alta en el sistema </div>
+  </div>
+ 
+</div>
+ 
+<div class="column">Iteracion 2
+ 
+  <div class="portlet">
+    <div class="portlet-header">ID: 3</div>
+    <div class="portlet-content">Como: Scrum Master <br> Quiero: Crear un proyecto <br> Para: Darle de alta en el sistema </div>
+  </div>
+ 
+</div>
+ 
+<div class="column">Iteracion 3
+ 
+  <div class="portlet">
+    <div class="portlet-header">ID: 4</div>
+    <div class="portlet-content">Como: Scrum Master <br> Quiero: Crear un proyecto <br> Para: Darle de alta en el sistema </div>
+  </div>
+ 
+  <div class="portlet">
+    <div class="portlet-header">ID: 5</div>
+    <div class="portlet-content">Como: Scrum Master <br> Quiero: Crear un proyecto <br> Para: Darle de alta en el sistema </div>
+  </div>
+ 
+</div>
+  </div>
+</div>
+</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
