@@ -2,7 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-
 # Home page
 GET     /ScrumTask/*file                          controllers.Assets.at(path="/public", file)
 
