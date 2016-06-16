@@ -11,5 +11,5 @@ class Daily extends Reunion {
   def crearDaily(dia:Integer, mes:Integer, anio:Integer, hora:Integer, minutos:Integer ){
     this.crearReunion(dia, mes, anio, hora, minutos)
   }
- }
+ 
 }
