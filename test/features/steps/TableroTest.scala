@@ -20,6 +20,32 @@ class TableroTest extends ScalaDsl with EN{
   var tarea2 = null: Tarea
   var release = null: Release
 
+  Given("""^Un tablero sin tarea$""") { () =>
+    //// Express the Regexp above with the code you wish you had
+  }
+  When("""^Creo un tablero con id (\d+) sin tarea$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    tablero = new Tablero(arg0)
+  }
+  Then("""^La cantidad de tareas en el tablero debe ser (\d+)$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    assertEquals(arg0, tablero.tareas.size) 
+  }
+  
+  Given("""^Un tablero con una tarea con id (\d+)$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    tarea = new Tarea(arg0)
+  }
+  When("""^Creo un tablero con id (\d+)$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    tablero = new Tablero(arg0)
+    tablero.agregarTarea(tarea)
+  }
+  Then("""^La cantidad de tareas del tablero debe ser (\d+)$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    assertEquals(arg0, tablero.tareas.size) 
+  }
+  
   Given("""^Un tablero inicializado y una tarea inicializada$""") { () =>
     //// Express the Regexp above with the code you wish you had
     tablero = new Tablero(1)
@@ -67,5 +93,20 @@ class TableroTest extends ScalaDsl with EN{
   Then("""^El nombre del primer release del tablero debe ser "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
     assertEquals(arg0, tablero.listaDeRelease(0).name) 
+  }
+  
+  Given("""^Un tablero con release$""") { () =>
+    //// Express the Regexp above with the code you wish you had
+    tablero = new Tablero(1)
+    release = new Release
+    tablero.agregarRelease(release)
+  }
+  When("""^Agrego un nuevo release$""") { () =>
+    //// Express the Regexp above with the code you wish you had
+    tablero.agregarRelease(release)
+  }
+  Then("""^La cantidad de release debe ser (\d+)$""") { (arg0: Int) =>
+    //// Express the Regexp above with the code you wish you had
+    assertEquals(arg0, tablero.listaDeRelease.size) 
   }
 }
