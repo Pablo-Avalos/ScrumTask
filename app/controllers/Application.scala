@@ -3,10 +3,10 @@ package controllers
 import play.api._
 import play.api.mvc._
 import play.api.mvc.Result
-import play.libs.Json
 import scala.collection.mutable.ListBuffer
-import model.Project
-import model.Project
+import play.api.libs.json.Json
+import play.api.libs.functional.syntax._
+import model._
 
 
 
@@ -21,12 +21,17 @@ object Application extends Controller {
 //     Collection<Libro> libros = Biblioteca.getInstance().todasLasInstancias();
 //     return ok(Json.toJson(libros));
 //    }
-        def proyectos = Action {
-        var project =  new Project
-        project.name = "Mi Primer Proyecto"
-        val json = Json.toJson(project.toString())
-        print(json)
-          Ok(Json.stringify(json))
-        }
+    
+  val appPorDefecto = new AppPorDefecto
         
+  implicit val proyectoWrites = Json.writes[Project]
+  
+  
+  def proyectos = Action {
+    val json = Json.toJson(appPorDefecto.proyectos)
+    Ok(json)
+  }
+  
+  
+  
 }

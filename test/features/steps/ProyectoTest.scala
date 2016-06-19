@@ -19,21 +19,21 @@ class ProyectoTest extends ScalaDsl with EN {
   var release = null: Release 
   Given("""^Tengo un proyecto inicializado$""") { () =>
     //// Express the Regexp above with the code you wish you had
-    project = new Project
+    project = new Project(1, "asfd")
 
   }
   When("""^Le seteo el nombre "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
-    project.name = arg0
+    project.nombre = arg0
   }
   Then("""^El nombre del proyecto debe ser "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
-    assertEquals(arg0, project.name)
+    assertEquals(arg0, project.nombre)
   }
 
   Given("""^Tengo un proyecto incializado$""") { () =>
     //// Express the Regexp above with the code you wish you had
-    project = new Project
+    project = new Project(1, "New Proyect")
   }
   When("""^Seteo el tablero con id (\d+)$""") { (arg0: Int) =>
     //// Express the Regexp above with the code you wish you had
@@ -47,7 +47,7 @@ class ProyectoTest extends ScalaDsl with EN {
    
   Given("""^Un proyecto sin colaboradores y un colaborador$""") { () =>
     //// Express the Regexp above with the code you wish you had
-    project = new Project
+    project = new Project(1, "New Proyect")
     colaborador = new Colaborador
   }
   When("""^Agrego al colaborador "([^"]*)"$""") { (arg0: String) =>
