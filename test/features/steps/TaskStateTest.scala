@@ -7,9 +7,9 @@ import model.Tarea
 
 @RunWith(classOf[Cucumber])
 class TaskStateTest extends ScalaDsl with EN {
-  var tarea = new Tarea(115) 
-  var tarea2 = new Tarea(2)
-  var tarea3= new Tarea(3)
+  var tarea = new Tarea(115,null) 
+  var tarea2 = new Tarea(2,null)
+  var tarea3= new Tarea(3,null)
 
 When("""^Le seteo el estado Finished$"""){ () =>
   //// Express the Regexp above with the code you wish you had

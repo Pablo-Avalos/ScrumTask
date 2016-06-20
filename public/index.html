@@ -54,111 +54,58 @@
 						<td>
 							<h4>Proyectos</h4>
 							<div>
-								<ol id="selectable">
-									<li class="ui-widget-content">Projecto-1</li>
-									<li class="ui-widget-content">Projecto-2</li>
-									<li class="ui-widget-content">Projecto-3</li>
-								</ol>
+								<select id="Select-Proyectos">
+								</select>
 							</div>
 						</td>
 					</tr>
 				</table>
-		    </td>
-		<td>
-			<table title="Contenido" border="0" height="100%" width="100%">
-				<tr>
-					<td><div id="tabs" height="100%" width="100%">
-							<div>
+			</td>
+			<td>
+				<table title="Contenido" border="0" height="100%" width="100%">
+					<tr>
+						<td><div id="tabs" height="100%" width="100%">
+
 								<ul>
 									<li><a href="#tabs-1">Reuniones</a></li>
 									<li><a href="#tabs-2">Miembros</a></li>
 									<li><a href="#tabs-3">Tablero</a></li>
 								</ul>
 								<div id="tabs-1">
-									<p>Proin elit arcu, rutrum commodo, vehicula tempus,
-										commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi
-										sit amet mauris. Nam elementum quam ullamcorper ante. Etiam
-										aliquet massa et lorem. Mauris dapibus lacus auctor risus.
-										Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula
-										eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae
-										ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris
-										vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt
-										interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+									<p>
 								</div>
 								<div id="tabs-2">
-									<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio
-										metus gravida ante, ut pharetra massa metus id nunc. Duis
-										scelerisque molestie turpis. Sed fringilla, massa eget luctus
-										malesuada, metus eros molestie lectus, ut tempus eros massa ut
-										dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in
-										ligula suscipit aliquam. Praesent in eros vestibulum mi
-										adipiscing adipiscing. Morbi facilisis. Curabitur ornare
-										consequat nunc. Aenean vel metus. Ut posuere viverra nulla.
-										Aliquam erat volutpat. Pellentesque convallis. Maecenas
-										feugiat, tellus pellentesque pretium posuere, felis lorem
-										euismod felis, eu ornare leo nisi vel felis. Mauris
-										consectetur tortor et purus.</p>
+									<p></p>
 								</div>
 								<div id="tabs-3">
-									<div class="column">
-										Iteracion 1
+									<ul id="sortable"></ul>
+									<div>
+										<div id="dialog-form" title="Crear Tarea">
+											<p class="validateTips">Completar Campos</p>
 
-										<div class="portlet">
-											<div class="portlet-header">ID: 1</div>
-											<div class="portlet-content">
-												Como: Scrum Master <br> Quiero: Crear un proyecto <br>
-												Para: Darle de alta en el sistema
-											</div>
+											<form>
+												<fieldset>
+													<label for="name">IdProjecto</label> <input type="text"
+														name="idProyecto" id="idProyecto"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Nombre</label> <input type="text" name="name"
+														id="name" class="text ui-widget-content ui-corner-all">
+													<label for="descripcion">Descripcion</label> <input
+														type="text" name="descripcion" id="descripcion"
+														class="text ui-widget-content ui-corner-all"> <input
+														type="submit" tabindex="-1"
+														style="position: absolute; top: -1000px">
+												</fieldset>
+											</form>
 										</div>
-
-										<div class="portlet">
-											<div class="portlet-header">ID: 2</div>
-											<div class="portlet-content">
-												Como: Scrum Master <br> Quiero: Crear un proyecto <br>
-												Para: Darle de alta en el sistema
-											</div>
-										</div>
-
-									</div>
-
-									<div class="column">
-										Iteracion 2
-
-										<div class="portlet">
-											<div class="portlet-header">ID: 3</div>
-											<div class="portlet-content">
-												Como: Scrum Master <br> Quiero: Crear un proyecto <br>
-												Para: Darle de alta en el sistema
-											</div>
-										</div>
-
-									</div>
-
-									<div class="column">
-										Iteracion 3
-
-										<div class="portlet">
-											<div class="portlet-header">ID: 4</div>
-											<div class="portlet-content">
-												Como: Scrum Master <br> Quiero: Crear un proyecto <br>
-												Para: Darle de alta en el sistema
-											</div>
-										</div>
-
-										<div class="portlet">
-											<div class="portlet-header">ID: 5</div>
-											<div class="portlet-content">
-												Como: Scrum Master <br> Quiero: Crear un proyecto <br>
-												Para: Darle de alta en el sistema
-											</div>
-										</div>
-
+										<button id="create-user">Agregar Tarea</button>
 									</div>
 								</div>
+
 							</div></td>
-				</tr>
-			</table>
-		</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
 	</table>
 </body>

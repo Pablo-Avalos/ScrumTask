@@ -14,10 +14,10 @@ import org.junit.Assert._
 @RunWith(classOf[Cucumber])
 class TaskTest extends ScalaDsl with EN{
   var tablero = new Tablero(7)
-  var tarea = new Tarea(115)
+  var tarea = new Tarea(115,null)
   
   When("""^Elimino la tarea con id (\d+)$"""){ (arg0:Int) =>
-    var tarea = new Tarea(arg0)
+    var tarea = new Tarea(arg0,null)
     tablero agregarTarea(tarea)
     tablero eliminarTarea(arg0)
   }
@@ -36,7 +36,7 @@ class TaskTest extends ScalaDsl with EN{
   
   Given("""^Tengo una tarea$""") { () =>
     //// Express the Regexp above with the code you wish you had
-    tarea = new Tarea(1)
+    tarea = new Tarea(1,null)
   }
   When("""^Le seteo el nombre como "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had

@@ -34,7 +34,7 @@ class TableroTest extends ScalaDsl with EN{
   
   Given("""^Un tablero con una tarea con id (\d+)$""") { (arg0: Int) =>
     //// Express the Regexp above with the code you wish you had
-    tarea = new Tarea(arg0)
+    tarea = new Tarea(arg0,null)
   }
   When("""^Creo un tablero con id (\d+)$""") { (arg0: Int) =>
     //// Express the Regexp above with the code you wish you had
@@ -49,7 +49,7 @@ class TableroTest extends ScalaDsl with EN{
   Given("""^Un tablero inicializado y una tarea inicializada$""") { () =>
     //// Express the Regexp above with the code you wish you had
     tablero = new Tablero(1)
-    tarea = new Tarea(1)
+    tarea = new Tarea(1,null)
   }
   When("""^Agrego la tarea con nombre "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
@@ -64,8 +64,8 @@ class TableroTest extends ScalaDsl with EN{
   Given("""^Un tablero inicializado y dos tarea inicializadas$""") { () =>
     //// Express the Regexp above with the code you wish you had
     tablero = new Tablero(1)
-    tarea = new Tarea(1)
-    tarea2 = new Tarea(2)
+    tarea = new Tarea(1,null)
+    tarea2 = new Tarea(2,null)
   }
   When("""^Agrego la tarea con nombre "([^"]*)" y agrego la tarea con nombre "([^"]*)"$""") { (arg0: String,arg1: String) =>
     //// Express the Regexp above with the code you wish you had
