@@ -2,10 +2,10 @@ package model
 
 import scala.collection.mutable.ListBuffer
 
-class Tablero(idT:Integer) {
-  var id = idT: Integer
-  var tareas =new ListBuffer[Tarea]
-  var listaDeRelease =new ListBuffer[Release]
+case class Tablero(idT:Int) {
+  
+  var tareas = new ListBuffer[Tarea]
+  var listaDeRelease = new ListBuffer[Release]
   
   def agregarTarea(tarea:Tarea){
     tareas.+=(tarea)

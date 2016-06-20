@@ -7,31 +7,65 @@ import scala.collection.mutable.ListBuffer
 import play.api.libs.json.Json
 import play.api.libs.functional.syntax._
 import model._
+import akka.io.Tcp.Write
+import play.api.libs.json.Writes
 
 
 
 object Application extends Controller {
-
-//  def index = Action {
-//    Ok(views.html.index("Your new application is ready."))
-//  }
-//
-//  public static Result libros() {
-//     response().setContentType("application/json");
-//     Collection<Libro> libros = Biblioteca.getInstance().todasLasInstancias();
-//     return ok(Json.toJson(libros));
-//    }
     
   val appPorDefecto = new AppPorDefecto
-        
-  implicit val proyectoWrites = Json.writes[Project]
+  
+  implicit val tareaWrites = new Writes[Tarea] {
+    def writes(tarea: Tarea) = Json.obj(
+      "id" -> tarea.id,
+      "nombre" -> tarea.nombre,
+      "descripcion" -> tarea.descripcion,
+      "autor" -> tarea.autor//,"estado" -> tarea.estado
+    )
+  }
+  
+  implicit val tableroWrites = new Writes[Tablero] {
+    def writes(tablero: Tablero) = Json.obj(
+      "idT" -> tablero.idT,
+      "tareas" -> tablero.tareas
+    )     
+  }
+  
+  implicit val colaboradorWrites = new Writes[Colaborador]{
+    def writes(colaborador : Colaborador) = Json.obj (
+      "nombre" -> colaborador.name    
+    )
+  }
+  
+  implicit val proyectoWrites = new Writes[Project] {
+    def writes(proyecto: Project) = Json.obj (
+      "id" -> proyecto.id,
+      "nombre" -> proyecto.nombre, 
+      "colaboradores" -> proyecto.colaboradores
+      
+      //,"tablero" -> proyecto.tablero// con este atributo falla la consulta
+    )
+  }
   
   
-  def proyectos = Action {
+  
+  
+  
+  def getProyectos = Action {
     val json = Json.toJson(appPorDefecto.proyectos)
     Ok(json)
   }
   
-  
+  def getTablero(idProyecto: Int) = Action {
+    val tablero = appPorDefecto.getTablero(idProyecto)
+    if (tablero == null){
+      InternalServerError("Upps al parecer este proyecto no tiene un tablero asociado.")
+    }
+    else{
+      val json = Json.toJson(tablero)
+      Ok(json)  
+    }
+  }
   
 }
