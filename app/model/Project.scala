@@ -9,4 +9,8 @@ case class Project (id: Int, var nombre: String){
   def agregarColaborador(colaborador:Colaborador){
     colaboradores.+=(colaborador)
   }
+  
+  def eliminarColaborador(nombre: String){
+    colaboradores = colaboradores.filterNot { c => c.name == nombre }
+  }
 }

@@ -56,6 +56,24 @@ object Application extends Controller {
       Ok(json)
     }
   }
+  
+  def getColaboradores(idProyecto: Int) = Action {
+    val colaboradores = appPorDefecto.getColaboradores(idProyecto)
+    Ok(Json.toJson(colaboradores))
+  }
+  
+  def agregarColaborador(idProyecto: Int, nombre: String) = Action{
+    val nuevoColaborador = new Colaborador()
+    nuevoColaborador.name = nombre
+    appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
+    Ok
+  }
+  
+  def eliminarColaborador(idProyecto: Int, nombreColaborador: String) = Action{
+    appPorDefecto.getProyecto(idProyecto).eliminarColaborador(nombreColaborador)
+    Ok
+  }
+  
   def agregarTarea(idProyecto: Int, nombre: String, descripcion: String) = Action {
 
     val tarea = new Tarea(appPorDefecto.getTablero(idProyecto).tareas.length, nombre)

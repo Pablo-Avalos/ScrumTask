@@ -1,5 +1,6 @@
 var idProyectoActual = null;
 var proyectos = null;
+var proyectoActual = null;
 
 
 /* Obtener proyectos disponibles */
@@ -18,14 +19,11 @@ $.ajax({
 					'<option value="' + response[i].id + '">'
 							+ response[i].nombre + '</option>');
 		}
+		obtenerTablero(idProyectoActual)
+		obtenerIntegrantes(idProyectoActual)
 	}
 });
 
-
-
-
-/*Obtener un tablero por defecto*/
-$(document).ready(obtenerTablero(1));
 
 /* Seleccionar un proyecto */
 $(document).ready( function () {
@@ -36,7 +34,7 @@ $(document).ready( function () {
 
 function actualizarProyecto(idProyecto){
 	idProyectoActual = idProyecto
-	//actualizarColaboradores();
+	actualizarIntegrantes();
 	//actualizarReuniones();
 	actulizarTablero();
 }
@@ -60,6 +58,21 @@ function obtenerTablero(idProyecto) {
 								+ response.tareas[i].id + '<br> Nombre : '
 								+ response.tareas[i].nombre + '<br> Descripcion: '+ response.tareas[i].descripcion + '</li>');
 
+			}
+		}
+	});
+}
+
+function obtenerIntegrantes(idProyecto) {
+	$.ajax({
+		type : 'GET',
+		contentType : 'application/json',
+		dataType : 'json',
+		url : '/integrantes/' + idProyecto,
+		success : function(response) {
+			for (var i = 0; i < response.length; i++) {
+				$("#selectable").append(
+						'<li class="ui-widget-content">' + response[i].nombre + '</li>');
 			}
 		}
 	});
@@ -186,4 +199,53 @@ function crearTarea(idProyecto, nombre, descripcion) {
 			actulizarTablero();
 		}
 	});
+}
+
+
+
+//Integrantes
+
+var nombreIntegranteSeleccionado = null;
+
+
+$(function() {
+    $( "#selectable" ).selectable({
+      stop: function() {
+        $( ".ui-selected", this ).each(function() {
+          nombreIntegranteSeleccionado = $(this).text();
+        });
+      }
+    });
+});
+
+$(function() {
+	$("#agregarIntegrante").button().on("click", function() {
+		//abrir dialog
+	});
+});
+
+$(function() {
+	$("#eliminarIntegrante").button({}).on("click", function() {
+		eliminarIntegranteSeleccionado();
+	});
+});
+
+
+function eliminarIntegranteSeleccionado() {
+	$.ajax({
+		type : 'GET',
+		contentType : 'application/json',
+		dataType : 'json',
+		url : '/eliminarIntegrante/' + idProyectoActual + '/' + nombreIntegranteSeleccionado,
+		success : function(response) {
+		},
+		complete : function () {
+			actualizarIntegrantes();
+		}
+	});
+}
+
+function actualizarIntegrantes(){
+	$("#selectable").empty();
+	obtenerIntegrantes(idProyectoActual);
 }

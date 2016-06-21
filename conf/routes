@@ -9,4 +9,7 @@ GET     /ScrumTask/*file                          controllers.Assets.at(path="/p
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET		/proyectos				    controllers.Application.getProyectos
 GET 	/tablero/:idProyecto         controllers.Application.getTablero(idProyecto: Int)
-GET    /agregarTarea/:idProyecto/:nombre/:descripcion 	 controllers.Application.agregarTarea(idProyecto: Int, nombre: String, descripcion: String)
+GET     /agregarTarea/:idProyecto/:nombre/:descripcion 	 controllers.Application.agregarTarea(idProyecto: Int, nombre: String, descripcion: String)
+GET 	/integrantes/:idProyecto controllers.Application.getColaboradores(idProyecto: Int)
+GET		/agregarIntegrante/:idProyecto/:nombre  controllers.Application.agregarColaborador(idProyecto: Int, nombre: String)
+GET		/eliminarIntegrante/:idProyecto/:nombreColaborador controllers.Application.eliminarColaborador(idProyecto: Int, nombreColaborador)

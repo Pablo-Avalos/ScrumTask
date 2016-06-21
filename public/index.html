@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Scrum Task</title>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="javascripts/utilUi.js"></script>
@@ -38,11 +37,15 @@
 	height: 18px;
 }
 </style>
-<script>
-	$(function() {
-		$("#selectable").selectable();
-	});
-</script>
+
+<style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  </style>
+
 </head>
 <body>
 	<div class="wide nav header">Scrum Task</div>
@@ -75,7 +78,12 @@
 									<p>
 								</div>
 								<div id="tabs-2">
-									<p></p>
+										
+										<ol id="selectable">
+										</ol>
+										
+										<button id="agregarIntegrante">Agregrar integrante</button>
+										<button id="eliminarIntegrante">Eliminar integrante</button>
 								</div>
 								<div id="tabs-3">
 									<ul id="tableroConTareas"></ul>
