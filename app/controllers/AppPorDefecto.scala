@@ -32,11 +32,17 @@ class AppPorDefecto {
 
   var proyecto2 = new Project(2, "Public Project")
   proyecto2.tablero = tablero2
+  
+  var proyecto3 = new Project(3, "Secret Project")
+  proyecto3.tablero = new Tablero(3)
+  
+  var proyecto4 = new Project(4, "Ultra Secret Project")
+  proyecto4.tablero = new Tablero(4)
 
   proyectos.+=(proyecto1)
   proyectos.+=(proyecto2)
-  proyectos.+=(new Project(3, "Secret Project"))
-  proyectos.+=(new Project(4, "Ultra Secret Project"))
+  proyectos.+=(proyecto3)
+  proyectos.+=(proyecto4)
 
   def getTablero(idProyecto: Int): Tablero = {
     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).tablero

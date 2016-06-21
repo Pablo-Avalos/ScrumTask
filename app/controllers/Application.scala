@@ -64,6 +64,7 @@ object Application extends Controller {
     val json = Json.toJson(t)
     Ok("{ 'tarea' :" + t +"}" )
   }
+  
   def getTarea(){
     
     

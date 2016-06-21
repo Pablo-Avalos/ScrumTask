@@ -1,6 +1,8 @@
 var idProyectoActual = null;
 var proyectos = null;
 
+
+/* Obtener proyectos disponibles */
 $.ajax({
 	type : 'GET',
 	contentType : 'application/json',
@@ -9,7 +11,7 @@ $.ajax({
 	success : function(response) {
 		proyectos = response;
 		console.log(response[0]);
-		idProjectoActual = response[0].id;
+		idProyectoActual = response[0].id;
 		var select = $("#Select-Proyectos");
 		for (var i = 0; i < response.length; i++) {
 			$("#Select-Proyectos").append(
@@ -19,6 +21,32 @@ $.ajax({
 	}
 });
 
+
+
+
+/*Obtener un tablero por defecto*/
+$(document).ready(obtenerTablero(1));
+
+/* Seleccionar un proyecto */
+$(document).ready( function () {
+	$('#Select-Proyectos').change(function() {
+		actualizarProyecto(this.value); //this.value es el id del proyecto seleccionado
+	});
+});
+
+function actualizarProyecto(idProyecto){
+	idProyectoActual = idProyecto
+	//actualizarColaboradores();
+	//actualizarReuniones();
+	actulizarTablero();
+}
+
+function actulizarTablero(){
+	$("#tableroConTareas").empty();
+	obtenerTablero(idProyectoActual);
+}
+
+
 function obtenerTablero(idProyecto) {
 	$.ajax({
 		type : 'GET',
@@ -27,7 +55,7 @@ function obtenerTablero(idProyecto) {
 		url : '/tablero/' + idProyecto,
 		success : function(response) {
 			for (var i = 0; i < response.tareas.length; i++) {
-				$("#sortable").append(
+				$("#tableroConTareas").append(
 						'<li id = "dialog" class="ui-state-default"> Id : '
 								+ response.tareas[i].id + '<br> Nombre : '
 								+ response.tareas[i].nombre + '<br> Descripcion: '+ response.tareas[i].descripcion + '</li>');
@@ -36,10 +64,10 @@ function obtenerTablero(idProyecto) {
 		}
 	});
 }
+
 $(function() {
 	$("#dialog").dialog();
 });
-$(document).ready(obtenerTablero(1));
 
 $(document).ready(function() {
 	$("#tarjeta-tarea").dialog({
@@ -59,8 +87,8 @@ $(document).ready(function() {
 });
 
 $(function() {
-	$("#sortable").sortable();
-	$("#sortable").disableSelection();
+	$("#tableroConTareas").sortable();
+	$("#tableroConTareas").disableSelection();
 });
 
 function agregarTarjeta() {
@@ -119,10 +147,9 @@ $(function() {
 		modal : true,
 		buttons : {
 			'Crear Tarea' : function() {
-				var idProyecto = $("#idProyecto").val();
 				var nombre = $("#name").val();
 				var descripcion = $("#descripcion").val();
-				$(document).ready(crearTarea(idProyecto, nombre, descripcion));
+				$(document).ready(crearTarea(idProyectoActual, nombre, descripcion));
 				dialog.dialog("close");
 			},
 			Cancelar : function() {
@@ -154,9 +181,9 @@ function crearTarea(idProyecto, nombre, descripcion) {
 		url : '/agregarTarea/' + idProyecto + '/' + nombre + '/' + descripcion,
 		success : function(response) {
 			tarea = response;
+		},
+		complete : function () {
+			actulizarTablero();
 		}
-
 	});
-	$("#sortable").empty();
-	obtenerTablero(1);
 }
