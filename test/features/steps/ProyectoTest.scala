@@ -48,11 +48,10 @@ class ProyectoTest extends ScalaDsl with EN {
   Given("""^Un proyecto sin colaboradores y un colaborador$""") { () =>
     //// Express the Regexp above with the code you wish you had
     project = new Project(1, "New Proyect")
-    colaborador = new Colaborador
   }
   When("""^Agrego al colaborador "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
-    colaborador.name = arg0
+    colaborador = new Colaborador(arg0)
     project.agregarColaborador(colaborador)
   }
   Then("""^El proyecto debe tener como primer colaborador a "([^"]*)" y la cantidad de colaboradores debe ser (\d+)$""") { (arg0: String, arg1: Int) =>

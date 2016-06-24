@@ -29,15 +29,38 @@ object Application extends Controller {
       "tareas" -> tablero.tareas)
   }
 
-  implicit val colaboradorWrites = new Writes[Colaborador] {
-    def writes(colaborador: Colaborador) = Json.obj(
-      "nombre" -> colaborador.name)
+  implicit val usarioWrites = new Writes[Usuario] {
+    def writes(usuario: Usuario) = Json.obj(
+      "nombre" -> usuario.name)
+  }
+  
+  implicit val temaWrites = new Writes[Tema] {
+    def writes(tema: Tema) = Json.obj(
+      "descripcion" -> tema.descripcion,
+      "temas" -> tema.temas
+      )
+  }
+  
+  implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
+    def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
+      "tipo" -> tipo.toString()
+      )
   }
 
+    implicit val reunionWrites = new Writes[Reunion] {
+    def writes(reunion: Reunion) = Json.obj(
+      "id" -> reunion.id
+      //"tipo" -> reunion.tipoDeReunion,
+      //"integrantes" -> reunion.integrantes,
+      //"temasTratados" -> reunion.temasTratados
+      )
+  }
+    
   implicit val proyectoWrites = new Writes[Project] {
     def writes(proyecto: Project) = Json.obj(
       "id" -> proyecto.id,
       "nombre" -> proyecto.nombre,
+      "reuniones" -> proyecto.reuniones,
       "colaboradores" -> proyecto.colaboradores //,"tablero" -> proyecto.tablero// con este atributo falla la consulta
       )
   }
@@ -63,7 +86,7 @@ object Application extends Controller {
   }
   
   def agregarColaborador(idProyecto: Int, nombre: String) = Action{
-    val nuevoColaborador = new Colaborador()
+    val nuevoColaborador = new Colaborador(nombre)
     nuevoColaborador.name = nombre
     appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
@@ -86,5 +109,15 @@ object Application extends Controller {
   def getTarea(){
     
     
+  }
+  
+  def getReuniones(idProyecto: Int) = Action {
+    val reuniones = appPorDefecto.getReuniones(idProyecto)
+    if (reuniones == null) {
+      InternalServerError("El proyecto no tiene reuniones.")
+    } else {
+      val json = Json.toJson(reuniones)
+      Ok(json)
+    }
   }
 }

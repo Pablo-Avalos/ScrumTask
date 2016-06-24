@@ -1,17 +1,17 @@
 package model
 
-class Usuario {
-  var name = null: String
+trait Usuario {
+  var name:String
 }
 
-class Colaborador extends Usuario {
-
+class Colaborador(var nombre:String) extends Usuario{
+  var name = nombre
 }
 
-class ScrumMaster extends Usuario {
-
+class ScrumMaster(var nombre:String) extends Usuario{
+  var name = nombre
 }
 
-class ProductOwner extends Usuario {
- 
+class ProductOwner(var nombre:String) extends Usuario{
+  var name = nombre
 }

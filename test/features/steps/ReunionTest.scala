@@ -12,6 +12,9 @@ import org.junit.Assert._
 import model.Reunion
 import model.Tema
 import model.Usuario
+import model.TipoDeReunion
+import model.TipoDeReunion.Tipo
+import org.junit.Assert._
 
 import scala.collection.mutable.ListBuffer
 
@@ -62,5 +65,24 @@ class ReunionTest extends ScalaDsl with EN {
 
   Then("""^La reunion debe tener un tema(.*)$""") { () =>
     assertNotNull(reunion.temasTratados)
+  }
+
+  Given("""^Una reunion sin tipo$""") { () =>
+  }
+
+  When("""^Creo una "([^"]*)"$""") { (arg0: String) =>
+    reunion = new Reunion(1)
+    var tipo = TipoDeReunion
+    arg0 match {
+    case "Daily" => reunion.tipoDeReunion= tipo.Daily
+    case "Planning" => reunion.tipoDeReunion= tipo.Planning
+    case "Demo" => reunion.tipoDeReunion= tipo.Demo
+    case "Retrospective" => reunion.tipoDeReunion= tipo.Retrospective
+    case _ => throw new IllegalArgumentException
+    }
+  }
+
+  Then("""^La reunion debe ser una "([^"]*)"$""") { (arg0: String) =>
+    assertEquals(reunion.tipoDeReunion.toString(),arg0)
   }
 }

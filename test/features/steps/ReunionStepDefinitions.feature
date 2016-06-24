@@ -18,3 +18,21 @@ Scenario: Agregar un tema a la reunion
 	Given Tengo una reunion sin temas 
 	When Le agrego un tema a la reunion 
 	Then La reunion debe tener un tema 
+	
+Scenario: Definir una Daily
+	Given Una reunion sin tipo 
+	When Creo una "Daily" 
+	Then La reunion debe ser una "Daily" 
+	
+    Given Una reunion sin tipo 
+	When Creo una "Planning" 
+	Then La reunion debe ser una "Planning"
+	
+	Given Una reunion sin tipo 
+	When Creo una "Demo" 
+	Then La reunion debe ser una "Demo"
+	
+	Given Una reunion sin tipo 
+	When Creo una "Retrospective" 
+	Then La reunion debe ser una "Retrospective"  
+  

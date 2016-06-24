@@ -1,24 +1,21 @@
 package controllers
 
-import model.Project
 import scala.collection.mutable.ListBuffer
-import model.Tablero
-import model.Tarea
-import model.Colaborador
+import model._
 
 class AppPorDefecto {
   
   
-  var integrante1 = new Colaborador()
+  var integrante1 = new Colaborador("Pepe")
   integrante1.name = "Pepe"
   
-  var integrante2 = new Colaborador()
+  var integrante2 = new Colaborador("Pipo")
   integrante2.name = "Pipo"
   
-  var integrante3 = new Colaborador()
+  var integrante3 = new Colaborador("Pancho")
   integrante3.name = "Pancho"
   
-  var integrante4 = new Colaborador()
+  var integrante4 = new Colaborador("Moncho")
   integrante4.name = "Moncho"
 
   var tarea1 = new Tarea(25, "Buscar")
@@ -39,6 +36,40 @@ class AppPorDefecto {
   tablero2.agregarTarea(new Tarea(28, "Hacer algo"))
   tablero2.agregarTarea(tarea2)
 
+  var reunion1 = new Reunion(100)
+  var reunion2 = new Reunion(101)
+  var reunion3 = new Reunion(102)
+  
+  var colaborador = new Colaborador("colaborador uno")
+  var scrummaster = new ScrumMaster("scrummaster")
+  var programowner = new ProductOwner("programowner")
+  
+  reunion1.integrantes.+=(colaborador)
+  reunion1.integrantes.+=(scrummaster)
+  reunion2.integrantes.+=(programowner)
+  reunion2.integrantes.+=(colaborador)
+  reunion3.integrantes.+=(scrummaster)
+  reunion3.integrantes.+=(colaborador)
+  reunion3.integrantes.+=(programowner)
+  
+  var tema1 = new Tema
+  tema1.descripcion = "Como hacer aplicaciones"
+  tema1.temas.+=("primer paso")
+  tema1.temas.+=("segundo paso")
+
+  var tema2 = new Tema
+  tema2.descripcion = "Como trabajar con jQuery"
+  tema2.temas.+=("primer paso")
+  tema2.temas.+=("segundo paso")
+  
+  reunion1.temasTratados=tema1
+  reunion2.temasTratados=tema2
+  reunion3.temasTratados=tema1
+  
+  reunion1.tipoDeReunion = TipoDeReunion.Daily
+  reunion2.tipoDeReunion = TipoDeReunion.Planning
+  reunion3.tipoDeReunion = TipoDeReunion.Retrospective
+
   var proyectos = new ListBuffer[Project]
 
   var proyecto1 = new Project(1, "ScrumTask")
@@ -53,15 +84,29 @@ class AppPorDefecto {
   
   var proyecto3 = new Project(3, "Secret Project")
   proyecto3.tablero = new Tablero(3)
+  proyecto2.agregarColaborador(integrante3)
   
   var proyecto4 = new Project(4, "Ultra Secret Project")
   proyecto4.tablero = new Tablero(4)
+  proyecto2.agregarColaborador(integrante4)
 
   proyectos.+=(proyecto1)
   proyectos.+=(proyecto2)
   proyectos.+=(proyecto3)
   proyectos.+=(proyecto4)
 
+  proyecto1.reuniones.+=(reunion1)
+  proyecto1.reuniones.+=(reunion2)
+  proyecto1.reuniones.+=(reunion3)
+  
+  proyecto2.reuniones.+=(reunion1)
+    
+  proyecto3.reuniones.+=(reunion2)
+  proyecto3.reuniones.+=(reunion3)
+
+  proyecto4.reuniones.+=(reunion1)
+  proyecto4.reuniones.+=(reunion2)
+  
   def getTablero(idProyecto: Int): Tablero = {
     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).tablero
   }
@@ -70,8 +115,12 @@ class AppPorDefecto {
     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null)
   }
   
-  def getColaboradores (idProyecto: Int): ListBuffer[Colaborador] = {
+  def getColaboradores (idProyecto: Int): ListBuffer[Usuario] = {
     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).colaboradores
+  }
+  
+  def getReuniones(idProyecto: Int): ListBuffer[Reunion] = {
+     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).reuniones
   }
   
 }
