@@ -20,14 +20,11 @@ class Reunion(idR:Int) {
   
   def setFecha(dia: Integer, mes: Integer, anio: Integer) {
     fecha = new Date((anio - 1900), mes - 1, dia)
-    //var df = getDateInstance(LONG, Locale.ENGLISH)
-    //println(df format fecha)
   }
 
   def setHora(hora: Integer, minutos: Integer) {
     horaDeInicio = new Time(hora, minutos, 0)
-    //println(t)
-  }
+   }
 
   def agregarIntegrante(participante: Usuario) {
     integrantes.+=(participante)
