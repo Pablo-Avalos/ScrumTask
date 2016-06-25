@@ -84,11 +84,11 @@ class AppPorDefecto {
   
   var proyecto3 = new Project(3, "Secret Project")
   proyecto3.tablero = new Tablero(3)
-  proyecto2.agregarColaborador(integrante3)
+  proyecto3.agregarColaborador(integrante3)
   
   var proyecto4 = new Project(4, "Ultra Secret Project")
   proyecto4.tablero = new Tablero(4)
-  proyecto2.agregarColaborador(integrante4)
+  proyecto4.agregarColaborador(integrante4)
 
   proyectos.+=(proyecto1)
   proyectos.+=(proyecto2)
