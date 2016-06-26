@@ -85,14 +85,14 @@ object Application extends Controller {
     Ok(Json.toJson(colaboradores))
   }
   
-  def agregarColaborador(idProyecto: Int, nombre: String) = Action{
+  def agregarColaborador(idProyecto: Int, nombre: String) = Action {
     val nuevoColaborador = new Colaborador(nombre)
     nuevoColaborador.name = nombre
     appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
   }
   
-  def eliminarColaborador(idProyecto: Int, nombreColaborador: String) = Action{
+  def eliminarColaborador(idProyecto: Int, nombreColaborador: String) = Action {
     appPorDefecto.getProyecto(idProyecto).eliminarColaborador(nombreColaborador)
     Ok
   }

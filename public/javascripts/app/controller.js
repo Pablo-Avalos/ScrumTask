@@ -85,5 +85,19 @@ var controller = {
   			actualizarIntegrantes();
   		}
   	});
+  },
+
+  agregarIntegrante: function(nombreIntegrante) {
+    $.ajax({
+  		type : 'GET',
+  		contentType : 'application/json',
+  		dataType : 'json',
+  		url : '/agregarIntegrante/' + controller.idProyectoActual + '/' + nombreIntegrante,
+  		success : function(response) {
+  		},
+  		complete : function () {
+  			actualizarIntegrantes();
+  		}
+  	});
   }
 };
