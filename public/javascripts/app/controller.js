@@ -34,7 +34,7 @@ var controller = {
       success : function(response) {
         for (var i = 0; i < response.tareas.length; i++) {
           $("#tableroConTareas").append(
-              '<li id = "dialog" class="ui-state-default"> Id : '
+              '<li id = "dialog" class="ui-state-default" value="'+ response.tareas[i].id +'"> Id : '
                   + response.tareas[i].id + '<br> Nombre : '
                   + response.tareas[i].nombre + '<br> Descripcion: '+ response.tareas[i].descripcion + '</li>');
         }
@@ -99,5 +99,18 @@ var controller = {
   			actualizarIntegrantes();
   		}
   	});
+  },
+   eliminarTarea: function(id) {
+    $.ajax({
+      type : 'GET',
+      contentType : 'application/json',
+      dataType : 'json',
+      url : '/eliminarTarea/' + controller.idProyectoActual + '/' + id,
+      success : function(response) {
+      },
+      complete : function () {
+        actulizarTablero();
+      }
+    });
   }
 };

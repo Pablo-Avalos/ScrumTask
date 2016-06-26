@@ -19,4 +19,8 @@ case class Project (idP:Int, nombreP:String){
   def agregarReunion(reunion:Reunion){
     reuniones.+=(reunion)
   }
+  
+  def eliminarTarea(id: Int){
+    tablero.eliminarTarea(id)
+  }
 }

@@ -104,3 +104,48 @@ $(function() {
 		dialog.dialog("open");
 	});
 });
+/* Eliminar tareas*/
+jQuery(document).ready(function($){
+ $("#namelist").sortable({
+ 	connectWith: '#deleteArea'
+ });
+ $("#deleteArea").droppable({
+	 accept: '#tableroConTareas > li',
+	 hoverClass: 'dropAreaHover',
+	 drop: function(event, ui) {
+	 	eliminarTarea(ui.draggable,ui.helper);
+	 },
+	 activeClass: 'dropAreaHover'
+ });
+ function eliminarTarea($draggable,$helper){
+	 var dialog, form,
+
+ 	confirmarEliminarTarea = $("#confirmarEliminarTarea").dialog({
+ 		autoOpen : false,
+ 		height : 220,
+ 		width : 400,
+ 		modal : true,
+ 		buttons : {
+ 			Aceptar : function() {
+ 				$helper.effect('transfer', { to: '#deleteArea', className: 'ui-effects-transfer' },500);
+ 		 	 	$draggable.remove();
+ 		 	 	var idTarea = $draggable.attr('value');
+ 		 	 	controller.eliminarTarea(idTarea);
+				confirmarEliminarTarea.dialog("close");
+ 			},
+ 			Cancelar : function() {
+ 				confirmarEliminarTarea.dialog("close");
+ 			}
+ 			},
+ 			close : function() {
+ 			}
+ 		});
+ 		confirmarEliminarTarea.dialog("open");
+ }
+});
+
+$(document).ready(function () {
+  $("#confirmarEliminarTarea").dialog({
+		autoOpen : false
+	})
+});

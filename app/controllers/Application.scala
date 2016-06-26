@@ -106,6 +106,11 @@ object Application extends Controller {
     Ok("{ 'tarea' :" + t +"}" )
   }
   
+   def eliminarTarea(idProyecto: Int, id: Int) = Action{
+    appPorDefecto.getProyecto(idProyecto).eliminarTarea(id)
+    Ok
+  }
+  
   def getTarea(){
     
     
