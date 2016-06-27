@@ -123,4 +123,7 @@ class AppPorDefecto {
      proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).reuniones
   }
   
+  def eliminarProyecto(idProyecto: Int) = proyectos = proyectos.filterNot { p => p.id == idProyecto }
+ 
+  
 }

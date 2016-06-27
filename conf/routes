@@ -15,3 +15,4 @@ GET		/agregarIntegrante/:idProyecto/:nombre  controllers.Application.agregarCola
 GET		/eliminarIntegrante/:idProyecto/:nombreColaborador controllers.Application.eliminarColaborador(idProyecto: Int, nombreColaborador)
 GET 	/reuniones/:idProyecto         controllers.Application.getReuniones(idProyecto: Int)
 GET		/eliminarTarea/:idProyecto/:id controllers.Application.eliminarTarea(idProyecto: Int, id: Int)
+GET 	/eliminarProyecto/:idProyecto controllers.Application.eliminarProyecto(idProyecto: Int)

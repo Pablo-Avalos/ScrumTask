@@ -110,6 +110,11 @@ object Application extends Controller {
     appPorDefecto.getProyecto(idProyecto).eliminarTarea(id)
     Ok
   }
+   
+  def eliminarProyecto(idProyecto: Int) = Action {
+    appPorDefecto.eliminarProyecto(idProyecto)
+    Ok
+  }
   
   def getTarea(){
     

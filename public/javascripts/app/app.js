@@ -11,10 +11,21 @@ $(document).ready( function () {
 });
 
 function actualizarProyecto(idProyecto){
-	controller.idProyectoActual = idProyecto;
+  controller.idProyectoActual = idProyecto;
 	actualizarIntegrantes();
 	//actualizarReuniones();
 	actulizarTablero();
+}
+
+function actualizarListaProyectos(){
+  vaciarProyecto();
+  controller.obtenerProyectos();
+}
+
+function vaciarProyecto(){
+  $("#Select-Proyectos").empty();
+  $("#tableroConTareas").empty();
+  $("#selectable").empty();
 }
 
 function actulizarTablero(){
@@ -26,3 +37,39 @@ function actualizarIntegrantes(){
 	$("#selectable").empty();
 	controller.obtenerIntegrantes();
 }
+
+function desabilitarBotonEliminarProyecto(){
+  $("#eliminarProyecto").prop('disabled', true);
+}
+
+
+
+
+/* Eliminar proyecto */
+
+$(function() {
+	var dialog, form,
+
+	dialogEliminarProyecto = $("#confirmarEliminarProyecto").dialog({
+		autoOpen : false,
+		height : 400,
+		width : 350,
+		modal : true,
+		buttons : {
+			'Aceptar' : function() {
+				controller.eliminarProyecto();
+        dialogEliminarProyecto.dialog("close");
+			},
+			Cancelar : function() {
+				dialogEliminarProyecto.dialog("close");
+			}
+		},
+		close : function() {}
+	});
+
+  $("#eliminarProyecto").button({}).on("click", function() {
+    $("#confirmarEliminarProyecto").empty();
+    $("#confirmarEliminarProyecto").append('<p>¿Desea eliminar el proyecto?</p>');
+    dialogEliminarProyecto.dialog('open');
+  });
+});

@@ -11,16 +11,24 @@ var controller = {
     	dataType : 'json',
     	url : '/proyectos',
     	success : function(response) {
-    		proyectos = response;
-    		controller.idProyectoActual = response[0].id;
-    		var select = $("#Select-Proyectos");
-    		for (var i = 0; i < response.length; i++) {
-    			$("#Select-Proyectos").append(
-    					'<option value="' + response[i].id + '">'
-    							+ response[i].nombre + '</option>');
-    		}
-    		controller.obtenerTablero(controller.idProyectoActual);
-    		controller.obtenerIntegrantes(controller.idProyectoActual);
+        if (response.length < 1){
+          //Todo
+          vaciarProyecto();
+          desabilitarBotonEliminarProyecto();
+        }
+        else{
+          proyectos = response;
+          controller.idProyectoActual = response[0].id;
+          controller.proyectoActual = response[0];
+      		var select = $("#Select-Proyectos");
+      		for (var i = 0; i < response.length; i++) {
+      			$("#Select-Proyectos").append(
+      					'<option value="' + response[i].id + '">'
+      							+ response[i].nombre + '</option>');
+      		}
+      		controller.obtenerTablero(controller.idProyectoActual);
+      		controller.obtenerIntegrantes(controller.idProyectoActual);
+        }
     	}
     });
   },
@@ -112,5 +120,18 @@ var controller = {
         actulizarTablero();
       }
     });
-  }
+  },
+  eliminarProyecto: function() {
+   $.ajax({
+     type : 'GET',
+     contentType : 'application/json',
+     dataType : 'json',
+     url : '/eliminarProyecto/' + controller.idProyectoActual,
+     success : function(response) {
+     },
+     complete : function () {
+       actualizarListaProyectos();
+     }
+   });
+ }
 };
