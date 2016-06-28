@@ -16,7 +16,27 @@ class Tablero(idT:Integer) {
   
   def getTarea(id:Integer)= tareas.find{ t => t.id == id }.getOrElse(null)
   
-  def agregarRelease(release:Release){
+  def agregarSprint(numeroRelease: Int): Sprint = {
+    var sprint = new Sprint(listaDeRelease.filter { r => r.numero == numeroRelease }.head.listaSprints.length)
+    listaDeRelease.filter { r => r.numero == numeroRelease }.head.listaSprints += sprint
+    sprint
+  }
+
+  def obtenerRealase(id: Integer): Release = {
+
+    listaDeRelease.filter { r => r.numero == id }.head
+
+  }
+    def agregarTarea(idRealease: Int, idSprint: Int, tarea: Tarea): Tarea = {
+
+    this.obtenerRealase(idRealease).listaSprints.filter { s => s.numero == idSprint }.head.tareas += tarea
+    tarea
+
+  }
+     def agregarRelease(release: Release) {
     listaDeRelease.+=(release)
   }
+
+
+
 }

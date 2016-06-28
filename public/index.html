@@ -16,14 +16,15 @@
 <script src="javascripts/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="javascripts/jquery.jqGrid.min.js"></script>
 <link rel="stylesheet" type="text/css" href="stylesheets/ui.jqgrid.css">
-<link rel="stylesheet" type="text/css" href="stylesheets/listIntegrantes.css">
+<link rel="stylesheet" type="text/css"
+	href="stylesheets/listIntegrantes.css">
 
 </head>
 <body>
 	<div class="wide nav header">Scrum Task</div>
 	<table width="100%" height="600px" cellspacing="1px" border="1px">
 		<tr height="200px">
-			<td style=’table-layout:fixed’;>
+			<td style="’table-layout: fixed’;">
 				<table title="Menu" border="0" width="100px">
 					<tr>
 						<td>
@@ -42,10 +43,10 @@
 					</tr>
 				</table>
 			</td>
-			<td  width="1200">
+			<td width="1200">
 				<table title="Contenido" border="0" height="100%" width="100%">
 					<tr>
-						<td><div id="tabs" class ="tabs-main">
+						<td><div id="tabs" class="tabs-main">
 
 								<ul>
 									<li><a href="#tabs-1">Reuniones</a></li>
@@ -54,7 +55,7 @@
 								</ul>
 								<div id="tabs-1">
 									<table id="jqGrid" border="0" height="100%" width="100%"></table>
-										<div id="jqGridPager"></div>
+									<div id="jqGridPager"></div>
 								</div>
 								<div id="tabs-2">
 
@@ -67,15 +68,19 @@
 											<form>
 												<fieldset>
 													<div>
-														<label for="name">Nombre</label>
-														<input type="text" name="nombreIntegrante" id="idIntegrante" class="text ui-widget-content ui-corner-all">
+														<label for="name">Nombre</label> <input type="text"
+															name="nombreIntegrante" id="idIntegrante"
+															class="text ui-widget-content ui-corner-all">
 													</div>
 													<br>
 													<div>
-														<ul style="list-style-type:none">
-															<li><input type="checkbox" name="rol" value="desarrollador">Desarrolador</label></li>
-															<li><input type="checkbox" name="rol" value="master">Scrum Master</label></li>
-															<li><input type="checkbox" name="rol" value="owner">Product Owner</label></li>
+														<ul style="list-style-type: none">
+															<li><input type="checkbox" name="rol"
+																value="desarrollador">Desarrolador</label></li>
+															<li><input type="checkbox" name="rol" value="master">Scrum
+																Master</label></li>
+															<li><input type="checkbox" name="rol" value="owner">Product
+																Owner</label></li>
 														</ul>
 													</div>
 
@@ -90,15 +95,42 @@
 
 								</div>
 								<div id="tabs-3">
-									<ul id="tableroConTareas"></ul>
 									<div>
+										<button id="create-release">Agregar Release</button>
+										<button id="create-sprint">Agregar Sprint</button>
+										<button id="create-user">Agregar Tarea</button>
+									</div>
+									<br>
+									<div id="tableroConRelease"></div>
+
+									<div>
+
+
+										<div id="dialog-release" title="Release"></div>
+										<div id="dialog-sprintResponse" title="Sprint"></div>
+
+										<div id="dialog-sprint" title="Sprint">
+											<p class="validateTips">Completar Campos</p>
+
+											<form>
+												<fieldset>
+													<label for="name">Numero Release</label> <input type="text"
+														name="numRelease" id="numRelease"
+														class="text ui-widget-content ui-corner-all">
+												</fieldset>
+											</form>
+										</div>
+
 										<div id="dialog-form" title="Crear Tarea">
 											<p class="validateTips">Completar Campos</p>
 
 											<form>
 												<fieldset>
-													<label for="name">IdProjecto</label> <input type="text"
-														name="idProyecto" id="idProyecto"
+													<label for="name">Numero Release</label> <input type="text"
+														name="n-release" id="n-release"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Numero Sprint</label> <input type="text"
+														name="n-sprint" id="n-sprint"
 														class="text ui-widget-content ui-corner-all"> <label
 														for="name">Nombre</label> <input type="text" name="name"
 														id="name" class="text ui-widget-content ui-corner-all">
@@ -110,20 +142,38 @@
 												</fieldset>
 											</form>
 										</div>
-										<button id="create-user">Agregar Tarea</button>
+
+										<div>
+											<div id="dialog-form" title="Crear Tarea">
+												<p class="validateTips">Completar Campos</p>
+
+												<form>
+													<fieldset>
+														<label for="name">IdProjecto</label> <input type="text"
+															name="idProyecto" id="idProyecto"
+															class="text ui-widget-content ui-corner-all"> <label
+															for="name">Nombre</label> <input type="text" name="name"
+															id="name" class="text ui-widget-content ui-corner-all">
+														<label for="descripcion">Descripcion</label> <input
+															type="text" name="descripcion" id="descripcion"
+															class="text ui-widget-content ui-corner-all"> <input
+															type="submit" tabindex="-1"
+															style="position: absolute; top: -1000px">
+													</fieldset>
+												</form>
+											</div>
+											<button id="create-user">Agregar Tarea</button>
+										</div>
+
+										<div id="confirmarEliminarTarea" title="Eliminar tarea">
+											<p>¿Desea eliminar por completo la tarea?</p>
+										</div>
+
+										<br>
+										<div id="deleteArea">Arrastrar aqui para borrar.</div>
 									</div>
 
-									<div id="confirmarEliminarTarea" title="Eliminar tarea">
-										<p>¿Desea eliminar por completo la tarea?</p>
-									</div>
-
-									<br>
-									<div id="deleteArea">
-									Arrastrar aqui para borrar.
-									</div>
-								</div>
-
-							</div></td>
+								</div></td>
 					</tr>
 				</table>
 			</td>

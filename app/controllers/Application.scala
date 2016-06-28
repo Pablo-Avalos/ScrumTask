@@ -23,39 +23,51 @@ object Application extends Controller {
       )
   }
 
+  implicit val sprintWrites = new Writes[Sprint] {
+    def writes(sprint: Sprint) = Json.obj(
+      "numero" -> sprint.numero,
+      "listaTareas" -> sprint.tareas)
+  }
+
+  implicit val releaseWrites = new Writes[Release] {
+    def writes(release: Release) = Json.obj(
+      "numero" -> release.numero,
+      "listaSprints" -> release.listaSprints)
+  }
+
   implicit val tableroWrites = new Writes[Tablero] {
     def writes(tablero: Tablero) = Json.obj(
       "idT" -> tablero.id,
-      "tareas" -> tablero.tareas)
+      "tareas" -> tablero.tareas,
+      "release" -> tablero.listaDeRelease
+      )
   }
+
 
   implicit val usarioWrites = new Writes[Usuario] {
     def writes(usuario: Usuario) = Json.obj(
       "nombre" -> usuario.name)
   }
-  
+
   implicit val temaWrites = new Writes[Tema] {
     def writes(tema: Tema) = Json.obj(
       "descripcion" -> tema.descripcion,
-      "temas" -> tema.temas
-      )
-  }
-  
-  implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
-    def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
-      "tipo" -> tipo.toString()
-      )
+      "temas" -> tema.temas)
   }
 
-    implicit val reunionWrites = new Writes[Reunion] {
+  implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
+    def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
+      "tipo" -> tipo.toString())
+  }
+
+  implicit val reunionWrites = new Writes[Reunion] {
     def writes(reunion: Reunion) = Json.obj(
-      "id" -> reunion.id
-      //"tipo" -> reunion.tipoDeReunion,
+      "id" -> reunion.id //"tipo" -> reunion.tipoDeReunion,
       //"integrantes" -> reunion.integrantes,
       //"temasTratados" -> reunion.temasTratados
       )
   }
-    
+
   implicit val proyectoWrites = new Writes[Project] {
     def writes(proyecto: Project) = Json.obj(
       "id" -> proyecto.id,
@@ -79,48 +91,48 @@ object Application extends Controller {
       Ok(json)
     }
   }
-  
+
   def getColaboradores(idProyecto: Int) = Action {
     val colaboradores = appPorDefecto.getColaboradores(idProyecto)
     Ok(Json.toJson(colaboradores))
   }
-  
+
   def agregarColaborador(idProyecto: Int, nombre: String) = Action {
     val nuevoColaborador = new Colaborador(nombre)
     nuevoColaborador.name = nombre
     appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
   }
-  
+
   def eliminarColaborador(idProyecto: Int, nombreColaborador: String) = Action {
     appPorDefecto.getProyecto(idProyecto).eliminarColaborador(nombreColaborador)
     Ok
   }
-  
-  def agregarTarea(idProyecto: Int, nombre: String, descripcion: String) = Action {
 
-    val tarea = new Tarea(appPorDefecto.getTablero(idProyecto).tareas.length, nombre)
+  def agregarTarea(idProyecto: Int, numeroRelease: Int, numeroSprint: Int, nombre: String, descripcion: String) = Action {
+
+    val tarea = new Tarea(appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.length, nombre)
     tarea.descripcion = descripcion
-    val t = appPorDefecto.getTablero(idProyecto).agregarTarea(tarea)
+    val t = appPorDefecto.getTablero(idProyecto).agregarTarea(numeroRelease, numeroSprint, tarea)
     val json = Json.toJson(t)
-    Ok("{ 'tarea' :" + t +"}" )
+    Ok("{ 'tarea' :" + t + "}")
+
   }
-  
-   def eliminarTarea(idProyecto: Int, id: Int) = Action{
+
+  def eliminarTarea(idProyecto: Int, id: Int) = Action {
     appPorDefecto.getProyecto(idProyecto).eliminarTarea(id)
     Ok
   }
-   
+
   def eliminarProyecto(idProyecto: Int) = Action {
     appPorDefecto.eliminarProyecto(idProyecto)
     Ok
   }
-  
-  def getTarea(){
-    
-    
+
+  def getTarea() {
+
   }
-  
+
   def getReuniones(idProyecto: Int) = Action {
     val reuniones = appPorDefecto.getReuniones(idProyecto)
     if (reuniones == null) {
@@ -129,5 +141,17 @@ object Application extends Controller {
       val json = Json.toJson(reuniones)
       Ok(json)
     }
+  }
+   def crearRelease(idProyecto: Int) = Action {
+    var release = new Release(appPorDefecto.getTablero(idProyecto).listaDeRelease.length)
+    appPorDefecto.getTablero(idProyecto).agregarRelease(release)
+
+    val json = Json.toJson(release)
+    Ok(json)
+  }
+  def crearSprint(idProyecto: Int, numeroRelease: Int) = Action {
+    var sprint = appPorDefecto.getTablero(idProyecto).agregarSprint(numeroRelease)
+    val json = Json.toJson(sprint)
+    Ok(json)
   }
 }

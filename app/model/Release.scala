@@ -1,5 +1,10 @@
 package model
 
-class Release {
-  var name = null : String  
+import scala.collection.mutable.ListBuffer
+
+
+case class Release(num: Int) {
+  var numero = num 
+  var name = null : String
+  var listaSprints =  new ListBuffer[Sprint]
 }

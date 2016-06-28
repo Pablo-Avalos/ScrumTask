@@ -29,7 +29,9 @@ function vaciarProyecto(){
 }
 
 function actulizarTablero(){
-	$("#tableroConTareas").empty();
+//	$("#tableroConTareas").empty();
+	
+	$("#tableroConRelease").empty();
 	controller.obtenerTablero();
 }
 
