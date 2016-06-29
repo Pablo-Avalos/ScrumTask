@@ -40,6 +40,16 @@ function actualizarIntegrantes(){
 	controller.obtenerIntegrantes();
 }
 
+function actualizarReuniones(){
+	vaciarReuniones();
+	controller.obtenerReuniones();
+}
+
+
+function vaciarReuniones(){
+	jQuery("#jqGrid").clearGridData()
+}
+
 function desabilitarBotonEliminarProyecto(){
   $("#eliminarProyecto").prop('disabled', true);
 }
@@ -75,8 +85,3 @@ $(function() {
     dialogEliminarProyecto.dialog('open');
   });
 });
-
-function actualizarReuniones(){
-	jQuery("#jqGrid").clearGridData()
-	obtenerReuniones();
-};

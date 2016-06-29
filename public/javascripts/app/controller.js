@@ -27,6 +27,7 @@ var controller = {
 					}
 					controller.obtenerTablero(controller.idProyectoActual);
 					controller.obtenerIntegrantes(controller.idProyectoActual);
+					controller.obtenerReuniones(controller.idProyectoActual);
 				}
 			}
 		});
@@ -255,5 +256,20 @@ var controller = {
 				actualizarListaProyectos();
 			}
 		});
-	}
+	},
+
+	obtenerReuniones : function () {
+	$.ajax({
+		type : 'GET',
+		contentType : 'application/json',
+		dataType : 'json',
+		url : '/reuniones/' + controller.idProyectoActual,
+		success : function(reuniones) {
+			//jQuery("#jqGrid").clearGridData()
+			for(var i=0;i<=reuniones.length;i++){
+			    jQuery("#jqGrid").addRowData(i, reuniones[i])
+		    };
+		}
+	});
+   },
 };

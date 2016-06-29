@@ -8,19 +8,19 @@ jQuery.browser = {};
     }
 })();
 
-$(document).ready(function() {
-	$.ajax({
-		type : 'GET',
-		contentType : 'application/json',
-		dataType : 'json',
-		url : '/reuniones/1',
-		success : function(reuniones) {
-			for(var i=0;i<=reuniones.length;i++){
-			    jQuery("#jqGrid").addRowData(i, reuniones[i])
-		    };
-		}
-	});
-});
+//$(document).ready(function() {
+//	$.ajax({
+//		type : 'GET',
+//		contentType : 'application/json',
+//		dataType : 'json',
+//		url : '/reuniones/1',
+//		success : function(reuniones) {
+//			for(var i=0;i<=reuniones.length;i++){
+//			    jQuery("#jqGrid").addRowData(i, reuniones[i])
+//		    };
+//		}
+//	});
+//});
 
 
 var reunionSeleccionada;	 
@@ -52,26 +52,6 @@ jQuery(document).ready(function() {
         rowNum: 10,
     }).navGrid("#jqGrid",{edit:false,add:false,del:false});
 });
-
-  function actualizarReuniones(){
-		jQuery("#jqGrid").clearGridData()
-		obtenerReuniones();
-  };
-  
-  function obtenerReuniones () {
-		$.ajax({
-			type : 'GET',
-			contentType : 'application/json',
-			dataType : 'json',
-			url : '/reuniones/' + controller.idProyectoActual,
-			success : function(reuniones) {
-				jQuery("#jqGrid").clearGridData()
-				for(var i=0;i<=reuniones.length;i++){
-				    jQuery("#jqGrid").addRowData(i, reuniones[i])
-			    };
-			}
-		});
-	};
  
 	$(function() {
 		$("#reunionEliminar").button({}).on("click", function() {
@@ -85,18 +65,6 @@ jQuery(document).ready(function() {
 		});
 	});
 	
-	$(function() {
-		$("#reunionAgregar").button({}).on("click", function() {
-			//javascript: return confirm('¿Estas seguro?');
-			if (!confirm("¿Desea eliminar la reunión?")) {
-				return false;
-				}
-			else {
-			eliminarReunion(reunionSeleccionada);
-			}
-		});
-	});
-
 	function eliminarReunion (reunionSeleccionada) {
 	  	$.ajax({
 	  		type : 'GET',
