@@ -8,60 +8,105 @@ jQuery.browser = {};
     }
 })();
 
+$(document).ready(function() {
+	$.ajax({
+		type : 'GET',
+		contentType : 'application/json',
+		dataType : 'json',
+		url : '/reuniones/1',
+		success : function(reuniones) {
+			for(var i=0;i<=reuniones.length;i++){
+			    jQuery("#jqGrid").addRowData(i, reuniones[i])
+		    };
+		}
+	});
+});
 
+
+var reunionSeleccionada;	 
 jQuery(document).ready(function() {
     jQuery("#jqGrid").jqGrid({
-    	type : 'GET',
-        url:'/reuniones/' + 1,
-        editurl:'/reuniones/' + 1,
-        datatype: "json",
-        colNames:['ID'], //,'Tipo','Integrantes', 'Temas Tratados'],
+		mtype : "GET",
+        colNames:['ID','Tipo','Integrantes', 'Temas Tratados'],
+        
+
         colModel: [
-            { label: 'id',name: 'ID',width: 75,key: true,editable: true,editrules : { required: true}} //,
-            //{ label: 'tipo',name: 'Tipo',width: 140,editable: true},
-            //{ label: 'integrantes',name: 'Integrantes',width: 140,editable: true},
-            //{ label : 'temasTratados',name: 'Temas Tratados',width: 100,editable: true}
+           {label: 'ID',name: 'id',index: 'id',width:10,sorttype: "int"},
+           {label: 'Tipo',name: 'tipo',index: 'tipo',width: 15},
+           {label: 'Integrantes',name: 'integrantes',index: 'integrantes', width: 60},
+           {label: 'Temas Tratados',name: 'temasTratados',index: 'temasTratados',width: 60}
             ],
+            onSelectRow: function(id){
+            	var ret = jQuery("#jqGrid").jqGrid('getRowData',id);
+            	reunionSeleccionada = ret.id;            	
+             },    
 		sortname: 'CustomID',
 		sortorder : 'asc',
 		caption:"Reuniones",
 		loadonce: true,
 		viewrecords: true,
 		gridview: true,
+		gridstate: true,
         width: 1100,
-        height: 350,
+        height: '100%',
         rowNum: 10,
-        //rowList: [3],
-        //height: '100%'
-        pager: "#jqGridPager"
-    });
-
-    $('#jqGrid').navGrid('#jqGridPager',
-        // the buttons to appear on the toolbar of the grid
-        { edit: true, add: true, del: true, search: false, refresh: false, view: false, position: "left", cloneToTop: false },
-        // options for the Edit Dialog
-        {
-            editCaption: "The Edit Dialog",
-            recreateForm: true,
-			checkOnUpdate : true,
-			checkOnSubmit : true,
-            closeAfterEdit: true,
-            errorTextFormat: function (data) {
-                return 'Error: ' + data.responseText
-            }
-        },
-        // options for the Add Dialog
-        {
-            closeAfterAdd: true,
-            recreateForm: true,
-            errorTextFormat: function (data) {
-                return 'Error: ' + data.responseText
-            }
-        },
-        // options for the Delete Dailog
-        {
-            errorTextFormat: function (data) {
-                return 'Error: ' + data.responseText
-            }
-        });
+    }).navGrid("#jqGrid",{edit:false,add:false,del:false});
 });
+
+  function actualizarReuniones(){
+		jQuery("#jqGrid").clearGridData()
+		obtenerReuniones();
+  };
+  
+  function obtenerReuniones () {
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/reuniones/' + controller.idProyectoActual,
+			success : function(reuniones) {
+				jQuery("#jqGrid").clearGridData()
+				for(var i=0;i<=reuniones.length;i++){
+				    jQuery("#jqGrid").addRowData(i, reuniones[i])
+			    };
+			}
+		});
+	};
+ 
+	$(function() {
+		$("#reunionEliminar").button({}).on("click", function() {
+			//javascript: return confirm('¿Estas seguro?');
+			if (!confirm("¿Desea eliminar la reunión?")) {
+				return false;
+				}
+			else {
+			eliminarReunion(reunionSeleccionada);
+			}
+		});
+	});
+	
+	$(function() {
+		$("#reunionAgregar").button({}).on("click", function() {
+			//javascript: return confirm('¿Estas seguro?');
+			if (!confirm("¿Desea eliminar la reunión?")) {
+				return false;
+				}
+			else {
+			eliminarReunion(reunionSeleccionada);
+			}
+		});
+	});
+
+	function eliminarReunion (reunionSeleccionada) {
+	  	$.ajax({
+	  		type : 'GET',
+	  		contentType : 'application/json',
+	  		dataType : 'json',
+	  		url : '/eliminarReunion/' + controller.idProyectoActual + '/' + reunionSeleccionada,
+	  		success : function(response) {
+	  		},
+	  		complete : function () {
+	  			actualizarReuniones();
+	  		}
+	  	});
+	  };

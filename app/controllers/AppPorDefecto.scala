@@ -53,18 +53,21 @@ class AppPorDefecto {
   reunion3.integrantes.+=(programowner)
   
   var tema1 = new Tema
-  tema1.descripcion = "Como hacer aplicaciones"
+  tema1.nombre = "Preparar el ambiente"
+  tema1.descripcion = "Breve explicación de como preparar el ambiente de desarrollo."
   tema1.temas.+=("primer paso")
   tema1.temas.+=("segundo paso")
 
   var tema2 = new Tema
-  tema2.descripcion = "Como trabajar con jQuery"
+  tema2.nombre = "Hacer ScrumTask"
+  tema2.descripcion = "Breve explicación de como crear ScrumTask."
   tema2.temas.+=("primer paso")
   tema2.temas.+=("segundo paso")
   
   reunion1.temasTratados=tema1
   reunion2.temasTratados=tema2
   reunion3.temasTratados=tema1
+
   
   reunion1.tipoDeReunion = TipoDeReunion.Daily
   reunion2.tipoDeReunion = TipoDeReunion.Planning

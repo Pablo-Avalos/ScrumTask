@@ -52,19 +52,22 @@ object Application extends Controller {
   implicit val temaWrites = new Writes[Tema] {
     def writes(tema: Tema) = Json.obj(
       "descripcion" -> tema.descripcion,
-      "temas" -> tema.temas)
+      "temas" -> tema.temas
+      )
   }
-
+  
   implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
     def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
-      "tipo" -> tipo.toString())
+      "tipo" -> tipo.toString()
+      )
   }
 
-  implicit val reunionWrites = new Writes[Reunion] {
+    implicit val reunionWrites = new Writes[Reunion] {
     def writes(reunion: Reunion) = Json.obj(
-      "id" -> reunion.id //"tipo" -> reunion.tipoDeReunion,
-      //"integrantes" -> reunion.integrantes,
-      //"temasTratados" -> reunion.temasTratados
+      "id" -> reunion.id,
+      "tipo" -> reunion.tipoDeReunion.toString(),
+      "integrantes" -> reunion.datosDeIntegrantes(),
+      "temasTratados" -> reunion.datosDeTemas()
       )
   }
 
@@ -153,5 +156,10 @@ object Application extends Controller {
     var sprint = appPorDefecto.getTablero(idProyecto).agregarSprint(numeroRelease)
     val json = Json.toJson(sprint)
     Ok(json)
+  }
+  
+  def eliminarReunion(idProyecto: Int, idReunion: Int) = Action {
+    appPorDefecto.getProyecto(idProyecto).eliminarReunion(idReunion)
+    Ok
   }
 }

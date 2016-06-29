@@ -13,7 +13,7 @@ $(document).ready( function () {
 function actualizarProyecto(idProyecto){
   controller.idProyectoActual = idProyecto;
 	actualizarIntegrantes();
-	//actualizarReuniones();
+	actualizarReuniones();
 	actulizarTablero();
 }
 
@@ -75,3 +75,8 @@ $(function() {
     dialogEliminarProyecto.dialog('open');
   });
 });
+
+function actualizarReuniones(){
+	jQuery("#jqGrid").clearGridData()
+	obtenerReuniones();
+};

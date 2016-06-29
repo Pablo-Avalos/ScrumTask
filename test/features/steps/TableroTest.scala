@@ -83,7 +83,7 @@ class TableroTest extends ScalaDsl with EN{
   Given("""^Un tablero sin release$""") { () =>
     //// Express the Regexp above with the code you wish you had
     tablero = new Tablero(1)
-    release = new Release
+    release = new Release(1)
   }
   When("""^Agrego un release con nombre "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
@@ -98,7 +98,7 @@ class TableroTest extends ScalaDsl with EN{
   Given("""^Un tablero con release$""") { () =>
     //// Express the Regexp above with the code you wish you had
     tablero = new Tablero(1)
-    release = new Release
+    release = new Release(1)
     tablero.agregarRelease(release)
   }
   When("""^Agrego un nuevo release$""") { () =>

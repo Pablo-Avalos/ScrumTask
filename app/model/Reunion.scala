@@ -40,4 +40,12 @@ class Reunion(idR:Int) {
     this.setFecha(dia, mes, anio)
     this.setHora(hora, minutos)
   }
+  
+  def datosDeIntegrantes():ListBuffer[String] = {
+     integrantes.map(integrante=> integrante.name)
+  }
+  
+  def datosDeTemas():String = {
+   temasTratados.nombre+ ": " + temasTratados.descripcion
+  }
 }

@@ -18,3 +18,4 @@ GET		/eliminarTarea/:idProyecto/:id controllers.Application.eliminarTarea(idProy
 GET 	/eliminarProyecto/:idProyecto controllers.Application.eliminarProyecto(idProyecto: Int)
 GET		/crearRelease/:idProyecto		controllers.Application.crearRelease(idProyecto: Int)
 GET		/crearSprint/:idProyecto/:numeroRelease     controllers.Application.crearSprint(idProyecto: Int, numeroRelease: Int) 
+GET		/eliminarReunion/:idProyecto/:idReunion controllers.Application.eliminarReunion(idProyecto: Int, idReunion: Int)
