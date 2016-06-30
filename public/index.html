@@ -22,14 +22,16 @@
 
 </head>
 <body>
-	<div class="wide nav header">Scrum Task</div>
+	<div STYLE="width:100%; background-color:#D8D8D8"class="wide nav header">Scrum Task</div>
 	<table width="100%" height="600px" cellspacing="1px" border="1px">
 		<tr height="200px">
 			<td style="’table-layout: fixed’;">
 				<table title="Menu" border="0" width="100px">
 					<tr>
 						<td>
-							<h4>Proyectos</h4>
+							<div STYLE="width:100%; background-color:#D8D8D8">
+							  <h4>Proyectos</h4>
+						    </div>
 							<div>
 								<select id="Select-Proyectos">
 								</select>
@@ -58,7 +60,9 @@
 									    <table id="jqGrid" border="0" height="100%" width="100%"></table>
 									        <div STYLE="width:100%; background-color:#D8D8D8">
 									           <button id="reunionEliminar">Eliminar</button>
-									        </div>
+									           <button id="reunionVer">ver</button>
+									           <div id="ver" title="Ver Reunión"></div>
+									        </div>   
 								    </div>
 								<div id="tabs-2">
 

@@ -8,28 +8,12 @@ jQuery.browser = {};
     }
 })();
 
-//$(document).ready(function() {
-//	$.ajax({
-//		type : 'GET',
-//		contentType : 'application/json',
-//		dataType : 'json',
-//		url : '/reuniones/1',
-//		success : function(reuniones) {
-//			for(var i=0;i<=reuniones.length;i++){
-//			    jQuery("#jqGrid").addRowData(i, reuniones[i])
-//		    };
-//		}
-//	});
-//});
-
-
-var reunionSeleccionada;	 
+var celdaSeleccionada;
+var reunionActual;
 jQuery(document).ready(function() {
     jQuery("#jqGrid").jqGrid({
 		mtype : "GET",
         colNames:['ID','Tipo','Integrantes', 'Temas Tratados'],
-        
-
         colModel: [
            {label: 'ID',name: 'id',index: 'id',width:10,sorttype: "int"},
            {label: 'Tipo',name: 'tipo',index: 'tipo',width: 15},
@@ -37,8 +21,8 @@ jQuery(document).ready(function() {
            {label: 'Temas Tratados',name: 'temasTratados',index: 'temasTratados',width: 60}
             ],
             onSelectRow: function(id){
-            	var ret = jQuery("#jqGrid").jqGrid('getRowData',id);
-            	reunionSeleccionada = ret.id;            	
+            	celdaSeleccionada= id
+            	reunionActual = jQuery("#jqGrid").jqGrid('getRowData',id);            	
              },    
 		sortname: 'CustomID',
 		sortorder : 'asc',
@@ -60,17 +44,17 @@ jQuery(document).ready(function() {
 				return false;
 				}
 			else {
-			eliminarReunion(reunionSeleccionada);
+			eliminarReunion(reunionActual.id);
 			}
 		});
 	});
 	
-	function eliminarReunion (reunionSeleccionada) {
+	function eliminarReunion () {
 	  	$.ajax({
 	  		type : 'GET',
 	  		contentType : 'application/json',
 	  		dataType : 'json',
-	  		url : '/eliminarReunion/' + controller.idProyectoActual + '/' + reunionSeleccionada,
+	  		url : '/eliminarReunion/' + controller.idProyectoActual + '/' + reunionActual.id,
 	  		success : function(response) {
 	  		},
 	  		complete : function () {
@@ -78,3 +62,46 @@ jQuery(document).ready(function() {
 	  		}
 	  	});
 	  };
+	  
+// Editar reunión
+		function editarReunion () {
+		  	$.ajax({
+		  		type : 'GET',
+		  		contentType : 'application/json',
+		  		dataType : 'json',
+		  		url : '/editarReunion/' + controller.idProyectoActual + '/' + reunionActual.id,
+		  		success : function(response) {
+		  		},
+		  		complete : function () {
+		  			actualizarReuniones();
+		  		}
+		  	});
+		  };
+	  
+// dialogo ver reunión. Requiere tener el modelo.	 
+	  $(function() {
+			var dialog, form,
+
+			dialogVerReunion = $("#ver").dialog({
+				autoOpen : false,
+				title: "Detalle de reunión",
+				height : 400,
+				width : 350,
+				modal : true,
+				buttons : {
+					Aceptar : function() {
+						dialogVerReunion.dialog("close");
+					}
+				},
+				close : function() {}
+			});
+
+		  $("#reunionVer").button({}).on("click", function() {
+		    $("#ver").empty();
+            $("#ver").append('<p>Reunión número: '+reunionActual.id+'</p><br>');
+            $("#ver").append('<p>Tipo de reunión: '+reunionActual.tipo+'</p><br>');
+            $("#ver").append('<p>Participantes: '+reunionActual.integrantes+'</p><br>');
+			$("#ver").append('<p>Temas: '+reunionActual.temasTratados+'</p><br>');
+		    dialogVerReunion.dialog('open');
+		  });
+		});
