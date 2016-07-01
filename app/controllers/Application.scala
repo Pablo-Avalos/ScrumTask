@@ -39,36 +39,33 @@ object Application extends Controller {
     def writes(tablero: Tablero) = Json.obj(
       "idT" -> tablero.id,
       "tareas" -> tablero.tareas,
-      "release" -> tablero.listaDeRelease
-      )
+      "release" -> tablero.listaDeRelease)
   }
-
 
   implicit val usarioWrites = new Writes[Usuario] {
     def writes(usuario: Usuario) = Json.obj(
-      "nombre" -> usuario.name)
+      "nombre" -> usuario.name,
+      "id" -> usuario.id
+      )
   }
 
   implicit val temaWrites = new Writes[Tema] {
     def writes(tema: Tema) = Json.obj(
       "descripcion" -> tema.descripcion,
-      "temas" -> tema.temas
-      )
-  }
-  
-  implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
-    def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
-      "tipo" -> tipo.toString()
-      )
+      "temas" -> tema.temas)
   }
 
-    implicit val reunionWrites = new Writes[Reunion] {
+  implicit val tipoWrites = new Writes[TipoDeReunion.Tipo] {
+    def writes(tipo: TipoDeReunion.Tipo) = Json.obj(
+      "tipo" -> tipo.toString())
+  }
+
+  implicit val reunionWrites = new Writes[Reunion] {
     def writes(reunion: Reunion) = Json.obj(
       "id" -> reunion.id,
       "tipo" -> reunion.tipoDeReunion.toString(),
       "integrantes" -> reunion.datosDeIntegrantes(),
-      "temasTratados" -> reunion.datosDeTemas()
-      )
+      "temasTratados" -> reunion.datosDeTemas())
   }
 
   implicit val proyectoWrites = new Writes[Project] {
@@ -145,7 +142,7 @@ object Application extends Controller {
       Ok(json)
     }
   }
-   def crearRelease(idProyecto: Int) = Action {
+  def crearRelease(idProyecto: Int) = Action {
     var release = new Release(appPorDefecto.getTablero(idProyecto).listaDeRelease.length)
     appPorDefecto.getTablero(idProyecto).agregarRelease(release)
 
@@ -157,9 +154,32 @@ object Application extends Controller {
     val json = Json.toJson(sprint)
     Ok(json)
   }
-  
+
   def eliminarReunion(idProyecto: Int, idReunion: Int) = Action {
     appPorDefecto.getProyecto(idProyecto).eliminarReunion(idReunion)
     Ok
+  }
+
+  def getTipoReuniones() = Action {
+    val tipoDeReuniones = appPorDefecto.getTipoDeReuniones()
+      val json = Json.toJson(tipoDeReuniones)
+      Ok(json)
+  }
+  
+  def guardarReunion(idProyecto: Int,tipo:String,nombre:String,descripcion:String,integrantes:String)= Action {
+    var participantes = new ListBuffer[Int] 
+    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach{ x => participantes.+=(x) };
+    var proyecto = appPorDefecto.getProyecto(idProyecto)
+    var nuevaReunion = new Reunion(proyecto.obtenerIdsReunion())
+    nuevaReunion.tipoDeReunion = TipoDeReunion.withName(tipo)
+    nuevaReunion.integrantes = proyecto.colaboradores.filter { colaborado => participantes.contains(colaborado.id)}
+    nuevaReunion.temasTratados = new Tema()
+    nuevaReunion.temasTratados.nombre =  nombre
+    nuevaReunion.temasTratados.descripcion =  descripcion
+    proyecto.reuniones.+=(nuevaReunion)
+    
+    //appPorDefecto.getProyecto(idProyecto).reuniones.head
+    val json = Json.toJson(nuevaReunion)
+    Ok(json)
   }
 }

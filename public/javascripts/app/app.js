@@ -48,6 +48,8 @@ function actualizarReuniones(){
 
 function vaciarReuniones(){
 	jQuery("#jqGrid").clearGridData()
+	celdaSeleccionada=null;
+	reunionActual=null;
 }
 
 function desabilitarBotonEliminarProyecto(){

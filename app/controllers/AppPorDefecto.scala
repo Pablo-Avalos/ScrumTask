@@ -8,16 +8,20 @@ class AppPorDefecto {
   
   var integrante1 = new Colaborador("Pepe")
   integrante1.name = "Pepe"
+  integrante1.id = 0
   
   var integrante2 = new Colaborador("Pipo")
   integrante2.name = "Pipo"
+  integrante2.id = 1
   
   var integrante3 = new Colaborador("Pancho")
   integrante3.name = "Pancho"
+  integrante3.id = 2
   
   var integrante4 = new Colaborador("Moncho")
   integrante4.name = "Moncho"
-
+  integrante4.id = 3
+  
   var tarea1 = new Tarea(25, "Buscar")
   tarea1.autor = "Pipo"
   tarea1.descripcion = "Buscar algo"
@@ -36,13 +40,16 @@ class AppPorDefecto {
   tablero2.agregarTarea(new Tarea(28, "Hacer algo"))
   tablero2.agregarTarea(tarea2)
 
-  var reunion1 = new Reunion(100)
-  var reunion2 = new Reunion(101)
-  var reunion3 = new Reunion(102)
+  var reunion1 = new Reunion(0)
+  var reunion2 = new Reunion(1)
+  var reunion3 = new Reunion(2)
   
   var colaborador = new Colaborador("colaborador uno")
+  colaborador.id = 4
   var scrummaster = new ScrumMaster("scrummaster")
+  scrummaster.id = 5
   var programowner = new ProductOwner("programowner")
+  scrummaster.id = 6
   
   reunion1.integrantes.+=(colaborador)
   reunion1.integrantes.+=(scrummaster)
@@ -128,5 +135,13 @@ class AppPorDefecto {
   
   def eliminarProyecto(idProyecto: Int) = proyectos = proyectos.filterNot { p => p.id == idProyecto }
  
+  def getTipoDeReuniones():ListBuffer[TipoDeReunion.Tipo] = {
+    var tiposDeReuniones = new ListBuffer[TipoDeReunion.Tipo]
+    tiposDeReuniones.+=(TipoDeReunion.Daily)
+    tiposDeReuniones.+=(TipoDeReunion.Demo)
+    tiposDeReuniones.+=(TipoDeReunion.Planning)
+    tiposDeReuniones.+=(TipoDeReunion.Retrospective)
+    tiposDeReuniones
+  }
   
 }

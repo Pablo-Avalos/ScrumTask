@@ -48,4 +48,15 @@ class Reunion(idR:Int) {
   def datosDeTemas():String = {
    temasTratados.nombre+ ": " + temasTratados.descripcion
   }
+  
+   def crearReunion(id:Int, tipo:String,integrantes :ListBuffer[Usuario],nombreTema:String,descripcionTema:String){
+    var nuevaReunion = new Reunion(id)
+    var tipoReunion = TipoDeReunion
+    nuevaReunion.tipoDeReunion = tipoReunion.withName(tipo)
+    nuevaReunion.integrantes = integrantes
+    nuevaReunion.temasTratados = new Tema()
+    nuevaReunion.temasTratados.nombre =  nombreTema
+    nuevaReunion.temasTratados.descripcion =  descripcionTema
+    nuevaReunion
+  }
 }

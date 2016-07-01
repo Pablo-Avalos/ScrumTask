@@ -19,3 +19,5 @@ GET 	/eliminarProyecto/:idProyecto controllers.Application.eliminarProyecto(idPr
 GET		/crearRelease/:idProyecto		controllers.Application.crearRelease(idProyecto: Int)
 GET		/crearSprint/:idProyecto/:numeroRelease     controllers.Application.crearSprint(idProyecto: Int, numeroRelease: Int) 
 GET		/eliminarReunion/:idProyecto/:idReunion controllers.Application.eliminarReunion(idProyecto: Int, idReunion: Int)
+GET		/tiposDeReunion				    controllers.Application.getTipoReuniones
+GET		/guardarReunion/:idProyecto/:tipo/:nombre/:descripcion/:integrantes    controllers.Application.guardarReunion(idProyecto: Int,tipo:String,nombre:String,descripcion:String,integrantes:String)

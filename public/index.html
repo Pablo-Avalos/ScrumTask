@@ -57,12 +57,32 @@
 									<li><a href="#tabs-3">Tablero</a></li>
 								</ul>
 									<div id="tabs-1">
-									    <table id="jqGrid" border="0" height="100%" width="100%"></table>
-									        <div STYLE="width:100%; background-color:#D8D8D8">
+											  <div STYLE="width:100%; background-color:#D8D8D8">
 									           <button id="reunionEliminar">Eliminar</button>
-									           <button id="reunionVer">ver</button>
+									           <button id="reunionCrear">Crear</button>
+									           <button id="reunionEditar">Editar</button>
+									           <button id="reunionVer">Ver</button>
 									           <div id="ver" title="Ver Reunión"></div>
-									        </div>   
+									        <div id="dialog-Tema" title="Tema de Reunión">
+											<p class="validateTips">Completar Campos</p>
+											   <form>
+												   <fieldset>
+													 <label for="nombreTema">Tema</label><br><input type="text"
+													    	name="Nombre tema" id ="nombre-tema"
+														    class="text ui-widget-content ui-corner-all">
+												     <label for="name">Descripción</label> <br><input type="text"
+													    	name="Descripcion" id ="descripcion-tema"
+													    	height="600"
+														    class="text ui-widget-content ui-corner-all">
+													<br><label for="name">Tipo de reunión</label> 
+													<br><select id ="reunion-tipo"></select>
+													 <br><label for="integrantes">Integrantes</label> 
+                                                    <br><ul style="list-style-type: none" id="integranteReunion"> </ul>	    
+												   </fieldset>
+											   </form>
+										    </div>
+									        </div>
+									    <table id="jqGrid" border="0" height="100%" width="100%"></table>   
 								    </div>
 								<div id="tabs-2">
 
