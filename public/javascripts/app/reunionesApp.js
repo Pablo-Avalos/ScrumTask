@@ -53,8 +53,8 @@ jQuery(document).ready(function() {
 		viewrecords : true,
 		gridview : true,
 		gridstate : true,
-		width : 1050,
-		height : '100%',
+		width : 1100,
+		height : 400,
 		rowNum : 10,
 	}).navGrid("#jqGrid", {
 		edit : false,
@@ -211,46 +211,8 @@ function reiniciarGuardarDialog(){
 	checkeados = $("input:checked").each(function() {
 		$('input:checkbox').removeAttr('checked');
 	});
+	$("#reunion-tipo").empty();
 }
-
-// Carga el selector de tipos de reunion
-$(document).ready(
-		function() {
-			$.ajax({
-				type : 'GET',
-				contentType : 'application/json',
-				dataType : 'json',
-				url : '/tiposDeReunion',
-				success : function(response) {
-					for (var i = 0; i < response.length; i++) {
-						$("#reunion-tipo").append(
-								'<option>' + response[i].tipo + '</option>');
-					}
-				}
-			});
-		});
-
-// carga los integrantes del proyecto para agregarlos a la reunion
-$(document).ready(
-		function() {
-			$
-					.ajax({
-						type : 'GET',
-						contentType : 'application/json',
-						dataType : 'json',
-						url : '/integrantes/1',
-						success : function(response) {
-							for (var i = 0; i < response.length; i++) {
-								$('#integranteReunion').append(
-										'<li> <input type="checkbox" name="rol" value='
-												+ response[i].id + '>'
-												+ response[i].nombre
-												+ '</label></li>');
-							}
-						}
-					});
-		});
-
 
 // Editar
 $(function() {

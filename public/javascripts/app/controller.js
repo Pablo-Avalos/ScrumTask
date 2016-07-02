@@ -27,7 +27,7 @@ var controller = {
 					}
 					controller.obtenerTablero(controller.idProyectoActual);
 					controller.obtenerIntegrantes(controller.idProyectoActual);
-					controller.obtenerReuniones(controller.idProyectoActual);
+					controller.obtenerReunionesDeProyecto(controller.idProyectoActual);
 				}
 			}
 		});
@@ -122,6 +122,12 @@ var controller = {
 					$("#selectable").append(
 							'<li class="ui-widget-content">'
 									+ response[i].nombre + '</li>');
+					// Posibles integrantes para nueva reunión
+					//$('#integranteReunion').append(
+					//		'<li> <input type="checkbox" name="rol" value='
+				//					+ response[i].id + '>'
+					//				+ response[i].nombre
+					//				+ '</label></li>');
 				}
 			}
 		});
@@ -257,6 +263,30 @@ var controller = {
 			}
 		});
 	},
+	
+	obtenerIntegrantesDeReunion : function() {
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/integrantes/' + controller.idProyectoActual,
+			success : function(response) {
+				for (var i = 0; i < response.length; i++) {
+					$('#integranteReunion').append(
+							'<li> <input type="checkbox" name="rol" value='
+									+ response[i].id + '>'
+									+ response[i].nombre
+									+ '</label></li>');
+				}
+			}
+		});
+	},
+	
+	obtenerReunionesDeProyecto : function (idProyecto) {
+	controller.obtenerReuniones(idProyecto);
+	controller.obtenerTipoDeReuniones(idProyecto);
+	controller.obtenerIntegrantesDeReunion(idProyecto);
+	},
 
 	obtenerReuniones : function () {
 	$.ajax({
@@ -272,4 +302,20 @@ var controller = {
 		}
 	});
    },
+   
+   obtenerTipoDeReuniones : function() {
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/tiposDeReunion',
+			success : function(response) {
+				for (var i = 0; i < response.length; i++) {
+					$("#reunion-tipo").append(
+							'<option>' + response[i].tipo + '</option>');
+				}
+			}
+		});
+	},
+
 };

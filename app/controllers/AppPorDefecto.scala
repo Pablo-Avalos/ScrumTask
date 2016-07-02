@@ -143,5 +143,4 @@ class AppPorDefecto {
     tiposDeReuniones.+=(TipoDeReunion.Retrospective)
     tiposDeReuniones
   }
-  
 }

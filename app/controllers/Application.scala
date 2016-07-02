@@ -13,7 +13,7 @@ import play.api.libs.json.Writes
 object Application extends Controller {
 
   val appPorDefecto = new AppPorDefecto
-
+ var idp = 3
   implicit val tareaWrites = new Writes[Tarea] {
     def writes(tarea: Tarea) = Json.obj(
       "id" -> tarea.id,
@@ -100,6 +100,8 @@ object Application extends Controller {
   def agregarColaborador(idProyecto: Int, nombre: String) = Action {
     val nuevoColaborador = new Colaborador(nombre)
     nuevoColaborador.name = nombre
+    nuevoColaborador.id = idp
+    idp = idp +1 // esto lo puse provisorio para manejar el id de usuario
     appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
   }
@@ -170,16 +172,9 @@ object Application extends Controller {
     var participantes = new ListBuffer[Int] 
     ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach{ x => participantes.+=(x) };
     var proyecto = appPorDefecto.getProyecto(idProyecto)
-    var nuevaReunion = new Reunion(proyecto.obtenerIdsReunion())
-    nuevaReunion.tipoDeReunion = TipoDeReunion.withName(tipo)
-    nuevaReunion.integrantes = proyecto.colaboradores.filter { colaborado => participantes.contains(colaborado.id)}
-    nuevaReunion.temasTratados = new Tema()
-    nuevaReunion.temasTratados.nombre =  nombre
-    nuevaReunion.temasTratados.descripcion =  descripcion
-    proyecto.reuniones.+=(nuevaReunion)
-    
-    //appPorDefecto.getProyecto(idProyecto).reuniones.head
-    val json = Json.toJson(nuevaReunion)
+    var id = proyecto.obtenerIdsReunion()
+    proyecto.crearReunion(id, tipo, participantes, nombre, descripcion)
+    val json = Json.toJson(proyecto.reuniones.filter { r => r.id == id })
     Ok(json)
   }
 }

@@ -26,6 +26,7 @@ function vaciarProyecto(){
   $("#Select-Proyectos").empty();
   $("#tableroConTareas").empty();
   $("#selectable").empty();
+  $("#reunion-tipo").empty();
 }
 
 function actulizarTablero(){
@@ -42,14 +43,20 @@ function actualizarIntegrantes(){
 
 function actualizarReuniones(){
 	vaciarReuniones();
-	controller.obtenerReuniones();
+	controller.obtenerReunionesDeProyecto();
 }
 
+function actualizarIntegrantesDeReunion(){
+	
+}
 
 function vaciarReuniones(){
-	jQuery("#jqGrid").clearGridData()
+	jQuery("#jqGrid").clearGridData();
+	$("#reunion-tipo").empty();
 	celdaSeleccionada=null;
 	reunionActual=null;
+	$("#integranteReunion").empty();
+	
 }
 
 function desabilitarBotonEliminarProyecto(){
