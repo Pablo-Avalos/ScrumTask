@@ -75,25 +75,15 @@ var controller = {
 											.createElement("div");
 
 									celdaTareas.setAttribute("id", "dialog");
-									celdaTareas.setAttribute("class",
-											"cuadrado");
+//									celdaTareas.setAttribute("class", "ui-icon");
 									var textoLista = document
 											.createTextNode("Id: " + tarea.id
 													+ "\n" + " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
 													+ " Descripcion: "
 													+ tarea.descripcion);
-
-									// '<li id = "dialog"
-									// class="ui-state-default"> Id :
-									// '
-									// + response.tareas[i].id
-									// + '<br> Nombre : '
-									// + response.tareas[i].nombre
-									// + '<br> Descripcion: '
-									// + response.tareas[i].descripcion
-									// + '</li>');
-
+									
+//									textoLista.setAttribute("id", "dialog");
 									celdaTareas.appendChild(textoLista);
 									ullist.appendChild(celdaTareas);
 								}
