@@ -22,16 +22,17 @@
 
 </head>
 <body>
-	<div STYLE="width:100%; background-color:#D8D8D8"class="wide nav header">Scrum Task</div>
+	<div STYLE="width: 100%; background-color: #D8D8D8"
+		class="wide nav header">Scrum Task</div>
 	<table width="100%" height="600px" cellspacing="1px" border="1px">
 		<tr height="200px">
 			<td style="’table-layout: fixed’;">
 				<table title="Menu" border="0" width="100px">
 					<tr>
 						<td>
-							<div STYLE="width:100%; background-color:#D8D8D8">
-							  <h4>Proyectos</h4>
-						    </div>
+							<div STYLE="width: 100%; background-color: #D8D8D8">
+								<h4>Proyectos</h4>
+							</div>
 							<div>
 								<select id="Select-Proyectos">
 								</select>
@@ -56,34 +57,35 @@
 									<li><a href="#tabs-2">Miembros</a></li>
 									<li><a href="#tabs-3">Tablero</a></li>
 								</ul>
-									<div id="tabs-1">
-											  <div STYLE="width:100%; background-color:#D8D8D8">
-									           <button id="reunionEliminar">Eliminar</button>
-									           <button id="reunionCrear">Crear</button>
-									           <button id="reunionEditar">Editar</button>
-									           <button id="reunionVer">Ver</button>
-									           <div id="ver" title="Ver Reunión"></div>
-									        <div id="dialog-Tema" title="Tema de Reunión">
+								<div id="tabs-1">
+									<div STYLE="width: 100%; background-color: #D8D8D8">
+										<button id="reunionEliminar">Eliminar</button>
+										<button id="reunionCrear">Crear</button>
+										<button id="reunionEditar">Editar</button>
+										<button id="reunionVer">Ver</button>
+										<div id="ver" title="Ver Reunión"></div>
+										<div id="dialog-Tema" title="Tema de Reunión">
 											<p class="validateTips">Completar Campos</p>
-											   <form>
-												   <fieldset>
-													 <label for="nombreTema">Tema</label><br><input type="text"
-													    	name="Nombre tema" id ="nombre-tema"
-														    class="text ui-widget-content ui-corner-all">
-												     <label for="name">Descripción</label> <br><input type="text"
-													    	name="Descripcion" id ="descripcion-tema"
-													    	height="600"
-														    class="text ui-widget-content ui-corner-all">
-													<br><label for="name">Tipo de reunión</label> 
-													<br><select id ="reunion-tipo"></select>
-													 <br><label for="integrantes">Integrantes</label> 
-                                                    <br><ul style="list-style-type: none" id="integranteReunion"> </ul>	    
-												   </fieldset>
-											   </form>
-										    </div>
-									        </div>
-									    <table id="jqGrid" border="0" height="100%" width="100%"></table>   
-								    </div>
+											<form>
+												<fieldset>
+													<label for="nombreTema">Tema</label><br>
+													<input type="text" name="Nombre tema" id="nombre-tema"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Descripción</label> <br>
+													<input type="text" name="Descripcion" id="descripcion-tema"
+														height="600" class="text ui-widget-content ui-corner-all">
+													<br>
+													<label for="name">Tipo de reunión</label> <br>
+													<select id="reunion-tipo"></select> <br>
+													<label for="integrantes">Integrantes</label> <br>
+													<ul style="list-style-type: none" id="integranteReunion">
+													</ul>
+												</fieldset>
+											</form>
+										</div>
+									</div>
+									<table id="jqGrid" border="0" height="100%" width="100%"></table>
+								</div>
 								<div id="tabs-2">
 
 									<ol id="selectable">
@@ -121,7 +123,7 @@
 
 
 								</div>
-								<div id="tabs-3">
+								<div id="tabs-3" style="overflow-y: scroll; height:520px;">
 									<div>
 										<button id="create-release">Agregar Release</button>
 										<button id="create-sprint">Agregar Sprint</button>
@@ -200,7 +202,8 @@
 										<div id="deleteArea">Arrastrar aqui para borrar.</div>
 									</div>
 
-								</div></td>
+								</div>
+							</div></td>
 					</tr>
 				</table>
 			</td>
