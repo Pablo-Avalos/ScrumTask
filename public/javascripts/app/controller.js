@@ -164,6 +164,7 @@ var controller = {
 			},
 			complete : function() {
 				actualizarIntegrantes();
+				controller.obtenerIntegrantesDeReunion();
 			}
 		});
 	},
@@ -179,6 +180,7 @@ var controller = {
 			},
 			complete : function() {
 				actualizarIntegrantes();
+				controller.obtenerIntegrantesDeReunion();
 			}
 		});
 	},
@@ -274,6 +276,7 @@ var controller = {
 			dataType : 'json',
 			url : '/integrantes/' + controller.idProyectoActual,
 			success : function(response) {
+				$('#integranteReunion').empty();
 				for (var i = 0; i < response.length; i++) {
 					$('#integranteReunion').append(
 							'<li> <input type="checkbox" name="rol" value='
