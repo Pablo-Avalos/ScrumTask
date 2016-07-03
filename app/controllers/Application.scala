@@ -113,7 +113,9 @@ object Application extends Controller {
 
   def agregarTarea(idProyecto: Int, numeroRelease: Int, numeroSprint: Int, nombre: String, descripcion: String) = Action {
 
-    val tarea = new Tarea(appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.length, nombre)
+    var nuevoID = if(appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.isEmpty){0}else {appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.length}
+    
+    val tarea = new Tarea(nuevoID, nombre)
     tarea.descripcion = descripcion
     val t = appPorDefecto.getTablero(idProyecto).agregarTarea(numeroRelease, numeroSprint, tarea)
     val json = Json.toJson(t)
