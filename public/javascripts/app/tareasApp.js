@@ -1,6 +1,22 @@
+//$(function() {
+//	$("#dialog").dialog();
+//});
+
 $(function() {
-	$("#dialog").dialog();
-});
+    $( "#dialog" ).dialog({
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "Delete all items": function() {
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
 
 $(document).ready(function() {
 	$("#tarjeta-tarea").dialog({

@@ -5,32 +5,37 @@ var controller = {
 	proyectoActual : null,
 
 	obtenerProyectos : function() {
-		$.ajax({
-			type : 'GET',
-			contentType : 'application/json',
-			dataType : 'json',
-			url : '/proyectos',
-			success : function(response) {
-				if (response.length < 1) {
-					// Todo
-					vaciarProyecto();
-					desabilitarBotonEliminarProyecto();
-				} else {
-					proyectos = response;
-					controller.idProyectoActual = response[0].id;
-					controller.proyectoActual = response[0];
-					var select = $("#Select-Proyectos");
-					for (var i = 0; i < response.length; i++) {
-						$("#Select-Proyectos").append(
-								'<option value="' + response[i].id + '">'
-										+ response[i].nombre + '</option>');
+		$
+				.ajax({
+					type : 'GET',
+					contentType : 'application/json',
+					dataType : 'json',
+					url : '/proyectos',
+					success : function(response) {
+						if (response.length < 1) {
+							// Todo
+							vaciarProyecto();
+							desabilitarBotonEliminarProyecto();
+						} else {
+							proyectos = response;
+							controller.idProyectoActual = response[0].id;
+							controller.proyectoActual = response[0];
+							var select = $("#Select-Proyectos");
+							for (var i = 0; i < response.length; i++) {
+								$("#Select-Proyectos").append(
+										'<option value="' + response[i].id
+												+ '">' + response[i].nombre
+												+ '</option>');
+							}
+							controller
+									.obtenerTablero(controller.idProyectoActual);
+							controller
+									.obtenerIntegrantes(controller.idProyectoActual);
+							controller
+									.obtenerReunionesDeProyecto(controller.idProyectoActual);
+						}
 					}
-					controller.obtenerTablero(controller.idProyectoActual);
-					controller.obtenerIntegrantes(controller.idProyectoActual);
-					controller.obtenerReunionesDeProyecto(controller.idProyectoActual);
-				}
-			}
-		});
+				});
 	},
 
 	obtenerTablero : function() {
@@ -61,6 +66,9 @@ var controller = {
 							for (var j = 0; j < response.release[i].listaSprints.length; j++) {
 								var numerSpt = response.release[i].listaSprints[j].numero;
 								var celdaSprint = document.createElement("td");
+								celdaSprint.setAttribute("id", "celdaSprint");
+//								style="overflow-y: scroll; height: 520px;"
+//									celdaSprint.setAttribute("style","overflow-y: scroll; height: 100px;" );
 								var textoCeldaSprint = document
 										.createTextNode("Sprint " + numerSpt);
 
@@ -68,6 +76,8 @@ var controller = {
 
 								var ullist = document.createElement("ul");
 								ullist.setAttribute("id", "tableroConTareas");
+								ullist.setAttribute("style","overflow-y: scroll; height: 150px;" );
+								
 								for (var h = 0; h < response.release[i].listaSprints[j].listaTareas.length; h++) {
 									var tarea = response.release[i].listaSprints[j].listaTareas[h];
 									// celdaSprint =
@@ -75,15 +85,18 @@ var controller = {
 											.createElement("div");
 
 									celdaTareas.setAttribute("id", "dialog");
-//									celdaTareas.setAttribute("class", "ui-icon");
+									celdaTareas.setAttribute("class", "column");
+									celdaTareas
+											.setAttribute("class", "portlet-content");
+
 									var textoLista = document
 											.createTextNode("Id: " + tarea.id
 													+ "\n" + " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
 													+ " Descripcion: "
 													+ tarea.descripcion);
-									
-//									textoLista.setAttribute("id", "dialog");
+
+									// textoLista.setAttribute("id", "dialog");
 									celdaTareas.appendChild(textoLista);
 									ullist.appendChild(celdaTareas);
 								}
@@ -113,11 +126,11 @@ var controller = {
 							'<li class="ui-widget-content">'
 									+ response[i].nombre + '</li>');
 					// Posibles integrantes para nueva reunión
-					//$('#integranteReunion').append(
-					//		'<li> <input type="checkbox" name="rol" value='
-				//					+ response[i].id + '>'
-					//				+ response[i].nombre
-					//				+ '</label></li>');
+					// $('#integranteReunion').append(
+					// '<li> <input type="checkbox" name="rol" value='
+					// + response[i].id + '>'
+					// + response[i].nombre
+					// + '</label></li>');
 				}
 			}
 		});
@@ -253,7 +266,7 @@ var controller = {
 			}
 		});
 	},
-	
+
 	obtenerIntegrantesDeReunion : function() {
 		$.ajax({
 			type : 'GET',
@@ -264,36 +277,36 @@ var controller = {
 				for (var i = 0; i < response.length; i++) {
 					$('#integranteReunion').append(
 							'<li> <input type="checkbox" name="rol" value='
-									+ response[i].id + '>'
-									+ response[i].nombre
+									+ response[i].id + '>' + response[i].nombre
 									+ '</label></li>');
 				}
 			}
 		});
 	},
-	
-	obtenerReunionesDeProyecto : function (idProyecto) {
-	controller.obtenerReuniones(idProyecto);
-	controller.obtenerTipoDeReuniones(idProyecto);
-	controller.obtenerIntegrantesDeReunion(idProyecto);
+
+	obtenerReunionesDeProyecto : function(idProyecto) {
+		controller.obtenerReuniones(idProyecto);
+		controller.obtenerTipoDeReuniones(idProyecto);
+		controller.obtenerIntegrantesDeReunion(idProyecto);
 	},
 
-	obtenerReuniones : function () {
-	$.ajax({
-		type : 'GET',
-		contentType : 'application/json',
-		dataType : 'json',
-		url : '/reuniones/' + controller.idProyectoActual,
-		success : function(reuniones) {
-			//jQuery("#jqGrid").clearGridData()
-			for(var i=0;i<=reuniones.length;i++){
-			    jQuery("#jqGrid").addRowData(i, reuniones[i])
-		    };
-		}
-	});
-   },
-   
-   obtenerTipoDeReuniones : function() {
+	obtenerReuniones : function() {
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/reuniones/' + controller.idProyectoActual,
+			success : function(reuniones) {
+				// jQuery("#jqGrid").clearGridData()
+				for (var i = 0; i <= reuniones.length; i++) {
+					jQuery("#jqGrid").addRowData(i, reuniones[i])
+				}
+				;
+			}
+		});
+	},
+
+	obtenerTipoDeReuniones : function() {
 		$.ajax({
 			type : 'GET',
 			contentType : 'application/json',
