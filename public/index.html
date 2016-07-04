@@ -59,33 +59,35 @@
 								</ul>
 								<div id="tabs-1">
 									<div STYLE="width: 100%; background-color: #D8D8D8">
-										<br>
-										<button id="reunionEliminar">Eliminar</button>
-										<button id="reunionCrear">Crear</button>
-										<button id="reunionEditar">Editar</button>
-										<button id="reunionVer">Ver</button>
+										<button id="reunionEliminar" title= "Eliminar Reunión"">Eliminar
+										</button>
+										<button id="reunionCrear" title= "Crear Reunión">Crear
+										</button>
+										<button id="reunionEditar" title="Editar Reunión">Editar
+										</button>
+										<button id="reunionVer" title="Ver Reunión">Ver
+										</button>
 										<div id="ver" title="Ver Reunión"></div>
-										<br>
 										<div id="dialog-Tema" title="Tema de Reunión">
 											<p class="validateTips">Completar Campos</p>
 											<form>
 												<fieldset>
-													<label for="nombreTema">Tema</label><br> <input
-														type="text" name="Nombre tema" id="nombre-tema"
-														class="text ui-widget-content ui-corner-all"> <label
-														for="name">Descripción</label> <br> <input
-														type="text" name="Descripcion" id="descripcion-tema"
-														height="600" class="text ui-widget-content ui-corner-all">
-													<br> <label for="name">Tipo de reunión</label> <br>
-													<select id="reunion-tipo"></select> <br> <label
-														for="integrantes">Integrantes</label> <br>
+													<label for="nombreTema">Tema</label><br>
+													<input type="text" name="Nombre tema" id="nombre-tema"
+														class="text ui-widget-content ui-corner-all"><br> 
+													<label for="name">Descripción</label> <br>
+													<textarea name="Descripcion" id="descripcion-tema" width="20" height="100"
+													 class="text ui-widget-content ui-corner-all"></textarea><br>
+													<label for="name">Tipo de reunión</label> <br>
+													<select id="reunion-tipo"></select> <br>
+													<label for="integrantes">Integrantes</label> <br>
 													<ul style="list-style-type: none" id="integranteReunion">
 													</ul>
 												</fieldset>
 											</form>
 										</div>
 									</div>
-									<table id="jqGrid" border="0" height="100%" width="100%"></table>
+									<table id="jqGrid" border="0" height="100%" width="100%" title="Reuniones"></table>
 								</div>
 								<div id="tabs-2">
 

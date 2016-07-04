@@ -14,7 +14,8 @@ var nuevaReunionTemaNombre;
 var nuevaReunionTemaDescripcion;
 var nuevaReunionTipo;
 var checkeados = [];
-
+var reunionActual;
+var idNuevaReunion = -1;
 //carga de datos de reunión
 jQuery(document).ready(function() {
 	jQuery("#jqGrid").jqGrid({
@@ -127,11 +128,11 @@ $(function() {
 							'<p>Tipo de reunión: ' + reunionActual.tipo
 									+ '</p><br>');
 					$("#ver").append(
-							'<p>Participantes: ' + reunionActual.integrantes
-									+ '</p><br>');
+							'Participantes: <br> <textarea readonly width="40" height="40" class="text ui-widget-content ui-corner-all">'
+							+ reunionActual.integrantes.split(",") +'</textarea><br>');
 					$("#ver").append(
-							'<p>Temas: ' + reunionActual.temasTratados
-									+ '</p><br>');
+							'Tema y Descripción: <br> <textarea readonly width="40" height="40" class="text ui-widget-content ui-corner-all">'
+							+ reunionActual.temasTratados +'</textarea>');
 				} else {
 					$("#ver").append(
 							'<p>No se selecciono ninguna reunion</p><br>');
@@ -145,7 +146,7 @@ $(function() {
 	var dialog, form, dialogCrearTema = $("#dialog-Tema").dialog(
 			{
 				autoOpen : false,
-				title : "Crear Reunión",
+				//title : "Organizar Reuniones",
 				height : 400,
 				width : 350,
 				modal : true,
@@ -192,7 +193,7 @@ function agregarReunion() {
 		type : 'GET',
 		contentType : 'application/json',
 		dataType : 'json',
-		url : '/guardarReunion/' + controller.idProyectoActual + '/'
+		url : '/guardarReunion/' + controller.idProyectoActual + '/' + idNuevaReunion + '/'
 				+ nuevaReunionTipo + '/'
 				+ nuevaReunionTemaNombre + '/' + nuevaReunionTemaDescripcion + '/' + integrantes,
 		success : function(response) {
@@ -212,11 +213,26 @@ function reiniciarGuardarDialog(){
 		$('input:checkbox').removeAttr('checked');
 	});
 	$("#reunion-tipo").empty();
-}
+	$("#dialog-Tema").dialog('option', 'title', 'Guardar Reunión');
+	idNuevaReunion = -1;
+};
+
+
+
+
+
 
 // Editar
+
 $(function() {
 	$("#reunionEditar").button({}).on("click", function() {
-		alert("Hacer cuanto antes");
+		var temasTratados = reunionActual.temasTratados.split(": ")
+		$("#nombre-tema").val(temasTratados[0]);
+		$("#descripcion-tema").val(temasTratados[1]);
+		$("#reunion-tipo").val(reunionActual.tipo);
+		$("#dialog-Tema").dialog('option', 'title', 'Editar Reunión');
+		$("#reunionCrear").click();
+		idNuevaReunion = reunionActual.id
 	});
 });
+	

@@ -168,14 +168,12 @@ object Application extends Controller {
     val json = Json.toJson(tipoDeReuniones)
     Ok(json)
   }
-
-  def guardarReunion(idProyecto: Int, tipo: String, nombre: String, descripcion: String, integrantes: String) = Action {
-    var participantes = new ListBuffer[Int]
-    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach { x => participantes.+=(x) };
+  
+  def guardarReunion(idProyecto: Int,idR:Int,tipo:String,nombre:String,descripcion:String,integrantes:String)= Action {
+    var participantes = new ListBuffer[Int] 
+    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach{ x => participantes.+=(x) };
     var proyecto = appPorDefecto.getProyecto(idProyecto)
-    var id = proyecto.obtenerIdsReunion()
-    proyecto.crearReunion(id, tipo, participantes, nombre, descripcion)
-    val json = Json.toJson(proyecto.reuniones.filter { r => r.id == id })
-    Ok(json)
+    proyecto.crearReunion(idR, tipo, participantes, nombre, descripcion)
+    Ok
   }
 }
