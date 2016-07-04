@@ -46,7 +46,7 @@ var controller = {
 					dataType : 'json',
 					url : '/tablero/' + controller.idProyectoActual,
 					success : function(response) {
-						console.log(response.release);
+//						console.log(response.release);
 						var divTabla = document
 								.getElementById("tableroConRelease");
 						var tabla = document.createElement("table");
@@ -153,6 +153,7 @@ var controller = {
 		});
 	},
 
+
 	eliminarIntegrante : function(nombreIntegrante) {
 		$.ajax({
 			type : 'GET',
@@ -253,6 +254,26 @@ var controller = {
 			}
 		});
 	},
+	
+	eliminarTarea : function(nRelease, nSprint, id) {
+//		var tarea = '1';
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/eliminarTarea/' + controller.idProyectoActual + '/'
+					+ nRelease + '/' + nSprint + '/' + id,
+			success : function(response) {
+				alert("se elimino correctamente")
+//				tarea = response;
+			},
+			complete : function() {
+				actulizarTablero();
+			}
+		});
+	},
+
+	
 	eliminarProyecto : function() {
 		$.ajax({
 			type : 'GET',

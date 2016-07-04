@@ -128,6 +128,7 @@
 										<button id="create-release">Agregar Release</button>
 										<button id="create-sprint">Agregar Sprint</button>
 										<button id="create-user">Agregar Tarea</button>
+										<button id="eliminar-tarea">Eliminar Tarea</button>
 									</div>
 									<br>
 									<div id="tableroConRelease"></div>
@@ -171,7 +172,24 @@
 												</fieldset>
 											</form>
 										</div>
+										<div id="eliminarTarea" title="Eliminar Tarea">
+											<p class="validateTips">Completar Campos</p>
 
+											<form>
+												<fieldset>
+													<label for="name">Numero Release</label> <input type="text"
+														name="n-release" id="ne-release"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Numero Sprint</label> <input type="text"
+														name="n-sprint" id="ne-sprint"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Id Tarea</label> <input type="text" name="name"
+														id="id" class="text ui-widget-content ui-corner-all">
+														</fieldset>
+											</form>
+										</div>
+
+<!--  
 										<div>
 											<div id="dialog-form" title="Crear Tarea">
 												<p class="validateTips">Completar Campos</p>
@@ -192,7 +210,7 @@
 												</form>
 											</div>
 											<button id="create-user">Agregar Tarea</button>
-										</div>
+										</div> -->
 
 										<div id="confirmarEliminarTarea" title="Eliminar tarea">
 											<p>¿Desea eliminar por completo la tarea?</p>

@@ -13,7 +13,7 @@ import play.api.libs.json.Writes
 object Application extends Controller {
 
   val appPorDefecto = new AppPorDefecto
- var idp = 3
+  var idp = 3
   implicit val tareaWrites = new Writes[Tarea] {
     def writes(tarea: Tarea) = Json.obj(
       "id" -> tarea.id,
@@ -45,8 +45,7 @@ object Application extends Controller {
   implicit val usarioWrites = new Writes[Usuario] {
     def writes(usuario: Usuario) = Json.obj(
       "nombre" -> usuario.name,
-      "id" -> usuario.id
-      )
+      "id" -> usuario.id)
   }
 
   implicit val temaWrites = new Writes[Tema] {
@@ -101,7 +100,7 @@ object Application extends Controller {
     val nuevoColaborador = new Colaborador(nombre)
     nuevoColaborador.name = nombre
     nuevoColaborador.id = idp
-    idp = idp +1 // esto lo puse provisorio para manejar el id de usuario
+    idp = idp + 1 // esto lo puse provisorio para manejar el id de usuario
     appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
   }
@@ -113,8 +112,8 @@ object Application extends Controller {
 
   def agregarTarea(idProyecto: Int, numeroRelease: Int, numeroSprint: Int, nombre: String, descripcion: String) = Action {
 
-    var nuevoID = if(appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.isEmpty){0}else {appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.length}
-    
+    var nuevoID = if (appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.isEmpty) { 0 } else { appPorDefecto.getTablero(idProyecto).listaDeRelease.head.listaSprints.filter { s => s.numero == numeroSprint }.head.tareas.length }
+
     val tarea = new Tarea(nuevoID, nombre)
     tarea.descripcion = descripcion
     val t = appPorDefecto.getTablero(idProyecto).agregarTarea(numeroRelease, numeroSprint, tarea)
@@ -123,8 +122,8 @@ object Application extends Controller {
 
   }
 
-  def eliminarTarea(idProyecto: Int, id: Int) = Action {
-    appPorDefecto.getProyecto(idProyecto).eliminarTarea(id)
+  def eliminarTarea(idProyecto: Int, idRelease: Int, idSprint: Int, id: Int) = Action  {
+    appPorDefecto.getTablero(idProyecto).eliminarTarea(idRelease, idSprint, id)
     Ok
   }
 
@@ -166,13 +165,13 @@ object Application extends Controller {
 
   def getTipoReuniones() = Action {
     val tipoDeReuniones = appPorDefecto.getTipoDeReuniones()
-      val json = Json.toJson(tipoDeReuniones)
-      Ok(json)
+    val json = Json.toJson(tipoDeReuniones)
+    Ok(json)
   }
-  
-  def guardarReunion(idProyecto: Int,tipo:String,nombre:String,descripcion:String,integrantes:String)= Action {
-    var participantes = new ListBuffer[Int] 
-    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach{ x => participantes.+=(x) };
+
+  def guardarReunion(idProyecto: Int, tipo: String, nombre: String, descripcion: String, integrantes: String) = Action {
+    var participantes = new ListBuffer[Int]
+    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach { x => participantes.+=(x) };
     var proyecto = appPorDefecto.getProyecto(idProyecto)
     var id = proyecto.obtenerIdsReunion()
     proyecto.crearReunion(id, tipo, participantes, nombre, descripcion)

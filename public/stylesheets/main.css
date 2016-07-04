@@ -57,13 +57,22 @@ body {
 	border: 9px solid #0B2161;
 	padding: 25px;
 	margin: 25px;
+	-webkit-border-radius: 5px 10px;
+	-moz-border-radius: 5px 10px;
+	filter: alpha(opacity = 50);
+	word-wrap: break-word;
+	outline-style: double;
+    outline-color: green;
+    outline-width: 3px;
+}
+
+div {
+	
 }
 
 #celdaSprint {
 	width: 150px;
 }
-
-
 
 #sortable li {
 	margin: 3px 3px 3px 0;
@@ -80,14 +89,14 @@ body {
 }
 
 #button {
-    background-color: #0B3861; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0px;
-    margin: 4px 2px;
-    cursor: pointer;
+	background-color: #0B3861; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 0px;
+	margin: 4px 2px;
+	cursor: pointer;
 }

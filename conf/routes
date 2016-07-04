@@ -14,7 +14,7 @@ GET 	/integrantes/:idProyecto controllers.Application.getColaboradores(idProyect
 GET		/agregarIntegrante/:idProyecto/:nombre  controllers.Application.agregarColaborador(idProyecto: Int, nombre: String)
 GET		/eliminarIntegrante/:idProyecto/:nombreColaborador controllers.Application.eliminarColaborador(idProyecto: Int, nombreColaborador)
 GET 	/reuniones/:idProyecto         controllers.Application.getReuniones(idProyecto: Int)
-GET		/eliminarTarea/:idProyecto/:id controllers.Application.eliminarTarea(idProyecto: Int, id: Int)
+GET		/eliminarTarea/:idProyecto/:idRelease/:idSprint/:id controllers.Application.eliminarTarea(idProyecto: Int, idRelease: Int, idSprint: Int, id: Int)
 GET 	/eliminarProyecto/:idProyecto controllers.Application.eliminarProyecto(idProyecto: Int)
 GET		/crearRelease/:idProyecto		controllers.Application.crearRelease(idProyecto: Int)
 GET		/crearSprint/:idProyecto/:numeroRelease     controllers.Application.crearSprint(idProyecto: Int, numeroRelease: Int) 

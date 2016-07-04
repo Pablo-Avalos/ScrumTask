@@ -21,8 +21,8 @@ case class Project(idP: Int, nombreP: String) {
     reuniones.+=(reunion)
   }
 
-  def eliminarTarea(id: Int) {
-    tablero.eliminarTarea(id)
+  def eliminarTarea(idRelease: Int, idSprint: Int, id: Int) {
+    tablero.eliminarTarea(idRelease , idSprint ,id)
   }
   def eliminarReunion(idReunion: Int) {
     reuniones = reuniones.filterNot { r => r.id == idReunion }
