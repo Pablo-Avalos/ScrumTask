@@ -12,6 +12,7 @@
 <script src="javascripts/app/tareasApp.js"></script>
 <script src="javascripts/app/integrantesApp.js"></script>
 <script src="javascripts/app/reunionesApp.js"></script>
+<script src="javascripts/app/proyectoApp.js"></script>
 <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
 <script src="javascripts/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="javascripts/jquery.jqGrid.min.js"></script>
@@ -43,6 +44,23 @@
 							<div id="confirmarEliminarProyecto" title="Eliminar proyecto">
 							</div>
 
+							<div>
+								<button id="agregarProyecto">Crear proyecto</button>
+							</div>
+
+							<div id="agregarProyectoDialog" title="Agregar proyecto">
+								<form>
+									<fieldset>
+										<div>
+											<label for="name">Nombre del proyecto</label> <input type="text"
+												name="nombreIntegrante" id="nombreProyecto"
+												class="text ui-widget-content ui-corner-all">
+										</div>
+										<br>
+									</fieldset>
+								</form>
+							</div>
+
 						</td>
 					</tr>
 				</table>
@@ -59,35 +77,36 @@
 								</ul>
 								<div id="tabs-1">
 									<div STYLE="width: 100%; background-color: #D8D8D8">
-										<button id="reunionEliminar" title= "Eliminar Reunión"">Eliminar
+										<button id="reunionEliminar" title="Eliminar Reunión"">Eliminar
 										</button>
-										<button id="reunionCrear" title= "Crear Reunión">Crear
+										<button id="reunionCrear" title="Crear Reunión">Crear
 										</button>
 										<button id="reunionEditar" title="Editar Reunión">Editar
 										</button>
-										<button id="reunionVer" title="Ver Reunión">Ver
-										</button>
+										<button id="reunionVer" title="Ver Reunión">Ver</button>
 										<div id="ver" title="Ver Reunión"></div>
 										<div id="dialog-Tema" title="Tema de Reunión">
 											<p class="validateTips">Completar Campos</p>
 											<form>
 												<fieldset>
-													<label for="nombreTema">Tema</label><br>
-													<input type="text" name="Nombre tema" id="nombre-tema"
-														class="text ui-widget-content ui-corner-all"><br> 
+													<label for="nombreTema">Tema</label><br> <input
+														type="text" name="Nombre tema" id="nombre-tema"
+														class="text ui-widget-content ui-corner-all"><br>
 													<label for="name">Descripción</label> <br>
-													<textarea name="Descripcion" id="descripcion-tema" width="20" height="100"
-													 class="text ui-widget-content ui-corner-all"></textarea><br>
-													<label for="name">Tipo de reunión</label> <br>
-													<select id="reunion-tipo"></select> <br>
-													<label for="integrantes">Integrantes</label> <br>
+													<textarea name="Descripcion" id="descripcion-tema"
+														width="20" height="100"
+														class="text ui-widget-content ui-corner-all"></textarea>
+													<br> <label for="name">Tipo de reunión</label> <br>
+													<select id="reunion-tipo"></select> <br> <label
+														for="integrantes">Integrantes</label> <br>
 													<ul style="list-style-type: none" id="integranteReunion">
 													</ul>
 												</fieldset>
 											</form>
 										</div>
 									</div>
-									<table id="jqGrid" border="0" height="100%" width="100%" title="Reuniones"></table>
+									<table id="jqGrid" border="0" height="100%" width="100%"
+										title="Reuniones"></table>
 								</div>
 								<div id="tabs-2">
 
@@ -187,11 +206,11 @@
 														class="text ui-widget-content ui-corner-all"> <label
 														for="name">Id Tarea</label> <input type="text" name="name"
 														id="id" class="text ui-widget-content ui-corner-all">
-														</fieldset>
+												</fieldset>
 											</form>
 										</div>
 
-<!--  
+										<!--  
 										<div>
 											<div id="dialog-form" title="Crear Tarea">
 												<p class="validateTips">Completar Campos</p>

@@ -6,6 +6,8 @@ import model._
 class AppPorDefecto {
   
   
+  var idProyecto = 25
+  
   var integrante1 = new Colaborador("Pepe")
   integrante1.name = "Pepe"
   integrante1.id = 0
@@ -142,5 +144,10 @@ class AppPorDefecto {
     tiposDeReuniones.+=(TipoDeReunion.Planning)
     tiposDeReuniones.+=(TipoDeReunion.Retrospective)
     tiposDeReuniones
+  }
+  
+    def agregarProyecto(nombre : String) {
+    proyectos.+=(new Project(idProyecto, nombre))
+    idProyecto = idProyecto + 1
   }
 }
