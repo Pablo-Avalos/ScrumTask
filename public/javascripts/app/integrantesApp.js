@@ -91,6 +91,9 @@ $(function() {
             });
     				$(document).ready(controller.agregarIntegrante(nombre, tipo));
             nombreIntegranteSeleccionado = null;
+            checkeados = $("input:checked").each(function() {
+        		$('input:checkbox').removeAttr('checked');
+        	});
             disableEnableButton();
     				dialogAgregarIntegrante.dialog("close");
           },
@@ -99,9 +102,12 @@ $(function() {
         {
           text: 'Cancelar',
           click: function () {
+              checkeados = $("input:checked").each(function() {
+            		$('input:checkbox').removeAttr('checked');
+            	   }) 
             dialogAgregarIntegrante.dialog("close");
           },
-        }
+        },
     ]
 	});
 
