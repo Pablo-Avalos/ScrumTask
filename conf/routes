@@ -22,5 +22,5 @@ GET		/eliminarReunion/:idProyecto/:idReunion controllers.Application.eliminarReu
 GET		/tiposDeReunion				    controllers.Application.getTipoReuniones
 GET		/guardarReunion/:idProyecto/:idReunion/:fecha/:tipo/:nombre/:descripcion/:integrantes    controllers.Application.guardarReunion(idProyecto: Int,idReunion: Int,fecha:String,tipo:String,nombre:String,descripcion:String,integrantes:String)
 GET     /agregarProyecto/:nombre    controllers.Application.agregarProyecto(nombre:String)
-GET 	/integrantesReunion/:idProyecto/:idReunion controllers.Application.getIntegrantesReunion(idProyecto: Int,idReunion: Int)
+GET 	/integrantesReunion/:idProyecto controllers.Application.getIntegrantesReunion(idProyecto: Int)
 GET 	/usuariosReunion/:idProyecto/:idReunion controllers.Application.getObtenerUsuariosDeReunion(idProyecto: Int,idReunion: Int)
