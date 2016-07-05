@@ -54,7 +54,7 @@ function vaciarReuniones(){
 	jQuery("#jqGrid").clearGridData();
 	$("#reunion-tipo").empty();
 	celdaSeleccionada=null;
-	reunionActual=null;
+	//reunionActual=null;
 	$("#integranteReunion").empty();
 
 }

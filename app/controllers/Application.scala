@@ -64,7 +64,8 @@ object Application extends Controller {
     def writes(reunion: Reunion) = Json.obj(
       "id" -> reunion.id,
       "tipo" -> reunion.tipoDeReunion.toString(),
-      "integrantes" -> reunion.datosDeIntegrantes(),
+      "fecha" -> reunion.fechatexto,
+      "integrantes" -> reunion.integrantes.map {i => i.name},
       "temasTratados" -> reunion.datosDeTemas())
   }
 
@@ -182,16 +183,30 @@ object Application extends Controller {
     Ok(json)
   }
 
-  def guardarReunion(idProyecto: Int, idR: Int, tipo: String, nombre: String, descripcion: String, integrantes: String) = Action {
-    var participantes = new ListBuffer[Int]
-    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach { x => participantes.+=(x) };
-    var proyecto = appPorDefecto.getProyecto(idProyecto)
-    proyecto.crearReunion(idR, tipo, participantes, nombre, descripcion)
-    Ok
-  }
-
   def agregarProyecto(nombre: String) = Action {
     appPorDefecto.agregarProyecto(nombre)
     Ok("Se agrego un nuevo proyecto")
   }
+  
+    def guardarReunion(idProyecto: Int,idR:Int,fecha:String,tipo:String,nombre:String,descripcion:String,integrantes:String)= Action {
+    var participantes = new ListBuffer[Int] 
+    ((((integrantes.split(","))).filterNot { x => x == "" }).map { x => x.toInt }).foreach{ x => participantes.+=(x) };
+    var proyecto = appPorDefecto.getProyecto(idProyecto)
+    proyecto.crearReunion(idR,fecha, tipo, participantes, nombre, descripcion)
+    Ok
+  }
+  
+   def getIntegrantesReunion(idProyecto: Int) = Action {
+    var integrantes = new ListBuffer[Usuario]
+    integrantes = appPorDefecto.getProyecto(idProyecto).colaboradores
+    Ok(Json.toJson(integrantes))
+  }
+   
+   def getObtenerUsuariosDeReunion(idProyecto: Int,idReunion: Int)= Action {
+    var asistentes = new ListBuffer[Usuario]
+    if(((appPorDefecto.getProyecto(idProyecto).reuniones.map{r=>r.id}).contains(idReunion))){
+    asistentes =(appPorDefecto.getProyecto(idProyecto).reuniones.filter { r => r.id == idReunion }.head.integrantes)
+    }
+    Ok(Json.toJson(asistentes))
+   }
 }

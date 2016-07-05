@@ -13,20 +13,20 @@ class AppPorDefecto {
   integrante1.id = 0
   
   var integrante20 = new ProductOwner("Pepi")
-  integrante20.name = "Pancho"
-  integrante20.id = 3
+  integrante20.name = "Pepi"
+  integrante20.id = 1
   
   var integrante2 = new Colaborador("Pipo")
   integrante2.name = "Pipo"
-  integrante2.id = 1
+  integrante2.id = 2
   
   var integrante3 = new Colaborador("Pancho")
   integrante3.name = "Pancho"
-  integrante3.id = 2
+  integrante3.id = 3
   
   var integrante4 = new Colaborador("Moncho")
   integrante4.name = "Moncho"
-  integrante4.id = 3
+  integrante4.id = 4
   
   var tarea1 = new Tarea(25, "Buscar")
   tarea1.autor = "Pipo"
@@ -50,20 +50,14 @@ class AppPorDefecto {
   var reunion2 = new Reunion(1)
   var reunion3 = new Reunion(2)
   
-  var colaborador = new Colaborador("colaborador uno")
-  colaborador.id = 4
-  var scrummaster = new ScrumMaster("scrummaster")
-  scrummaster.id = 5
-  var programowner = new ProductOwner("programowner")
-  scrummaster.id = 6
   
-  reunion1.integrantes.+=(colaborador)
-  reunion1.integrantes.+=(scrummaster)
-  reunion2.integrantes.+=(programowner)
-  reunion2.integrantes.+=(colaborador)
-  reunion3.integrantes.+=(scrummaster)
-  reunion3.integrantes.+=(colaborador)
-  reunion3.integrantes.+=(programowner)
+  reunion1.integrantes.+=(integrante1)
+  reunion1.integrantes.+=(integrante20)
+  reunion2.integrantes.+=(integrante2)
+  reunion2.integrantes.+=(integrante3)
+  reunion3.integrantes.+=(integrante2)
+  reunion3.integrantes.+=(integrante3)
+  reunion3.integrantes.+=(integrante1)
   
   var tema1 = new Tema
   tema1.nombre = "Preparar el ambiente"
@@ -80,6 +74,10 @@ class AppPorDefecto {
   reunion1.temasTratados=tema1
   reunion2.temasTratados=tema2
   reunion3.temasTratados=tema1
+  
+  reunion1.fechatexto = "9-8-2016"
+  reunion2.fechatexto = "1-9-2016"
+  reunion3.fechatexto = "1-10-2016"
 
   
   reunion1.tipoDeReunion = TipoDeReunion.Daily

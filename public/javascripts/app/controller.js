@@ -316,22 +316,45 @@ var controller = {
 			type : 'GET',
 			contentType : 'application/json',
 			dataType : 'json',
-			url : '/integrantes/' + controller.idProyectoActual,
+			url : '/integrantesReunion/' + controller.idProyectoActual,
 			success : function(response) {
-				$('#integranteReunion').empty();
+				//controller.obtenerIntegrantes()
+				//$('#integranteReunion').empty();
 				for (var i = 0; i < response.length; i++) {
+		            $('#li'+response[i].id).remove();
 					$('#integranteReunion').append(
-							'<li> <input type="checkbox" name="rol" value='
-									+ response[i].id + '>' + response[i].nombre
+							'<li id=li' + response[i].id + '> <input type="checkbox" name="rol" value='
+									+ response[i].id + ' id='+ response[i].id + '>' + response[i].nombre
 									+ '</label></li>');
 				}
 			}
 		});
 	},
+	
+	obtenerUsuariosDeReunion : function(idReunion) {
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/usuariosReunion/' + controller.idProyectoActual + '/' + idReunion,
+			success : function(response) {
+				for (var i = 0; i < response.length; i++) {
+		            $('#li'+response[i].id).remove();
+					$('#integranteReunion').append(
+							'<li id=li' + response[i].id + '> <input type="checkbox" checked="checked" name="rol" value='
+									+ response[i].id + ' id='+ response[i].id + '>' + response[i].nombre
+									+ '</label></li>');
+				}
+			}
+		})
+	},
+	
+	
 
 	obtenerReunionesDeProyecto : function(idProyecto) {
-		controller.obtenerReuniones(idProyecto);
+		controller.obtenerReuniones();
 		controller.obtenerTipoDeReuniones(idProyecto);
+		//controller.obtenerIntegrantesDeReunion(idProyecto);
 		controller.obtenerIntegrantesDeReunion(idProyecto);
 	},
 
@@ -347,9 +370,11 @@ var controller = {
 					jQuery("#jqGrid").addRowData(i, reuniones[i])
 				}
 				;
+				$("#fechareunion").datepicker( "setDate", new Date());
 			}
 		});
 	},
+
 
 	obtenerTipoDeReuniones : function() {
 		$.ajax({

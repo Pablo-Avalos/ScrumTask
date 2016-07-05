@@ -17,6 +17,7 @@ class Reunion(idR:Int) {
   var integrantes = new ListBuffer[Usuario]
   var temasTratados = null: Tema
   var tipoDeReunion = null: TipoDeReunion.Tipo
+  var fechatexto = null: String
   
   def setFecha(dia: Integer, mes: Integer, anio: Integer) {
     fecha = new Date((anio - 1900), mes - 1, dia)
