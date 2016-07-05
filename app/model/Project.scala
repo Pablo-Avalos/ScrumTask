@@ -40,7 +40,7 @@ case class Project(idP: Int, nombreP: String) {
     id
   }
   
-   def crearReunion(id:Int, tipo:String,integrantesReunion :ListBuffer[Int],nombreTema:String,descripcionTema:String){
+   def crearReunion(id:Int,fecha:String,tipo:String,integrantesReunion :ListBuffer[Int],nombreTema:String,descripcionTema:String){
     var nuevaReunion = null:Reunion
     if(id != -1){
       reuniones = reuniones.filterNot { r => r.id == id};
@@ -48,8 +48,8 @@ case class Project(idP: Int, nombreP: String) {
     }else{
       nuevaReunion = new Reunion(obtenerIdsReunion())
     }
-    
     var ps = TipoDeReunion
+    nuevaReunion.fechatexto = fecha
     nuevaReunion.tipoDeReunion = ps.withName(tipo)
     nuevaReunion.integrantes = colaboradores.filter { colaborado => integrantesReunion.contains(colaborado.id)}
     nuevaReunion.temasTratados = new Tema()

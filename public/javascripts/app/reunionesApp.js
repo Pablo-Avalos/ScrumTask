@@ -16,11 +16,12 @@ var nuevaReunionTipo;
 var checkeados = [];
 var reunionActual;
 var idNuevaReunion = -1;
+var fechaReunion;
 //carga de datos de reunión
 jQuery(document).ready(function() {
 	jQuery("#jqGrid").jqGrid({
 		mtype : "GET",
-		colNames : [ 'ID', 'Tipo', 'Integrantes', 'Temas Tratados' ],
+		colNames : [ 'ID', 'Tipo','Fecha', 'Integrantes', 'Temas Tratados' ],
 		colModel : [ {
 			label : 'ID',
 			name : 'id',
@@ -32,6 +33,11 @@ jQuery(document).ready(function() {
 			name : 'tipo',
 			index : 'tipo',
 			width : 15
+		},{
+			label : 'Fecha',
+			name : 'fecha',
+			index : 'fecha',
+			width : 60
 		}, {
 			label : 'Integrantes',
 			name : 'integrantes',
@@ -68,9 +74,9 @@ jQuery(document).ready(function() {
 $(function() {
 	$("#reunionEliminar").button({}).on("click", function() {
 		// javascript: return confirm('¿Estas seguro?');
-		if (reunionActual == null) {
-			alert("Debe seleccionar una reunión antes de continuar");
-		} else {
+		if(celdaSeleccionada == null){
+			$("#reunionVer").click();			
+		}else {
 			if (!confirm("¿Desea eliminar la reunión?")) {
 				return false;
 			} else {
@@ -102,7 +108,7 @@ $(function() {
 
 	dialogVerReunion = $("#ver").dialog({
 		autoOpen : false,
-		title : "Detalle de reunión",
+		//title : "Detalle de reunión",
 		height : 400,
 		width : 350,
 		modal : true,
@@ -121,12 +127,18 @@ $(function() {
 			function() {
 				$("#ver").empty();
 				if (celdaSeleccionada != null) {
+					$("#ver").dialog('option', 'title', 'Ver Reunión');
+					$("#ver").dialog("option", "width", 300);
+					$("#ver").dialog("option", "height", 400);
 					$("#ver").append(
 							'<p>Reunión número: ' + reunionActual.id
-									+ '</p><br>');
+									+ '</p>');
 					$("#ver").append(
 							'<p>Tipo de reunión: ' + reunionActual.tipo
-									+ '</p><br>');
+									+ '</p>');
+					$("#ver").append(
+							'<p>Fecha de reunión: ' + reunionActual.fecha
+									+ '</p>');
 					$("#ver").append(
 							'Participantes: <br> <textarea readonly width="40" height="40" class="text ui-widget-content ui-corner-all">'
 							+ reunionActual.integrantes.split(",") +'</textarea><br>');
@@ -134,8 +146,11 @@ $(function() {
 							'Tema y Descripción: <br> <textarea readonly width="40" height="40" class="text ui-widget-content ui-corner-all">'
 							+ reunionActual.temasTratados +'</textarea>');
 				} else {
+					$("#ver").dialog("option", "width", 310);
+					$("#ver").dialog("option", "height", 210);
+					$("#ver").dialog('option', 'title', 'Error: ');
 					$("#ver").append(
-							'<p>No se selecciono ninguna reunion</p><br>');
+							'<p>No se seleccionó ninguna reunión</p><br>');
 				}
 				dialogVerReunion.dialog('open');
 			});
@@ -147,8 +162,8 @@ $(function() {
 			{
 				autoOpen : false,
 				//title : "Organizar Reuniones",
-				height : 400,
-				width : 350,
+				height : 500,
+				width : 500,
 				modal : true,
 				buttons : {
 					'Guardar' : function() {
@@ -159,6 +174,11 @@ $(function() {
 						checkeados = $("input:checked").each(function() {
 							checkeados = checkeados + 1
 						});
+						var date = $("#fechareunion").datepicker('getDate'),
+			            day  = date.getDate().toString(),  
+			            month = (date.getMonth() + 1).toString(),              
+			            year =  (date.getFullYear()).toString();
+						fechaReunion = day + "-" + month + "-" + year;
 						if (nuevaReunionTemaNombre == ""
 								|| nuevaReunionTemaDescripcion == ""
 								|| checkeados.length == 0) {
@@ -180,6 +200,8 @@ $(function() {
 					}
 				},
 				close : function() {
+					reiniciarGuardarDialog();
+					dialogCrearTema.dialog("close");
 				}
 			});
 	$("#reunionCrear").button({}).on("click", function() {
@@ -193,7 +215,7 @@ function agregarReunion() {
 		type : 'GET',
 		contentType : 'application/json',
 		dataType : 'json',
-		url : '/guardarReunion/' + controller.idProyectoActual + '/' + idNuevaReunion + '/'
+		url : '/guardarReunion/' + controller.idProyectoActual + '/' + idNuevaReunion + '/' + fechaReunion + '/'
 				+ nuevaReunionTipo + '/'
 				+ nuevaReunionTemaNombre + '/' + nuevaReunionTemaDescripcion + '/' + integrantes,
 		success : function(response) {
@@ -206,14 +228,23 @@ function agregarReunion() {
 }
 // Limpiar la ventana de guardar
 
+$(function() {
+    $("#fechareunion").datepicker({
+    	dateFormat: "dd-mm-yy",
+    	minDate: new Date(),
+    	setDate: new Date()
+    });
+});
+
 function reiniciarGuardarDialog(){
 	$("#nombre-tema").val("");
 	$("#descripcion-tema").val("");
 	checkeados = $("input:checked").each(function() {
 		$('input:checkbox').removeAttr('checked');
 	});
-	$("#reunion-tipo").empty();
+	//$("#reunion-tipo").empty();
 	$("#dialog-Tema").dialog('option', 'title', 'Guardar Reunión');
+	$("#fechareunion").datepicker( "setDate", new Date());
 	idNuevaReunion = -1;
 };
 
@@ -225,14 +256,21 @@ function reiniciarGuardarDialog(){
 // Editar
 
 $(function() {
+
 	$("#reunionEditar").button({}).on("click", function() {
-		var temasTratados = reunionActual.temasTratados.split(": ")
+		if(celdaSeleccionada == null){
+			$("#reunionVer").click();			
+		}else {
+		$("#fechareunion").datepicker( "setDate", reunionActual.fecha);
+		var temasTratados = reunionActual.temasTratados.split(": ");
 		$("#nombre-tema").val(temasTratados[0]);
 		$("#descripcion-tema").val(temasTratados[1]);
 		$("#reunion-tipo").val(reunionActual.tipo);
 		$("#dialog-Tema").dialog('option', 'title', 'Editar Reunión');
+		controller.obtenerUsuariosDeReunion(reunionActual.id);
+		idNuevaReunion = reunionActual.id;
 		$("#reunionCrear").click();
-		idNuevaReunion = reunionActual.id
+		};
 	});
 });
 	
