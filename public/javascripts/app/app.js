@@ -43,7 +43,7 @@ function actualizarIntegrantes(){
 
 function actualizarReuniones(){
 	vaciarReuniones();
-	controller.obtenerReunionesDeProyecto(reunionActual.id);
+	controller.obtenerReunionesDeProyecto();
 }
 
 function actualizarIntegrantesDeReunion(){
