@@ -77,7 +77,7 @@
 								</ul>
 								<div id="tabs-1">
 									<div STYLE="width: 100%; background-color: #D8D8D8">
-										<button id="reunionEliminar" title="Eliminar Reunión"">Eliminar
+										<button id="reunionEliminar" title="Eliminar Reunión">Eliminar
 										</button>
 										<button id="reunionCrear" title="Crear Reunión">Crear
 										</button>
@@ -110,9 +110,18 @@
 								</div>
 								<div id="tabs-2">
 
-									<ol id="selectable">
-									</ol>
-
+									<div STYLE="width: 100%; background-color: #D8D8D8">
+										<h4>Scrum Master</h4>
+									</div>
+									<ol class="selectable" id="selectableScrumMaster"></ol>
+									<div STYLE="width: 100%; background-color: #D8D8D8">
+										<h4>Product Owner</h4>
+									</div>
+									<ol class="selectable" id="selectableProductOwner"></ol>
+									<div STYLE="width: 100%; background-color: #D8D8D8">
+										<h4>Team Development</h4>
+									</div>
+									<ol class="selectable" id="selectableDesarrolladores"></ol>
 									<div>
 										<div id="dialogAgregarIntegrante" title="Agregar integrante">
 
@@ -126,12 +135,9 @@
 													<br>
 													<div>
 														<ul style="list-style-type: none">
-															<li><input type="checkbox" name="rol"
-																value="desarrollador">Desarrolador</label></li>
-															<li><input type="checkbox" name="rol" value="master">Scrum
-																Master</label></li>
-															<li><input type="checkbox" name="rol" value="owner">Product
-																Owner</label></li>
+															<li><input type="checkbox" class="rol" name="desarrollador" value="desarrollador">Desarrollador</label></li>
+															<li><input type="checkbox" class="rol" name="scrumMaster" value="scrumMaster">Scrum Master</label></li>
+															<li><input type="checkbox" class="rol" name="productOwner" value="productOwner">Product Owner</label></li>
 														</ul>
 													</div>
 												</fieldset>
@@ -210,7 +216,7 @@
 											</form>
 										</div>
 
-										<!--  
+										<!--
 										<div>
 											<div id="dialog-form" title="Crear Tarea">
 												<p class="validateTips">Completar Campos</p>

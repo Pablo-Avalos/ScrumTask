@@ -45,7 +45,8 @@ object Application extends Controller {
   implicit val usarioWrites = new Writes[Usuario] {
     def writes(usuario: Usuario) = Json.obj(
       "nombre" -> usuario.name,
-      "id" -> usuario.id)
+      "id" -> usuario.id,
+      "tipo" -> usuario.tipo)
   }
 
   implicit val temaWrites = new Writes[Tema] {
@@ -96,12 +97,24 @@ object Application extends Controller {
     Ok(Json.toJson(colaboradores))
   }
 
-  def agregarColaborador(idProyecto: Int, nombre: String) = Action {
-    val nuevoColaborador = new Colaborador(nombre)
-    nuevoColaborador.name = nombre
-    nuevoColaborador.id = idp
+  def agregarColaborador(idProyecto: Int, nombre: String, tipo: String) = Action {
+    if(tipo == "desarrollador") {
+      var nuevoIntegrante = new Colaborador(nombre)
+      nuevoIntegrante.id = idp
+      appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoIntegrante)
+     }
+    else if (tipo == "productOwner") { 
+      var nuevoIntegrante = new ProductOwner(nombre)
+      nuevoIntegrante.id = idp
+      appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoIntegrante)
+    }
+    else if (tipo == "scrumMaster") {
+      var nuevoIntegrante = new ScrumMaster(nombre)
+      nuevoIntegrante.id = idp
+      appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoIntegrante)
+    }
+    else {InternalServerError("No se pudo agregar el integrante")}
     idp = idp + 1 // esto lo puse provisorio para manejar el id de usuario
-    appPorDefecto.getProyecto(idProyecto).agregarColaborador(nuevoColaborador)
     Ok
   }
 

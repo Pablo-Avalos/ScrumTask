@@ -25,19 +25,19 @@ function actualizarListaProyectos(){
 function vaciarProyecto(){
   $("#Select-Proyectos").empty();
   $("#tableroConTareas").empty();
-  $("#selectable").empty();
+  $(".selectable").empty();
   $("#reunion-tipo").empty();
 }
 
 function actulizarTablero(){
 //	$("#tableroConTareas").empty();
-	
+
 	$("#tableroConRelease").empty();
 	controller.obtenerTablero();
 }
 
 function actualizarIntegrantes(){
-	$("#selectable").empty();
+	$(".selectable").empty();
 	controller.obtenerIntegrantes();
 }
 
@@ -47,7 +47,7 @@ function actualizarReuniones(){
 }
 
 function actualizarIntegrantesDeReunion(){
-	
+
 }
 
 function vaciarReuniones(){
@@ -56,7 +56,7 @@ function vaciarReuniones(){
 	celdaSeleccionada=null;
 	reunionActual=null;
 	$("#integranteReunion").empty();
-	
+
 }
 
 function desabilitarBotonEliminarProyecto(){

@@ -8,9 +8,13 @@ class AppPorDefecto {
   
   var idProyecto = 25
   
-  var integrante1 = new Colaborador("Pepe")
+  var integrante1 = new ScrumMaster("Pepe")
   integrante1.name = "Pepe"
   integrante1.id = 0
+  
+  var integrante20 = new ProductOwner("Pepi")
+  integrante20.name = "Pancho"
+  integrante20.id = 3
   
   var integrante2 = new Colaborador("Pipo")
   integrante2.name = "Pipo"
@@ -88,6 +92,7 @@ class AppPorDefecto {
   proyecto1.tablero = tablero1
   proyecto1.agregarColaborador(integrante1)
   proyecto1.agregarColaborador(integrante2)
+  proyecto1.agregarColaborador(integrante20)
   
   var proyecto2 = new Project(2, "Public Project")
   proyecto2.tablero = tablero2

@@ -77,7 +77,7 @@ var controller = {
 								var ullist = document.createElement("ul");
 								ullist.setAttribute("id", "tableroConTareas");
 								ullist.setAttribute("style","overflow-y: scroll; height: 150px;" );
-								
+
 								for (var h = 0; h < response.release[i].listaSprints[j].listaTareas.length; h++) {
 									var tarea = response.release[i].listaSprints[j].listaTareas[h];
 									// celdaSprint =
@@ -122,9 +122,26 @@ var controller = {
 			url : '/integrantes/' + controller.idProyectoActual,
 			success : function(response) {
 				for (var i = 0; i < response.length; i++) {
-					$("#selectable").append(
-							'<li class="ui-widget-content">'
-									+ response[i].nombre + '</li>');
+					if (response[i].tipo == "scrumMaster") {
+						$("#selectableScrumMaster").append(
+								'<li class="ui-widget-content">'
+										+ response[i].nombre + '</li>');
+					}
+					else if (response[i].tipo == "productOwner") {
+						$("#selectableProductOwner").append(
+								'<li class="ui-widget-content">'
+										+ response[i].nombre + '</li>');
+					}
+					else if (response[i].tipo == "desarrollador") {
+						$("#selectableDesarrolladores").append(
+								'<li class="ui-widget-content">'
+										+ response[i].nombre + '</li>');
+					}
+
+
+					//$("#selectableScrumMaster").append(
+					//		'<li class="ui-widget-content">'
+					//				+ response[i].nombre + '</li>');
 					// Posibles integrantes para nueva reunión
 					// $('#integranteReunion').append(
 					// '<li> <input type="checkbox" name="rol" value='
@@ -170,13 +187,13 @@ var controller = {
 		});
 	},
 
-	agregarIntegrante : function(nombreIntegrante) {
+	agregarIntegrante : function(nombreIntegrante, tipo) {
 		$.ajax({
 			type : 'GET',
 			contentType : 'application/json',
 			dataType : 'json',
 			url : '/agregarIntegrante/' + controller.idProyectoActual + '/'
-					+ nombreIntegrante,
+					+ nombreIntegrante + '/' + tipo,
 			success : function(response) {
 			},
 			complete : function() {
@@ -256,7 +273,7 @@ var controller = {
 			}
 		});
 	},
-	
+
 	eliminarTarea : function(nRelease, nSprint, id) {
 //		var tarea = '1';
 		$.ajax({
@@ -275,7 +292,7 @@ var controller = {
 		});
 	},
 
-	
+
 	eliminarProyecto : function() {
 		$.ajax({
 			type : 'GET',
