@@ -196,14 +196,9 @@ object Application extends Controller {
     Ok
   }
   
-   def getIntegrantesReunion(idProyecto: Int, idReunion:Int) = Action {
-    var integrantes = new ListBuffer[ListBuffer[Usuario]]
-    if(((appPorDefecto.getProyecto(idProyecto).reuniones.map{r=>r.id}).contains(idReunion))){
-    integrantes.+=(appPorDefecto.getProyecto(idProyecto).reuniones.filter { r => r.id == idReunion }.head.integrantes)
-    }else{
-      integrantes.+=(new ListBuffer[Usuario])
-    }
-    integrantes.+=(appPorDefecto.getProyecto(idProyecto).colaboradores.filterNot{c => integrantes.contains(c)})
+   def getIntegrantesReunion(idProyecto: Int) = Action {
+    var integrantes = new ListBuffer[Usuario]
+    integrantes = appPorDefecto.getProyecto(idProyecto).colaboradores
     Ok(Json.toJson(integrantes))
   }
    

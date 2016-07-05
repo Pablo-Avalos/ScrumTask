@@ -182,7 +182,7 @@ var controller = {
 			},
 			complete : function() {
 				actualizarIntegrantes();
-				//controller.obtenerIntegrantesDeReunion();
+				controller.obtenerIntegrantesDeReunion();
 			}
 		});
 	},
@@ -198,7 +198,7 @@ var controller = {
 			},
 			complete : function() {
 				actualizarIntegrantes();
-				//controller.obtenerIntegrantesDeReunion();
+				controller.obtenerIntegrantesDeReunion();
 			}
 		});
 	},
@@ -307,20 +307,20 @@ var controller = {
 		});
 	},
 
-	obtenerIntegrantesDeReunion : function(idReunion) {
+	obtenerIntegrantesDeReunion : function() {
 		$.ajax({
 			type : 'GET',
 			contentType : 'application/json',
 			dataType : 'json',
-			url : '/integrantesReunion/' + controller.idProyectoActual + '/' + idReunion,
+			url : '/integrantesReunion/' + controller.idProyectoActual,
 			success : function(response) {
 				//controller.obtenerIntegrantes()
 				//$('#integranteReunion').empty();
-				for (var i = 0; i < response[1].length; i++) {
-		            $('#li'+response[1][i].id).remove();
+				for (var i = 0; i < response.length; i++) {
+		            $('#li'+response[i].id).remove();
 					$('#integranteReunion').append(
-							'<li id=li' + response[1][i].id + '> <input type="checkbox" name="rol" value='
-									+ response[1][i].id + ' id='+ response[1][i].id + '>' + response[1][i].nombre
+							'<li id=li' + response[i].id + '> <input type="checkbox" name="rol" value='
+									+ response[i].id + ' id='+ response[i].id + '>' + response[i].nombre
 									+ '</label></li>');
 				}
 			}
