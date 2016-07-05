@@ -59,14 +59,15 @@ var controller = {
 							var textoCeldaRelease = document
 									.createTextNode("Release "
 											+ response.release[i].numero);
-
+							celdaRelease.setAttribute("id", "release" + i)
 							celdaRelease.appendChild(textoCeldaRelease);
 							fila.appendChild(celdaRelease);
 
 							for (var j = 0; j < response.release[i].listaSprints.length; j++) {
 								var numerSpt = response.release[i].listaSprints[j].numero;
 								var celdaSprint = document.createElement("td");
-								celdaSprint.setAttribute("id", "celdaSprint");
+								celdaSprint.setAttribute("id", "celdaSprint" + j);
+
 //								style="overflow-y: scroll; height: 520px;"
 //									celdaSprint.setAttribute("style","overflow-y: scroll; height: 100px;" );
 								var textoCeldaSprint = document
@@ -110,6 +111,9 @@ var controller = {
 							divTabla.appendChild(tabla);
 						}
 						tabla.setAttribute("border", "2");
+
+						agregarBotonesAreleases(response);
+
 					}
 				});
 	},

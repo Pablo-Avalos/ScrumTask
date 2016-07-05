@@ -244,12 +244,12 @@ $(function() {
 //	 allFields.removeClass("ui-state-error");
 //	 }
 //	 });
-//	
+//
 //	 form = dialog.find("form").on("submit", function(event) {
 //	 event.preventDefault();
 //	 addUser();
 //	 });
-//	
+//
 //	 $("#create-user").button().on("click", function() {
 //	 dialog.dialog("open");
 //	 });
@@ -390,3 +390,17 @@ $(function() {
 		dialogSprint.dialog("open");
 	});
 });
+
+function nuevoBoton(numeroRelease) {
+	var boton = $('<div><button id="agregarSprint'+numeroRelease+'">Agregar Sprint</button></div>').click(function () {
+		$(document).ready(controller.crearSprint(numeroRelease));
+	});
+	return boton
+}
+
+function agregarBotonesAreleases(proyecto) {
+	for (var i = 0; i < proyecto.release.length; i++) {
+		var release = $("#release"+i)//document.getElementById('release'+i);
+		release.append(nuevoBoton(i));
+	}
+}
