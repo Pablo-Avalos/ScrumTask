@@ -149,8 +149,8 @@ class AppPorDefecto {
     tiposDeReuniones
   }
   
-    def agregarProyecto(nombre : String) {
-    proyectos.+=(new Project(idProyecto, nombre))
+    def agregarProyecto(proyecto : Project) {
+    proyectos.+=(proyecto)
     idProyecto = idProyecto + 1
   }
 }

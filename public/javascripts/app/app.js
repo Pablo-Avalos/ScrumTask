@@ -27,6 +27,7 @@ function vaciarProyecto(){
   $("#tableroConTareas").empty();
   $(".selectable").empty();
   $("#reunion-tipo").empty();
+  jQuery("#jqGrid").clearGridData();
 }
 
 function actulizarTablero(){
@@ -56,7 +57,6 @@ function vaciarReuniones(){
 	celdaSeleccionada=null;
 	//reunionActual=null;
 	$("#integranteReunion").empty();
-
 }
 
 function desabilitarBotonEliminarProyecto(){

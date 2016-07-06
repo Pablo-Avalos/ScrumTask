@@ -32,22 +32,22 @@ jQuery(document).ready(function() {
 			label : 'Tipo',
 			name : 'tipo',
 			index : 'tipo',
-			width : 15
+			width : 13
 		},{
 			label : 'Fecha',
 			name : 'fecha',
 			index : 'fecha',
-			width : 60
+			width : 15
 		}, {
 			label : 'Integrantes',
 			name : 'integrantes',
 			index : 'integrantes',
-			width : 60
+			width : 65
 		}, {
 			label : 'Temas Tratados',
 			name : 'temasTratados',
 			index : 'temasTratados',
-			width : 60
+			width : 75
 		} ],
 		onSelectRow : function(id) {
 			celdaSeleccionada = id

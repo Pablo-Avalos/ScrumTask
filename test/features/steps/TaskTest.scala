@@ -8,6 +8,8 @@ import cucumber.api.scala.EN
 import cucumber.api.scala.ScalaDsl
 import model.Tablero
 import model.Tarea
+import model.Release
+import model.Sprint
 import org.junit.Assert._
 
 @RunWith(classOf[Cucumber])
@@ -17,12 +19,16 @@ class TaskTest extends ScalaDsl with EN {
   tablero.agregarTarea(tarea)
 
   When("""^Elimino la tarea con id (\d+)$""") { (arg0: Integer) =>
-    var tarea1 = new Tarea(arg0, null)
-    tablero.agregarTarea(tarea1)
-    tablero.tareas.filter { r => r.id != arg0 }
+    var tarea = new Tarea(arg0,null)
+    var release = new Release(0)
+    var sprint = new Sprint(0)
+    tablero.agregarRelease(release)
+    tablero.agregarSprint(0)
+    tablero agregarTarea(0,0,tarea)
+    tablero eliminarTarea(0,0,arg0.asInstanceOf[Integer])
   }
   Then("""^La tarea con la id (\d+) ya no debe estar mas en el tablero$""") { (arg0: Int) =>
-    assert(tablero.tareas.length == 2)
+    assert(!tablero.tareas.contains(arg0))
   }
 
   Given("""^Tengo una tarea$""") { () =>

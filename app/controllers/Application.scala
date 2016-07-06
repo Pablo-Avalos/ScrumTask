@@ -184,8 +184,11 @@ object Application extends Controller {
   }
 
   def agregarProyecto(nombre: String) = Action {
-    appPorDefecto.agregarProyecto(nombre)
-    Ok("Se agrego un nuevo proyecto")
+    var proyecto = new Project(appPorDefecto.idProyecto,nombre)
+    proyecto.tablero = new Tablero(appPorDefecto.idProyecto)
+    appPorDefecto.agregarProyecto(proyecto)
+    val json = Json.toJson(proyecto)
+    Ok(json)
   }
   
     def guardarReunion(idProyecto: Int,idR:Int,fecha:String,tipo:String,nombre:String,descripcion:String,integrantes:String)= Action {
