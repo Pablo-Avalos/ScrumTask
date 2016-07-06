@@ -99,13 +99,17 @@ var controller = {
                                       else{celdaTareas.setAttribute("style","background:red")}
 
                                      }
+                                    var button = document.createElement("input");
+                                    button.type = "button";
+                                    button.value = "estado";
+                                    //button.onclick = 
 									var textoTarea = document.createTextNode(tarea.id
 													+ "\n" + " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
 													+ " Descripcion: "
 													+ tarea.descripcion);
 									celdaTareas.appendChild(textoTarea);
-
+                                    celdaTareas.appendChild(button)
 									//var botonEliminar = document.createElement("button");
 									//botonEliminar.setAttribute("class", "x");
 
