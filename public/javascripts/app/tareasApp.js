@@ -218,7 +218,7 @@ function abrirDialogCrearTarea(idRelease, idSprint) {
 }
 
 $(function() {
- var dialogElimTarea = $("#eliminarTarea").dialog(
+	var dialogElimTarea = $("#eliminarTarea").dialog(
 			{
 				autoOpen : false,
 				height : 300,
@@ -232,9 +232,10 @@ $(function() {
 						console.log("neerelease" + nRelease);
 						console.log("nSprint" + nSprint);
 						console.log("id" + id);
-						$(document).ready(
-								controller.eliminarTarea(nRelease, nSprint,
-										id));
+						$(document)
+								.ready(
+										controller.eliminarTarea(nRelease,
+												nSprint, id));
 						dialogElimTarea.dialog("close");
 					},
 					Cancelar : function() {
@@ -286,39 +287,73 @@ $(function() {
 
 	});
 });
-
-$(function() {
-	dialogSprint = $("#dialog-sprint").dialog({
-		autoOpen : false,
-		height : 300,
-		width : 350,
-		modal : true,
-		buttons : {
-			'Crear Sprint' : function() {
-				var numeroRelease = $("#numRelease").val();
-				$(document).ready(controller.crearSprint(numeroRelease));
-				dialogSprint.dialog("close");
-			},
-			Cancelar : function() {
-				dialogSprint.dialog("close");
-			}
-		}
-	});
-
-	$("#create-sprint").button().on("click", function() {
+function abrirDialogSprint(numeroRelease) {
+	dialogSprint = $("#dialog-sprint").dialog(
+			{
+				autoOpen : false,
+				height : 300,
+				width : 350,
+				modal : true,
+				buttons : {
+					'Crear Sprint' : function() {
+						var fechaInicio = $("#sp-fechaInicio").val();
+						var fechaFin = $("#sp-fechaFin").val();
+						console.log("fechas" + fechaInicio + " " + fechaFin)
+						$(document).ready(
+								controller.crearSprint(numeroRelease,
+										fechaInicio, fechaFin));
+						dialogSprint.dialog("close");
+					},
+					Cancelar : function() {
+						dialogSprint.dialog("close");
+					}
+				}
+			});
 		dialogSprint.dialog("open");
-	});
-});
+
+}
+
+
+
+
+
+// dialogSprint = $("#dialog-sprint").dialog({
+// autoOpen : false,
+// height : 300,
+// width : 350,
+// modal : true,
+// buttons : {
+// 'Crear Sprint' : function() {
+// var fechaInicio = $("#sp-fechaInicio").val();
+// var fechaFin = $("#sp-fechaFin").val();
+// console.log("fechas" + fechaInicio + " " + fechaFin)
+// $(document).ready(controller.crearSprint(numeroRelease, fechaInicio,
+// fechaFin));
+// dialogSprint.dialog("close");
+// },
+// Cancelar : function() {
+// dialogSprint.dialog("close");
+// }
+// }
+// });
 
 function nuevoBotonSprint(numeroRelease) {
-	var boton = $('<div><button id="agregarSprint'+numeroRelease+'">Agregar Sprint</button></div>').click(function () {
-		$(document).ready(controller.crearSprint(numeroRelease));
+	var boton = $(
+			'<div><button id="agregarSprint' + numeroRelease
+					+ '">Agregar Sprint</button></div>').click(function() {
+		abrirDialogSprint(numeroRelease);
+
 	});
+
+	// $(document).ready(controller.crearSprint(numeroRelease ));
+
 	return boton
 }
 
-function nuevoBotonTarea(numeroRelease,numeroSprint) {
-	var boton = $('<button id="agregarTarea'+numeroRelease+numeroSprint+'">Agregar tarea</button>').click(function () {
+function nuevoBotonTarea(numeroRelease, numeroSprint) {
+	var boton = $(
+			'<button id="agregarTarea' + numeroRelease + numeroSprint
+					+ '">Agregar tarea</button>').click(function() {
 		abrirDialogCrearTarea(numeroRelease, numeroSprint);
 	});
 	return boton
@@ -326,20 +361,20 @@ function nuevoBotonTarea(numeroRelease,numeroSprint) {
 
 function agregarBotonesAreleases(proyecto) {
 	for (var i = 0; i < proyecto.release.length; i++) {
-		var release = $("#release"+i)//document.getElementById('release'+i);
+		var release = $("#release" + i)// document.getElementById('release'+i);
 		release.append(nuevoBotonSprint(i));
 		agregarBotonesAsprint(proyecto.release[i], i);
 	}
 }
 
-function agregarBotonesAsprint(release, idRelease){
+function agregarBotonesAsprint(release, idRelease) {
 	for (var i = 0; i < release.listaSprints.length; i++) {
-		var sprint = $("#celdaSprint"+idRelease+i)
+		var sprint = $("#celdaSprint" + idRelease + i)
 		sprint.append(nuevoBotonTarea(idRelease, i))
 	}
 }
 
-function agregarTarea(sprint, tarea){
+function agregarTarea(sprint, tarea) {
 	for (var i = 0; i < sprint.listaTareas.length; i++) {
 		sprint.listaTareas[i]
 	}

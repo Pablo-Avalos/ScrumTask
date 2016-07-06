@@ -54,8 +54,8 @@
 								<form>
 									<fieldset>
 										<div>
-											<label for="name">Nombre del proyecto</label> <input type="text"
-												name="nombreIntegrante" id="nombreProyecto"
+											<label for="name">Nombre del proyecto</label> <input
+												type="text" name="nombreIntegrante" id="nombreProyecto"
 												class="text ui-widget-content ui-corner-all">
 										</div>
 										<br>
@@ -91,27 +91,29 @@
 											<p class="validateTips">Completar Campos</p>
 											<form>
 												<fieldset>
-												<table>
-												<tr>
-												<td>
-													<label for="nombreTema"><ins>Tema:</ins></label><br> <input
-														type="text" name="Nombre tema" id="nombre-tema"
-														class="text ui-widget-content ui-corner-all"><br>
-													<label for="name"><ins>Descripción:</ins></label> <br>
-													<textarea name="Descripcion" id="descripcion-tema"
-														width="20" height="100"
-														class="text ui-widget-content ui-corner-all"></textarea>
-													<br> <label for="name"><ins>Tipo de reunión:</ins></label> <br>
-													<select id="reunion-tipo"></select> <br>
-													<p><ins>Fecha:</ins><br><input type="text" id="fechareunion"></p>
-												</td>
-												<td valign="top" id="integranteReunionTd">
-													<label for="integrantes"><ins>Integrantes:</ins></label>
-													<ul style="list-style-type: none" id="integranteReunion">
-													</ul>
-												</td>
-												</tr>
-												</table>
+													<table>
+														<tr>
+															<td><label for="nombreTema"><ins>Tema:</ins></label><br>
+																<input type="text" name="Nombre tema" id="nombre-tema"
+																class="text ui-widget-content ui-corner-all"><br>
+																<label for="name"><ins>Descripción:</ins></label> <br>
+																<textarea name="Descripcion" id="descripcion-tema"
+																	width="20" height="100"
+																	class="text ui-widget-content ui-corner-all"></textarea>
+																<br> <label for="name"><ins>Tipo de
+																		reunión:</ins></label> <br> <select id="reunion-tipo"></select>
+																<br>
+																<p>
+																	<ins>Fecha:</ins>
+																	<br>
+																	<input type="text" id="fechareunion">
+																</p></td>
+															<td valign="top" id="integranteReunionTd"><label
+																for="integrantes"><ins>Integrantes:</ins></label>
+																<ul style="list-style-type: none" id="integranteReunion">
+																</ul></td>
+														</tr>
+													</table>
 												</fieldset>
 											</form>
 										</div>
@@ -146,9 +148,14 @@
 													<br>
 													<div>
 														<ul style="list-style-type: none">
-															<li><input type="checkbox" class="rol" name="desarrollador" value="desarrollador">Desarrollador</label></li>
-															<li><input type="checkbox" class="rol" name="scrumMaster" value="scrumMaster">Scrum Master</label></li>
-															<li><input type="checkbox" class="rol" name="productOwner" value="productOwner">Product Owner</label></li>
+															<li><input type="checkbox" class="rol"
+																name="desarrollador" value="desarrollador">Desarrollador</label></li>
+															<li><input type="checkbox" class="rol"
+																name="scrumMaster" value="scrumMaster">Scrum
+																Master</label></li>
+															<li><input type="checkbox" class="rol"
+																name="productOwner" value="productOwner">Product
+																Owner</label></li>
 														</ul>
 													</div>
 												</fieldset>
@@ -180,9 +187,13 @@
 
 											<form>
 												<fieldset>
-													<label for="name">Numero Release</label> <input type="text"
-														name="numRelease" id="numRelease"
+													<label for="name">Fecha Inicio</label> <input type="text"
+														name="numRelease" id="sp-fechaInicio"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="name">Fecha Fin</label> <input type="text"
+														name="numRelease" id="sp-fechaFin"
 														class="text ui-widget-content ui-corner-all">
+
 												</fieldset>
 											</form>
 										</div>
@@ -192,11 +203,11 @@
 
 											<form>
 												<fieldset>
-													<label
-														for="name">Nombre</label> <input type="text" name="name"
-														id="name" class="text ui-widget-content ui-corner-all">
-													<label for="descripcion">Descripcion</label> <input
-														type="text" name="descripcion" id="descripcion"
+													<label for="name">Nombre</label> <input type="text"
+														name="name" id="name"
+														class="text ui-widget-content ui-corner-all"> <label
+														for="descripcion">Descripcion</label> <input type="text"
+														name="descripcion" id="descripcion"
 														class="text ui-widget-content ui-corner-all"> <input
 														type="submit" tabindex="-1"
 														style="position: absolute; top: -1000px">
