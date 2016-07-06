@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Diego/Desktop/TP-Ingenieria/ScrumTask/conf/routes
-// @HASH:e4fe41117a5dbecb4ebd7a92a5652ea6026f8dc2
-// @DATE:Sun Jul 03 23:02:11 ART 2016
+// @SOURCE:/home/matias/TPI-1er-cuatri-2016/Ingenieria/workspace/ScrumTask/conf/routes
+// @HASH:3a9312f9c498022106df95e5b731b443dc58341e
+// @DATE:Wed Jul 06 09:52:17 ART 2016
 
 
 import play.core._
@@ -53,7 +53,7 @@ private[this] lazy val controllers_Application_getColaboradores5 = Route("GET", 
         
 
 // @LINE:14
-private[this] lazy val controllers_Application_agregarColaborador6 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("agregarIntegrante/"),DynamicPart("idProyecto", """[^/]+""",true),StaticPart("/"),DynamicPart("nombre", """[^/]+""",true))))
+private[this] lazy val controllers_Application_agregarColaborador6 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("agregarIntegrante/"),DynamicPart("idProyecto", """[^/]+""",true),StaticPart("/"),DynamicPart("nombre", """[^/]+""",true),StaticPart("/"),DynamicPart("tipo", """[^/]+""",true))))
         
 
 // @LINE:15
@@ -89,13 +89,21 @@ private[this] lazy val controllers_Application_getTipoReuniones14 = Route("GET",
         
 
 // @LINE:23
-private[this] lazy val controllers_Application_guardarReunion15 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("guardarReunion/"),DynamicPart("idProyecto", """[^/]+""",true),StaticPart("/"),DynamicPart("idReunion", """[^/]+""",true),StaticPart("/"),DynamicPart("tipo", """[^/]+""",true),StaticPart("/"),DynamicPart("nombre", """[^/]+""",true),StaticPart("/"),DynamicPart("descripcion", """[^/]+""",true),StaticPart("/"),DynamicPart("integrantes", """[^/]+""",true))))
+private[this] lazy val controllers_Application_guardarReunion15 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("guardarReunion/"),DynamicPart("idProyecto", """[^/]+""",true),StaticPart("/"),DynamicPart("idReunion", """[^/]+""",true),StaticPart("/"),DynamicPart("fecha", """[^/]+""",true),StaticPart("/"),DynamicPart("tipo", """[^/]+""",true),StaticPart("/"),DynamicPart("nombre", """[^/]+""",true),StaticPart("/"),DynamicPart("descripcion", """[^/]+""",true),StaticPart("/"),DynamicPart("integrantes", """[^/]+""",true))))
         
 
 // @LINE:24
 private[this] lazy val controllers_Application_agregarProyecto16 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("agregarProyecto/"),DynamicPart("nombre", """[^/]+""",true))))
         
-def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """ScrumTask/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """proyectos""","""controllers.Application.getProyectos"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """tablero/$idProyecto<[^/]+>""","""controllers.Application.getTablero(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarTarea/$idProyecto<[^/]+>/$numeroRelease<[^/]+>/$numeroSprint<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>""","""controllers.Application.agregarTarea(idProyecto:Int, numeroRelease:Int, numeroSprint:Int, nombre:String, descripcion:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """integrantes/$idProyecto<[^/]+>""","""controllers.Application.getColaboradores(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarIntegrante/$idProyecto<[^/]+>/$nombre<[^/]+>""","""controllers.Application.agregarColaborador(idProyecto:Int, nombre:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarIntegrante/$idProyecto<[^/]+>/$nombreColaborador<[^/]+>""","""controllers.Application.eliminarColaborador(idProyecto:Int, nombreColaborador:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """reuniones/$idProyecto<[^/]+>""","""controllers.Application.getReuniones(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarTarea/$idProyecto<[^/]+>/$idRelease<[^/]+>/$idSprint<[^/]+>/$id<[^/]+>""","""controllers.Application.eliminarTarea(idProyecto:Int, idRelease:Int, idSprint:Int, id:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarProyecto/$idProyecto<[^/]+>""","""controllers.Application.eliminarProyecto(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """crearRelease/$idProyecto<[^/]+>""","""controllers.Application.crearRelease(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """crearSprint/$idProyecto<[^/]+>/$numeroRelease<[^/]+>""","""controllers.Application.crearSprint(idProyecto:Int, numeroRelease:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>""","""controllers.Application.eliminarReunion(idProyecto:Int, idReunion:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """tiposDeReunion""","""controllers.Application.getTipoReuniones"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """guardarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>/$tipo<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>/$integrantes<[^/]+>""","""controllers.Application.guardarReunion(idProyecto:Int, idReunion:Int, tipo:String, nombre:String, descripcion:String, integrantes:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarProyecto/$nombre<[^/]+>""","""controllers.Application.agregarProyecto(nombre:String)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
+
+// @LINE:25
+private[this] lazy val controllers_Application_getIntegrantesReunion17 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("integrantesReunion/"),DynamicPart("idProyecto", """[^/]+""",true))))
+        
+
+// @LINE:26
+private[this] lazy val controllers_Application_getObtenerUsuariosDeReunion18 = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("usuariosReunion/"),DynamicPart("idProyecto", """[^/]+""",true),StaticPart("/"),DynamicPart("idReunion", """[^/]+""",true))))
+        
+def documentation = List(("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """ScrumTask/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """proyectos""","""controllers.Application.getProyectos"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """tablero/$idProyecto<[^/]+>""","""controllers.Application.getTablero(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarTarea/$idProyecto<[^/]+>/$numeroRelease<[^/]+>/$numeroSprint<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>""","""controllers.Application.agregarTarea(idProyecto:Int, numeroRelease:Int, numeroSprint:Int, nombre:String, descripcion:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """integrantes/$idProyecto<[^/]+>""","""controllers.Application.getColaboradores(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarIntegrante/$idProyecto<[^/]+>/$nombre<[^/]+>/$tipo<[^/]+>""","""controllers.Application.agregarColaborador(idProyecto:Int, nombre:String, tipo:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarIntegrante/$idProyecto<[^/]+>/$nombreColaborador<[^/]+>""","""controllers.Application.eliminarColaborador(idProyecto:Int, nombreColaborador:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """reuniones/$idProyecto<[^/]+>""","""controllers.Application.getReuniones(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarTarea/$idProyecto<[^/]+>/$idRelease<[^/]+>/$idSprint<[^/]+>/$id<[^/]+>""","""controllers.Application.eliminarTarea(idProyecto:Int, idRelease:Int, idSprint:Int, id:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarProyecto/$idProyecto<[^/]+>""","""controllers.Application.eliminarProyecto(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """crearRelease/$idProyecto<[^/]+>""","""controllers.Application.crearRelease(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """crearSprint/$idProyecto<[^/]+>/$numeroRelease<[^/]+>""","""controllers.Application.crearSprint(idProyecto:Int, numeroRelease:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """eliminarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>""","""controllers.Application.eliminarReunion(idProyecto:Int, idReunion:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """tiposDeReunion""","""controllers.Application.getTipoReuniones"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """guardarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>/$fecha<[^/]+>/$tipo<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>/$integrantes<[^/]+>""","""controllers.Application.guardarReunion(idProyecto:Int, idReunion:Int, fecha:String, tipo:String, nombre:String, descripcion:String, integrantes:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """agregarProyecto/$nombre<[^/]+>""","""controllers.Application.agregarProyecto(nombre:String)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """integrantesReunion/$idProyecto<[^/]+>""","""controllers.Application.getIntegrantesReunion(idProyecto:Int)"""),("""GET""", prefix + (if(prefix.endsWith("/")) "" else "/") + """usuariosReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>""","""controllers.Application.getObtenerUsuariosDeReunion(idProyecto:Int, idReunion:Int)""")).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
   case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
   case l => s ++ l.asInstanceOf[List[(String,String,String)]] 
 }}
@@ -153,8 +161,8 @@ case controllers_Application_getColaboradores5(params) => {
 
 // @LINE:14
 case controllers_Application_agregarColaborador6(params) => {
-   call(params.fromPath[Int]("idProyecto", None), params.fromPath[String]("nombre", None)) { (idProyecto, nombre) =>
-        invokeHandler(controllers.Application.agregarColaborador(idProyecto, nombre), HandlerDef(this, "controllers.Application", "agregarColaborador", Seq(classOf[Int], classOf[String]),"GET", """""", Routes.prefix + """agregarIntegrante/$idProyecto<[^/]+>/$nombre<[^/]+>"""))
+   call(params.fromPath[Int]("idProyecto", None), params.fromPath[String]("nombre", None), params.fromPath[String]("tipo", None)) { (idProyecto, nombre, tipo) =>
+        invokeHandler(controllers.Application.agregarColaborador(idProyecto, nombre, tipo), HandlerDef(this, "controllers.Application", "agregarColaborador", Seq(classOf[Int], classOf[String], classOf[String]),"GET", """""", Routes.prefix + """agregarIntegrante/$idProyecto<[^/]+>/$nombre<[^/]+>/$tipo<[^/]+>"""))
    }
 }
         
@@ -225,8 +233,8 @@ case controllers_Application_getTipoReuniones14(params) => {
 
 // @LINE:23
 case controllers_Application_guardarReunion15(params) => {
-   call(params.fromPath[Int]("idProyecto", None), params.fromPath[Int]("idReunion", None), params.fromPath[String]("tipo", None), params.fromPath[String]("nombre", None), params.fromPath[String]("descripcion", None), params.fromPath[String]("integrantes", None)) { (idProyecto, idReunion, tipo, nombre, descripcion, integrantes) =>
-        invokeHandler(controllers.Application.guardarReunion(idProyecto, idReunion, tipo, nombre, descripcion, integrantes), HandlerDef(this, "controllers.Application", "guardarReunion", Seq(classOf[Int], classOf[Int], classOf[String], classOf[String], classOf[String], classOf[String]),"GET", """""", Routes.prefix + """guardarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>/$tipo<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>/$integrantes<[^/]+>"""))
+   call(params.fromPath[Int]("idProyecto", None), params.fromPath[Int]("idReunion", None), params.fromPath[String]("fecha", None), params.fromPath[String]("tipo", None), params.fromPath[String]("nombre", None), params.fromPath[String]("descripcion", None), params.fromPath[String]("integrantes", None)) { (idProyecto, idReunion, fecha, tipo, nombre, descripcion, integrantes) =>
+        invokeHandler(controllers.Application.guardarReunion(idProyecto, idReunion, fecha, tipo, nombre, descripcion, integrantes), HandlerDef(this, "controllers.Application", "guardarReunion", Seq(classOf[Int], classOf[Int], classOf[String], classOf[String], classOf[String], classOf[String], classOf[String]),"GET", """""", Routes.prefix + """guardarReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>/$fecha<[^/]+>/$tipo<[^/]+>/$nombre<[^/]+>/$descripcion<[^/]+>/$integrantes<[^/]+>"""))
    }
 }
         
@@ -235,6 +243,22 @@ case controllers_Application_guardarReunion15(params) => {
 case controllers_Application_agregarProyecto16(params) => {
    call(params.fromPath[String]("nombre", None)) { (nombre) =>
         invokeHandler(controllers.Application.agregarProyecto(nombre), HandlerDef(this, "controllers.Application", "agregarProyecto", Seq(classOf[String]),"GET", """""", Routes.prefix + """agregarProyecto/$nombre<[^/]+>"""))
+   }
+}
+        
+
+// @LINE:25
+case controllers_Application_getIntegrantesReunion17(params) => {
+   call(params.fromPath[Int]("idProyecto", None)) { (idProyecto) =>
+        invokeHandler(controllers.Application.getIntegrantesReunion(idProyecto), HandlerDef(this, "controllers.Application", "getIntegrantesReunion", Seq(classOf[Int]),"GET", """""", Routes.prefix + """integrantesReunion/$idProyecto<[^/]+>"""))
+   }
+}
+        
+
+// @LINE:26
+case controllers_Application_getObtenerUsuariosDeReunion18(params) => {
+   call(params.fromPath[Int]("idProyecto", None), params.fromPath[Int]("idReunion", None)) { (idProyecto, idReunion) =>
+        invokeHandler(controllers.Application.getObtenerUsuariosDeReunion(idProyecto, idReunion), HandlerDef(this, "controllers.Application", "getObtenerUsuariosDeReunion", Seq(classOf[Int], classOf[Int]),"GET", """""", Routes.prefix + """usuariosReunion/$idProyecto<[^/]+>/$idReunion<[^/]+>"""))
    }
 }
         
