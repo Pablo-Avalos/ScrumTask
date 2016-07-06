@@ -47,7 +47,6 @@ var controller = {
 					dataType : 'json',
 					url : '/tablero/' + controller.idProyectoActual,
 					success : function(response) {
-						// console.log(response.release);
 						var divTabla = document
 								.getElementById("tableroConRelease");
 						var tabla = document.createElement("table");
@@ -76,9 +75,6 @@ var controller = {
 								var textoCeldaSprint = document
 										.createTextNode("Sprint " + numerSpt);
 
-//								celdaSprint.appendChild(document
-//										.createElement("br"));
-
 								celdaSprint.appendChild(textoCeldaSprint);
 
 								celdaSprint.setAttribute("id", "celdaSprint"
@@ -93,9 +89,11 @@ var controller = {
 								celdaSprint.appendChild(fechaInicioSprint);
 
 								var divTareas = document.createElement("div");
+								divTareas.setAttribute("value", i);
 								var ullist = document.createElement("ul");
 								divTareas.appendChild(ullist);
 								ullist.setAttribute("id", "tareas" + j);
+								ullist.setAttribute("value", j);
 								ullist.setAttribute("class", "sortable")
 								ullist.setAttribute("style", "height: 150px;");
 								for (var h = 0; h < response.release[i].listaSprints[j].listaTareas.length; h++) {
@@ -104,7 +102,8 @@ var controller = {
 									var celdaTareas = document
 											.createElement("li");
 									celdaTareas.setAttribute("class",
-											"ui-state-default");
+											"ui-state-default tareaParaEliminar");
+									celdaTareas.setAttribute("value", tarea.id);
 									var nombre = document.createElement("div");
 									nombre.appendChild(document
 											.createTextNode(tarea.nombre))
@@ -122,11 +121,6 @@ var controller = {
 										}
 
 									}
-									var button = document
-											.createElement("input");
-									button.type = "button";
-									button.value = "estado";
-									// button.onclick =
 									var textoTarea = document
 											.createTextNode(tarea.id + "\n"
 													+ " " + "Nombre: "
@@ -134,15 +128,6 @@ var controller = {
 													+ " Descripcion: "
 													+ tarea.descripcion);
 									celdaTareas.appendChild(textoTarea);
-									celdaTareas.appendChild(button)
-
-									// var botonEliminar =
-									// document.createElement("button");
-									// botonEliminar.setAttribute("class", "x");
-
-									// celdaTareas.appendChild(document.createElement("button"));
-									// textoLista.setAttribute("id", "dialog");
-									// celdaTareas.appendChild(textoLista);
 									ullist.appendChild(celdaTareas);
 
 								}
@@ -167,7 +152,7 @@ var controller = {
 						tabla.setAttribute("border", "2");
 
 						agregarBotonesAreleases(response);
-
+						agregarBotonesAtareas();
 					},
 					complete : function functionName() {
 						$(".sortable").sortable({

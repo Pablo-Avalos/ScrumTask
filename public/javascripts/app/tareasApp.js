@@ -165,6 +165,17 @@ $(document).ready(function() {
 	})
 });
 
+$(document).ready(function() {
+	$("#dialog-sprint").dialog({
+		autoOpen : false
+	})
+});
+$(document).ready(function() {
+	$("#eliminarTareaDialog").dialog({
+		autoOpen : false
+	})
+});
+
 $(function() {
 	$("#tableroConTareas").sortable();
 	$("#tableroConTareas").disableSelection();
@@ -217,8 +228,8 @@ function abrirDialogCrearTarea(idRelease, idSprint) {
 	dialog.dialog("open");
 }
 
-$(function() {
-	var dialogElimTarea = $("#eliminarTarea").dialog(
+function abrirDialogEliminarTarea(idRelease, idSprint, idTarea) {
+ var dialogElimTarea = $("#eliminarTareaDialog").dialog(
 			{
 				autoOpen : false,
 				height : 300,
@@ -226,32 +237,20 @@ $(function() {
 				modal : true,
 				buttons : {
 					'Eliminar Tarea' : function() {
-						var nRelease = $("#ne-release").val();
-						var nSprint = $("#ne-sprint").val();
-						var id = $("#id").val();
-						console.log("neerelease" + nRelease);
-						console.log("nSprint" + nSprint);
-						console.log("id" + id);
-						$(document)
-								.ready(
-										controller.eliminarTarea(nRelease,
-												nSprint, id));
+						var nRelease = idRelease;
+						var nSprint = idSprint;
+						var id = idTarea;
+						$(document).ready(controller.eliminarTarea(nRelease, nSprint, id));
 						dialogElimTarea.dialog("close");
 					},
 					Cancelar : function() {
 						dialogElimTarea.dialog("close");
 					}
-				},
-				close : function() {
-					form[0].reset();
-					dialogElimTarea.dialog("close");
 				}
 			});
+			dialogElimTarea.dialog("open");
+}
 
-	$("#eliminar-tarea").button().on("click", function() {
-		dialogElimTarea.dialog("open");
-	});
-});
 
 $(function() {
 	dialogSrintResponse = $("#dialog-sprintResponse").dialog({
@@ -318,30 +317,6 @@ function abrirDialogSprint(numeroRelease) {
 
 }
 
-
-
-
-
-// dialogSprint = $("#dialog-sprint").dialog({
-// autoOpen : false,
-// height : 300,
-// width : 350,
-// modal : true,
-// buttons : {
-// 'Crear Sprint' : function() {
-// var fechaInicio = $("#sp-fechaInicio").val();
-// var fechaFin = $("#sp-fechaFin").val();
-// console.log("fechas" + fechaInicio + " " + fechaFin)
-// $(document).ready(controller.crearSprint(numeroRelease, fechaInicio,
-// fechaFin));
-// dialogSprint.dialog("close");
-// },
-// Cancelar : function() {
-// dialogSprint.dialog("close");
-// }
-// }
-// });
-
 function nuevoBotonSprint(numeroRelease) {
 	var boton = $(
 			'<div><button id="agregarSprint' + numeroRelease
@@ -383,6 +358,18 @@ function agregarTarea(sprint, tarea) {
 	for (var i = 0; i < sprint.listaTareas.length; i++) {
 		sprint.listaTareas[i]
 	}
+}
+
+function agregarBotonesAtareas() {
+	$(".tareaParaEliminar").each(function() {
+		var idRelease = $(this).closest('div').attr('value');
+		var idSprint = $(this).closest('ul').attr('value');
+		var idTarea = $(this).attr('value');
+		var botonEliminar = $('<button id="eliminarTarea">x</button>').click(function () {
+			abrirDialogEliminarTarea(idRelease, idSprint, idTarea);
+		});
+		$(this).append(botonEliminar);
+	});
 }
 
 
