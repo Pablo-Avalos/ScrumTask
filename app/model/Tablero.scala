@@ -42,10 +42,9 @@ class Tablero(idT: Integer) {
 
   }
   def agregarTarea(idRealease: Int, idSprint: Int, tarea: Tarea): Tarea = {
-
-    this.obtenerRealase(idRealease).listaSprints.filter { s => s.numero == idSprint }.head.tareas += tarea
+    //this.obtenerRealase(idRealease).listaSprints.filter { s => s.numero == idSprint }.head.tareas += tarea
+    this.obtenerRealase(idRealease).getSprint(idSprint).agregarTarea(tarea)
     tarea
-
   }
   def agregarRelease(release: Release) {
     listaDeRelease.+=(release)
