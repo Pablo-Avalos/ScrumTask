@@ -5,15 +5,10 @@ Scenario: Creacion de una Tarea
     When Le seteo el nombre como "tareaInicial"
     Then El nombre de la  tarea debe ser "tareaInicial"
     
-Scenario: Obtener una tarea ya existente
-	Giver Tengo una tarea con id 115
-	When Se quiere obtener la tarea con id 155
-	Then Se obtiene la tarea con id 155
-    
 Scenario: Eliminar una tarea ya existente
 	Given Tengo una tarea
 	When Elimino la tarea con id 157
-	Then La tarea con id 157 ya no debe estar mas en el tablero
+	Then La tarea con la id 157 ya no debe estar mas en el tablero
 	
 Scenario: Definir autor de una tarea
 	Given Una tarea sin autor 

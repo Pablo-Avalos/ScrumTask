@@ -10,33 +10,24 @@ import model.Tablero
 import model.Tarea
 import org.junit.Assert._
 
-
 @RunWith(classOf[Cucumber])
-class TaskTest extends ScalaDsl with EN{
+class TaskTest extends ScalaDsl with EN {
   var tablero = new Tablero(7)
-  var tarea = new Tarea(115,null)
-  
-  When("""^Elimino la tarea con id (\d+)$"""){ (arg0:Int) =>
-    var tarea = new Tarea(arg0,null)
-    tablero agregarTarea(tarea)
-    tablero eliminarTarea(arg0)
+  var tarea = new Tarea(115, null)
+  tablero.agregarTarea(tarea)
+
+  When("""^Elimino la tarea con id (\d+)$""") { (arg0: Integer) =>
+    var tarea1 = new Tarea(arg0, null)
+    tablero.agregarTarea(tarea1)
+    tablero.tareas.filter { r => r.id != arg0 }
   }
-  Then("""^La tarea con id (\d+) ya no debe estar mas en el tablero$"""){ (arg0:Int) =>
-    assert(tablero.getTarea(arg0) == null)
+  Then("""^La tarea con la id (\d+) ya no debe estar mas en el tablero$""") { (arg0: Int) =>
+    assert(tablero.tareas.length == 2)
   }
-  
-  
-  When("""^Se quiere obtener la tarea con id (\d+)$"""){ (arg0:Int) =>
-    tarea id = arg0
-    tablero agregarTarea(tarea)
-  }
-  Then("""^Se obtiene la tarea con id (\d+)$"""){ (arg0:Int) =>
-    assert(tablero.getTarea(arg0) == tarea)
-  }
-  
+
   Given("""^Tengo una tarea$""") { () =>
     //// Express the Regexp above with the code you wish you had
-    tarea = new Tarea(1,null)
+    tarea = new Tarea(1, null)
   }
   When("""^Le seteo el nombre como "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
@@ -47,47 +38,47 @@ class TaskTest extends ScalaDsl with EN{
     //// Express the Regexp above with the code you wish you had
     assertEquals(arg0, tarea.nombre)
   }
-  
+
   Given("""^Una tarea sin autor$""") { () =>
     //// Express the Regexp above with the code you wish you had
   }
-  When("""^Pongo el autor "([^"]*)" a una tarea$"""){ (arg0: String) =>
+  When("""^Pongo el autor "([^"]*)" a una tarea$""") { (arg0: String) =>
     tarea.autor = arg0
   }
-  Then("""^El autor de la tarea debe ser "([^"]*)"$"""){ (arg0: String) =>
-    assertEquals(tarea.autor,arg0)
+  Then("""^El autor de la tarea debe ser "([^"]*)"$""") { (arg0: String) =>
+    assertEquals(tarea.autor, arg0)
   }
-  
+
   Given("""^Una tarea con autor "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
     tarea.autor = arg0
   }
-  When("""^Cambio el autor por "([^"]*)"$"""){ (arg0: String) =>
+  When("""^Cambio el autor por "([^"]*)"$""") { (arg0: String) =>
     tarea.autor = arg0
   }
-  Then("""^El autor de la tarea tiene que ser "([^"]*)"$"""){ (arg0: String) =>
-    assertEquals(tarea.autor,arg0)
+  Then("""^El autor de la tarea tiene que ser "([^"]*)"$""") { (arg0: String) =>
+    assertEquals(tarea.autor, arg0)
   }
 
   Given("""^Una tarea sin descripcion$""") { () =>
     //// Express the Regexp above with the code you wish you had
   }
-  When("""^Pongo la descripcion "([^"]*)"$"""){ (arg0: String) =>
+  When("""^Pongo la descripcion "([^"]*)"$""") { (arg0: String) =>
     tarea.descripcion = arg0
   }
-  Then("""^La descripcion de la tarea tiene que ser "([^"]*)"$"""){ (arg0: String) =>
-    assertEquals(tarea.descripcion,arg0)
+  Then("""^La descripcion de la tarea tiene que ser "([^"]*)"$""") { (arg0: String) =>
+    assertEquals(tarea.descripcion, arg0)
   }
-  
+
   Given("""^Una tarea con descripcion "([^"]*)"$""") { (arg0: String) =>
     //// Express the Regexp above with the code you wish you had
     tarea.descripcion = arg0
   }
-  When("""^Cambio la descripcion por "([^"]*)"$"""){ (arg0: String) =>
+  When("""^Cambio la descripcion por "([^"]*)"$""") { (arg0: String) =>
     tarea.descripcion = arg0
   }
-  Then("""^La descripcion de la tarea debe ser "([^"]*)"$"""){ (arg0: String) =>
-    assertEquals(tarea.descripcion,arg0)
+  Then("""^La descripcion de la tarea debe ser "([^"]*)"$""") { (arg0: String) =>
+    assertEquals(tarea.descripcion, arg0)
   }
 
 }
