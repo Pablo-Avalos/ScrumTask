@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -105,8 +106,7 @@
 																<br>
 																<p>
 																	<ins>Fecha:</ins>
-																	<br>
-																	<input type="text" id="fechareunion">
+																	<br> <input type="text" id="fechareunion">
 																</p></td>
 															<td valign="top" id="integranteReunionTd"><label
 																for="integrantes"><ins>Integrantes:</ins></label>
@@ -172,55 +172,69 @@
 									<div>
 										<button id="create-release">Agregar Release</button>
 									</div>
-									<br>
-									<div id="tableroConRelease"></div>
+									<div id="referencias">
+										Referencias:
+										<h4 style="background-color: #F7BE81; width: 10%">Tarea
+											Pendiente</h4>
+										<div>
 
-									<div>
+											<h4 style="background-color: #CED8F6; width: 10%">Tarea
+												en Proceso</h4>
+										</div>
+										<div>
+											<h4 style="background-color: #D0F5A9; width: 10%">Tarea
+												Finalizada</h4>
+										</div>
+										</div>
+										<br>
+										<div id="tableroConRelease"></div>
+
+										<div>
 
 
-										<div id="dialog-release" title="Release"></div>
-										<div id="dialog-sprintResponse" title="Sprint"></div>
+											<div id="dialog-release" title="Release"></div>
+											<div id="dialog-sprintResponse" title="Sprint"></div>
 
-										<div id="dialog-sprint" title="Sprint">
-											<p class="validateTips">Completar Campos</p>
+											<div id="dialog-sprint" title="Sprint">
+												<p class="validateTips">Completar Campos</p>
 
-											<form>
-												<fieldset>
-													<label for="name">Fecha Inicio</label> <input type="text"
-														name="numRelease" id="sp-fechaInicio"
-														class="text ui-widget-content ui-corner-all"><br> <label
-														for="name">Fecha Fin</label> <input type="text"
-														name="numRelease" id="sp-fechaFin"
-														class="text ui-widget-content ui-corner-all">
+												<form>
+													<fieldset>
+														<label for="name">Fecha Inicio</label> <input type="text"
+															name="numRelease" id="sp-fechaInicio"
+															class="text ui-widget-content ui-corner-all"><br>
+														<label for="name">Fecha Fin</label> <input type="text"
+															name="numRelease" id="sp-fechaFin"
+															class="text ui-widget-content ui-corner-all">
 
-												</fieldset>
-											</form>
+													</fieldset>
+												</form>
+											</div>
+
+											<div id="dialog-form" title="Crear Tarea">
+												<p class="validateTips">Completar Campos</p>
+
+												<form>
+													<fieldset>
+														<label for="name">Nombre</label><br> <input
+															type="text" name="name" id="name"
+															class="text ui-widget-content ui-corner-all"><br>
+														<label for="descripcion">Descripcion</label> <br> <input
+															type="text" name="descripcion" id="descripcion"
+															class="text ui-widget-content ui-corner-all"> <input
+															type="submit" tabindex="-1"
+															style="position: absolute; top: -1000px">
+													</fieldset>
+												</form>
+											</div>
+
+											<div id="eliminarTareaDialog" title="Eliminar tarea">
+												<p>¿Desea eliminar por completo la tarea?</p>
+											</div>
 										</div>
 
-										<div id="dialog-form" title="Crear Tarea">
-											<p class="validateTips">Completar Campos</p>
-
-											<form>
-												<fieldset>
-													<label for="name">Nombre</label><br> <input type="text"
-														name="name" id="name"
-														class="text ui-widget-content ui-corner-all"><br> <label
-														for="descripcion">Descripcion</label> <br><input type="text"
-														name="descripcion" id="descripcion"
-														class="text ui-widget-content ui-corner-all"> <input
-														type="submit" tabindex="-1"
-														style="position: absolute; top: -1000px">
-												</fieldset>
-											</form>
-										</div>
-
-										<div id="eliminarTareaDialog" title="Eliminar tarea">
-											<p>¿Desea eliminar por completo la tarea?</p>
-										</div>
 									</div>
-
-								</div>
-							</div></td>
+								</div></td>
 					</tr>
 				</table>
 			</td>

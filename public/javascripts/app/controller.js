@@ -98,36 +98,47 @@ var controller = {
 								ullist.setAttribute("style", "height: 150px;");
 								for (var h = 0; h < response.release[i].listaSprints[j].listaTareas.length; h++) {
 									var tarea = response.release[i].listaSprints[j].listaTareas[h];
-
 									var celdaTareas = document
 											.createElement("li");
+									var estado = controller.cambiarEstado(tarea.estado.codigo);
+									console.log("-----------" + estado);
+
 									celdaTareas.setAttribute("class",
-											"ui-state-default tareaParaEliminar");
+											"tareaParaEliminar " + estado);
+									
 									celdaTareas.setAttribute("value", tarea.id);
 									var nombre = document.createElement("div");
 									nombre.appendChild(document
 											.createTextNode(tarea.nombre))
-									if (tarea.estado.codigo = 3) {
-										celdaTareas.setAttribute("style",
-												"background:white")
-									} else {
-										if (tarea.estado.codigo = 2) {
-											celdaTareas.setAttribute("style",
-													"background:yellow")
-
-										} else {
-											celdaTareas.setAttribute("style",
-													"background:red")
-										}
-
-									}
+											
 									var textoTarea = document
 											.createTextNode(tarea.id + "\n"
 													+ " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
 													+ " Descripcion: "
-													+ tarea.descripcion);
-									celdaTareas.appendChild(textoTarea);
+													+ tarea.descripcion + document.createElement("br"));
+//									textoTarea.appendChild();
+
+									var tablaTarea = document.createElement("table");
+									tablaTarea.setAttribute("class" , "tbt");
+									
+									var id = document.createElement("tr")
+									var nombre = document.createElement("tr")
+									var descripcion = document.createElement("tr")
+									id.setAttribute("class" , "tbt");
+									nombre.setAttribute("class" , "tbt");
+									descripcion.setAttribute("class" , "tbt");
+
+									id.appendChild(document.createTextNode("Id:" + tarea.id));
+									nombre.appendChild(document.createTextNode("Nombre: " + tarea.nombre));
+									descripcion.appendChild(document.createTextNode("Desc: " + tarea.descripcion));
+									tablaTarea.appendChild(id);
+									tablaTarea.appendChild(nombre);
+									tablaTarea.appendChild(descripcion);
+
+									celdaTareas.appendChild(tablaTarea);
+
+									
 									ullist.appendChild(celdaTareas);
 
 								}
@@ -287,19 +298,19 @@ var controller = {
 
 	},
 
-	eliminarTarea : function(id) {
-		$.ajax({
-			type : 'GET',
-			contentType : 'application/json',
-			dataType : 'json',
-			url : '/eliminarTarea/' + controller.idProyectoActual + '/' + id,
-			success : function(response) {
-			},
-			complete : function() {
-				actulizarTablero();
-			}
-		});
-	},
+//	eliminarTarea : function(id) {
+//		$.ajax({
+//			type : 'GET',
+//			contentType : 'application/json',
+//			dataType : 'json',
+//			url : '/eliminarTarea/' + controller.idProyectoActual + '/' + id,
+//			success : function(response) {
+//			},
+//			complete : function() {
+//				actulizarTablero();
+//			}
+//		});
+//	},
 	crearTarea : function(nRelease, nSprint, nombre, descripcion) {
 		var tarea = '1';
 		$.ajax({
@@ -335,6 +346,23 @@ var controller = {
 			}
 		});
 	},
+	
+	pasarDeEstadoTarea : function(nRelease, nSprint, id) {
+		// var tarea = '1';
+		$.ajax({
+			type : 'GET',
+			contentType : 'application/json',
+			dataType : 'json',
+			url : '/cambiarEstado/' + controller.idProyectoActual + '/'
+					+ nRelease + '/' + nSprint + '/' + id + '/' + 1,
+			success : function(response) {
+			},
+			complete : function() {
+				actulizarTablero();
+			}
+		});
+	},
+
 
 	eliminarProyecto : function() {
 		$.ajax({
@@ -439,5 +467,19 @@ var controller = {
 			}
 		});
 	},
+	cambiarEstado: function(idEstado){
+		switch(idEstado) {
+	    case 1:
+	    	return "estado1";
+	        break;
+	    case 2:
+	     	return "estado2";
+	     	break;
+	    case 3:
+	    	return "estado3";
+	        break;
+	}
+		
+	}
 
 };

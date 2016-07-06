@@ -222,4 +222,9 @@ object Application extends Controller {
     }
     Ok(Json.toJson(asistentes))
    }
+   def actualizarEstado(idProyecto: Int, idRelease: Int, idSprint: Int, id: Int, idEstado:Int) = Action {
+     
+     appPorDefecto.getProyecto(idProyecto).acutualizarEstado(idRelease,idSprint,id, idEstado)
+     Ok(this.getTablero(idProyecto).toString())
+   }
 }

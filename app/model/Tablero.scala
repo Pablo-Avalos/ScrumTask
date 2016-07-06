@@ -50,5 +50,8 @@ class Tablero(idT: Integer) {
   def agregarRelease(release: Release) {
     listaDeRelease.+=(release)
   }
+  def actualizarEstadoTarea(idRelease:Int, idSprint:Int, idTarea:Int, idEstado:Int){
+    listaDeRelease.filter { r => r.numero == idRelease }.head.listaSprints.filter { s => s.numero == idSprint }.head.tareas.filter { t => t.id == idTarea}.head.nextState
+  }
 
 }

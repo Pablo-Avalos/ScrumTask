@@ -252,6 +252,31 @@ function abrirDialogEliminarTarea(idRelease, idSprint, idTarea) {
 }
 
 
+function abrirDialogCambiarEstado(idRelease, idSprint, idTarea) {
+	 var dialogElimTarea = $("#eliminarTareaDialog").dialog(
+				{
+					autoOpen : false,
+					height : 300,
+					width : 350,
+					modal : true,
+					buttons : {
+						'Eliminar Tarea' : function() {
+							var nRelease = idRelease;
+							var nSprint = idSprint;
+							var id = idTarea;
+							$(document).ready(controller.eliminarTarea(nRelease, nSprint, id));
+							dialogElimTarea.dialog("close");
+						},
+						Cancelar : function() {
+							dialogElimTarea.dialog("close");
+						}
+					}
+				});
+				dialogElimTarea.dialog("open");
+	}
+
+
+
 $(function() {
 	dialogSrintResponse = $("#dialog-sprintResponse").dialog({
 		autoOpen : false,
@@ -368,7 +393,12 @@ function agregarBotonesAtareas() {
 		var botonEliminar = $('<button id="eliminarTarea">x</button>').click(function () {
 			abrirDialogEliminarTarea(idRelease, idSprint, idTarea);
 		});
+		var botonCambiarEstad = $('<button id="cambiarEstado">Estado</button>').click(function () {
+		 
+			controller.pasarDeEstadoTarea(idRelease,idSprint,idTarea);
+		});
 		$(this).append(botonEliminar);
+		$(this).append(botonCambiarEstad);
 	});
 }
 

@@ -21,9 +21,9 @@ class TaskTest extends ScalaDsl with EN {
   When("""^Elimino la tarea con id (\d+)$""") { (arg0: Integer) =>
     var tarea = new Tarea(arg0,null)
     var release = new Release(0)
-    var sprint = new Sprint(0)
+//    var sprint = new Sprint(0)
     tablero.agregarRelease(release)
-    tablero.agregarSprint(0)
+//    tablero.agregarSprint(0)
     tablero agregarTarea(0,0,tarea)
     tablero eliminarTarea(0,0,arg0.asInstanceOf[Integer])
   }

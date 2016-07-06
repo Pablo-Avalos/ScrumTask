@@ -62,8 +62,8 @@ body {
 	filter: alpha(opacity = 50);
 	word-wrap: break-word;
 	outline-style: double;
-    outline-color: green;
-    outline-width: 3px;
+	outline-color: green;
+	outline-width: 3px;
 }
 
 div {
@@ -80,7 +80,7 @@ div {
 	float: left;
 	width: 150px;
 	height: 150px;
-	font-size: 1em;
+	font-size: 0.5em;
 	text-align: center;
 }
 
@@ -88,15 +88,56 @@ div {
 	height: 600px;
 }
 
+.tbtr, trr {
+	border: 1px solid black;
+}
+
 #button {
 	background-color: #0B3861; /* Green */
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 10px 22px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 0px;
+	font-size: px;
 	margin: 4px 2px;
 	cursor: pointer;
+}
+
+#referencias {
+	position: relative;
+	top: 8px;
+	right: 16px;
+	font-size: 10px;
+}
+
+.estado1 {
+	font-size: 12px;
+	background-color: #D0F5A9;
+	/*	-webkit-border-radius: 27px 27px 27px 27px;
+	-moz-border-radius: 27px 27px 27px 27px;
+	border-radius: 27px 27px 27px 27px;*/
+	word-break: keep-all;
+	overflow-y: scroll;
+}
+
+.estado2 {
+	font-size: 0.3em;
+	background-color: #CED8F6;
+	/*	-webkit-border-radius: 27px 27px 27px 27px;
+	-moz-border-radius: 27px 27px 27px 27px;
+	border-radius: 27px 27px 27px 27px;*/
+	word-break: keep-all;
+	overflow-y: scroll;
+}
+
+.estado3 {
+	font-size: 0.3em;
+	background-color: #F7BE81;
+	/*	-webkit-border-radius: 27px 27px 27px 27px;
+	-moz-border-radius: 27px 27px 27px 27px;
+	border-radius: 27px 27px 27px 27px;*/
+	word-break: keep-all;
+	overflow-y: scroll;
 }

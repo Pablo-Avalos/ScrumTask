@@ -57,4 +57,10 @@ case class Project(idP: Int, nombreP: String) {
     nuevaReunion.temasTratados.descripcion =  descripcionTema
     reuniones.+=(nuevaReunion)
   }
+   
+   def acutualizarEstado(idRelease:Int, idSprint:Int, idTarea:Int, idEstado:Int){
+     
+     tablero.actualizarEstadoTarea(idRelease, idSprint,idTarea,idEstado)
+     
+   }
 }

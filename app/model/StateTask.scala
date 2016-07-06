@@ -8,7 +8,6 @@ abstract class StateTask {
 class StateTaskFinished extends StateTask{   
    def codigo:Int= 1
    def nextState(tarea:Tarea){
-    ""
   }
  
 }
