@@ -60,7 +60,15 @@ function vaciarReuniones(){
 }
 
 function desabilitarBotonEliminarProyecto(){
-  $("#eliminarProyecto").prop('disabled', true);
+  $("#eliminarProyecto").button({
+    disabled : true
+  })
+}
+
+function habilitarBotonEliminarProyecto(){
+  $("#eliminarProyecto").button({
+    disabled : false
+  })
 }
 
 

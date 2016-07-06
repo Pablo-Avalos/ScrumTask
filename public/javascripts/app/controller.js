@@ -27,6 +27,7 @@ var controller = {
 												+ '">' + response[i].nombre
 												+ '</option>');
 							}
+							habilitarBotonEliminarProyecto();
 							controller
 									.obtenerTablero(controller.idProyectoActual);
 							controller
