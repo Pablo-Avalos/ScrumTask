@@ -101,7 +101,6 @@ var controller = {
 									var celdaTareas = document
 											.createElement("li");
 									var estado = controller.cambiarEstado(tarea.estado.codigo);
-									console.log("-----------" + estado);
 
 									celdaTareas.setAttribute("class",
 											"tareaParaEliminar " + estado);
@@ -110,14 +109,6 @@ var controller = {
 									var nombre = document.createElement("div");
 									nombre.appendChild(document
 											.createTextNode(tarea.nombre))
-											
-									var textoTarea = document
-											.createTextNode(tarea.id + "\n"
-													+ " " + "Nombre: "
-													+ tarea.nombre + "\n" + ""
-													+ " Descripcion: "
-													+ tarea.descripcion + document.createElement("br"));
-//									textoTarea.appendChild();
 
 									var tablaTarea = document.createElement("table");
 									tablaTarea.setAttribute("class" , "tbt");
@@ -129,7 +120,6 @@ var controller = {
 									nombre.setAttribute("class" , "tbt");
 									descripcion.setAttribute("class" , "tbt");
 
-									id.appendChild(document.createTextNode("Id:" + tarea.id));
 									nombre.appendChild(document.createTextNode("Nombre: " + tarea.nombre));
 									descripcion.appendChild(document.createTextNode("Desc: " + tarea.descripcion));
 									tablaTarea.appendChild(id);
