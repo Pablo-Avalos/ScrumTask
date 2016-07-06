@@ -379,3 +379,9 @@ function agregarTarea(sprint, tarea) {
 		sprint.listaTareas[i]
 	}
 }
+
+
+$(function() {
+    $( "#sp-fechaInicio").datepicker({ dateFormat: 'dd-mm-yy' });
+    $( "#sp-fechaFin").datepicker({ dateFormat: 'dd-mm-yy' });
+  });
