@@ -34,7 +34,10 @@ object Application extends Controller {
   implicit val sprintWrites = new Writes[Sprint] {
     def writes(sprint: Sprint) = Json.obj(
       "numero" -> sprint.numero,
-      "listaTareas" -> sprint.tareas)
+      "listaTareas" -> sprint.tareas,
+        "fechaInicio" -> sprint.fechaIncio,
+          "fechaFin" -> sprint.fechaFin
+    )
   }
 
   implicit val releaseWrites = new Writes[Release] {
@@ -174,8 +177,8 @@ object Application extends Controller {
     val json = Json.toJson(release)
     Ok(json)
   }
-  def crearSprint(idProyecto: Int, numeroRelease: Int) = Action {
-    var sprint = appPorDefecto.getTablero(idProyecto).agregarSprint(numeroRelease)
+  def crearSprint(idProyecto: Int, numeroRelease: Int, fechaInicio:String, fechaFin:String) = Action {
+    var sprint = appPorDefecto.getTablero(idProyecto).agregarSprint(numeroRelease, fechaInicio, fechaFin)
     val json = Json.toJson(sprint)
     Ok(json)
   }
