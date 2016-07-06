@@ -3,6 +3,7 @@ package model
 import scala.collection.mutable.ListBuffer
 import java.util.Date
 import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class Tablero(idT: Integer) {
   var id = idT: Int
@@ -23,13 +24,14 @@ class Tablero(idT: Integer) {
   def getTarea(id: Integer) = tareas.find { t => t.id == id }.getOrElse(null)
 
   def agregarSprint(numeroRelease: Int, fechaInicio: String, fechaFin: String): Sprint = {
-    var f1 = sdf.format(new Date())
-    var f2 = sdf.format(new Date())
+    
+    println("-----------" + fechaInicio)
+    println("-----------" + fechaFin)
+//    f1 = sdf.format(new Date(fechaInicio))
+//    f2 = sdf.format(new Date(fechaFin))
 
-    println("----------------" + f1)
-    println("----------------" + f2)
-
-    var sprint = new Sprint(listaDeRelease.filter { r => r.numero == numeroRelease }.head.listaSprints.length, f1, f2)
+    
+    var sprint = new Sprint(listaDeRelease.filter { r => r.numero == numeroRelease }.head.listaSprints.length, fechaInicio, fechaFin)
     listaDeRelease.filter { r => r.numero == numeroRelease }.head.listaSprints += sprint
     sprint
   }

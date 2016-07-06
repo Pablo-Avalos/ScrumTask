@@ -288,6 +288,9 @@ $(function() {
 	});
 });
 function abrirDialogSprint(numeroRelease) {
+	var fechaInicio;
+	var fechaFin;
+
 	dialogSprint = $("#dialog-sprint").dialog(
 			{
 				autoOpen : false,
@@ -296,8 +299,8 @@ function abrirDialogSprint(numeroRelease) {
 				modal : true,
 				buttons : {
 					'Crear Sprint' : function() {
-						var fechaInicio = $("#sp-fechaInicio").val();
-						var fechaFin = $("#sp-fechaFin").val();
+						fechaInicio = $("#sp-fechaInicio").val();
+						fechaFin = $("#sp-fechaFin").val();
 						console.log("fechas" + fechaInicio + " " + fechaFin)
 						$(document).ready(
 								controller.crearSprint(numeroRelease,
@@ -310,6 +313,8 @@ function abrirDialogSprint(numeroRelease) {
 				}
 			});
 		dialogSprint.dialog("open");
+		fechaFin = '';
+		fechaInicio= '';
 
 }
 
