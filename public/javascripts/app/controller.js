@@ -60,13 +60,14 @@ var controller = {
 									.createTextNode("Release "
 											+ response.release[i].numero);
 							celdaRelease.setAttribute("id", "release" + i)
+							celdaRelease.setAttribute("value", i);
 							celdaRelease.appendChild(textoCeldaRelease);
 							fila.appendChild(celdaRelease);
 
 							for (var j = 0; j < response.release[i].listaSprints.length; j++) {
 								var numerSpt = response.release[i].listaSprints[j].numero;
 								var celdaSprint = document.createElement("td");
-								celdaSprint.setAttribute("id", "celdaSprint" + j);
+								celdaSprint.setAttribute("id", "celdaSprint" +i+j);
 
 //								style="overflow-y: scroll; height: 520px;"
 //									celdaSprint.setAttribute("style","overflow-y: scroll; height: 100px;" );
@@ -113,7 +114,7 @@ var controller = {
 						tabla.setAttribute("border", "2");
 
 						agregarBotonesAreleases(response);
-
+						
 					}
 				});
 	},
@@ -330,7 +331,7 @@ var controller = {
 			}
 		});
 	},
-	
+
 	obtenerUsuariosDeReunion : function(idReunion) {
 		$.ajax({
 			type : 'GET',
@@ -348,8 +349,8 @@ var controller = {
 			}
 		})
 	},
-	
-	
+
+
 
 	obtenerReunionesDeProyecto : function(idProyecto) {
 		controller.obtenerReuniones();

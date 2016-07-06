@@ -1,7 +1,3 @@
-//$(function() {
-//	$("#dialog").dialog();
-//});
-
 $(function() {
 	$("#dialog").dialog({
 		resizable : false,
@@ -188,74 +184,7 @@ $(function() {
 	$("#tabs").tabs();
 });
 
-//$(function() {
-//	var dialog, form,
-//
-//	// From
-//	// http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-//	emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, name = $("#name"), email = $("#email"), allFields = $(
-//			[]).add(name).add(email), tips = $(".validateTips");
-//
-//	function updateTips(t) {
-//		tips.text(t).addClass("ui-state-highlight");
-//		setTimeout(function() {
-//			tips.removeClass("ui-state-highlight", 1500);
-//		}, 500);
-//	}
-//
-//	function checkLength(o, n, min, max) {
-//		if (o.val().length > max || o.val().length < min) {
-//			o.addClass("ui-state-error");
-//			updateTips("Length of " + n + " must be between " + min + " and "
-//					+ max + ".");
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	}
-//
-//	function checkRegexp(o, regexp, n) {
-//		if (!(regexp.test(o.val()))) {
-//			o.addClass("ui-state-error");
-//			updateTips(n);
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	}
-//	 dialog = $("#dialog-form").dialog({
-//	 autoOpen : false,
-//	 height : 300,
-//	 width : 350,
-//	 modal : true,
-//	 buttons : {
-//	 'Crear Tarea' : function() {
-//	 var nombre = $("#name").val();
-//	 var descripcion = $("#descripcion").val();
-//	 $(document).ready(controller.crearTarea(nombre, descripcion));
-//	 dialog.dialog("close");
-//	 },
-//	 Cancelar : function() {
-//	 dialog.dialog("close");
-//	 }
-//	 },
-//	 close : function() {
-//	 form[0].reset();
-//	 allFields.removeClass("ui-state-error");
-//	 }
-//	 });
-//
-//	 form = dialog.find("form").on("submit", function(event) {
-//	 event.preventDefault();
-//	 addUser();
-//	 });
-//
-//	 $("#create-user").button().on("click", function() {
-//	 dialog.dialog("open");
-//	 });
-//});
-
-$(function() {
+function abrirDialogCrearTarea(idRelease, idSprint) {
 	dialog = $("#dialog-form").dialog(
 			{
 				autoOpen : false,
@@ -264,12 +193,10 @@ $(function() {
 				modal : true,
 				buttons : {
 					'Crear Tarea' : function() {
-						var nRelease = $("#n-release").val();
-						var nSprint = $("#n-sprint").val();
 						var nombre = $("#name").val();
 						var descripcion = $("#descripcion").val();
 						$(document).ready(
-								controller.crearTarea(nRelease, nSprint,
+								controller.crearTarea(idRelease, idSprint,
 										nombre, descripcion));
 						dialog.dialog("close");
 					},
@@ -287,11 +214,8 @@ $(function() {
 		event.preventDefault();
 		addUser();
 	});
-
-	$("#dialog-form").button().on("click", function() {
-		dialog.dialog("open");
-	});
-});
+	dialog.dialog("open");
+}
 
 $(function() {
  var dialogElimTarea = $("#eliminarTarea").dialog(
@@ -323,11 +247,6 @@ $(function() {
 				}
 			});
 
-	// form = dialog.find("form").on("submit", function(event) {
-	// event.preventDefault();
-	// addUser();
-	// });
-	//
 	$("#eliminar-tarea").button().on("click", function() {
 		dialogElimTarea.dialog("open");
 	});
@@ -391,9 +310,17 @@ $(function() {
 	});
 });
 
-function nuevoBoton(numeroRelease) {
+function nuevoBotonSprint(numeroRelease) {
 	var boton = $('<div><button id="agregarSprint'+numeroRelease+'">Agregar Sprint</button></div>').click(function () {
 		$(document).ready(controller.crearSprint(numeroRelease));
+	});
+	return boton
+}
+
+function nuevoBotonTarea(numeroRelease,numeroSprint) {
+	var boton = $('<div><button id="agregarTarea'+numeroRelease+numeroSprint+'">Agregar tarea</button></div>').click(function () {
+		alert("hola");
+		abrirDialogCrearTarea(numeroRelease, numeroSprint);
 	});
 	return boton
 }
@@ -401,6 +328,14 @@ function nuevoBoton(numeroRelease) {
 function agregarBotonesAreleases(proyecto) {
 	for (var i = 0; i < proyecto.release.length; i++) {
 		var release = $("#release"+i)//document.getElementById('release'+i);
-		release.append(nuevoBoton(i));
+		release.append(nuevoBotonSprint(i));
+		agregarBotonesAsprint(proyecto.release[i], i);
+	}
+}
+
+function agregarBotonesAsprint(release, idRelease){
+	for (var i = 0; i < release.listaSprints.length; i++) {
+		var sprint = $("#celdaSprint"+idRelease+i)
+		sprint.append(nuevoBotonTarea(idRelease, i))
 	}
 }
