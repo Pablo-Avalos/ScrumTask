@@ -326,9 +326,9 @@ var controller = {
 			url : '/integrantesReunion/' + controller.idProyectoActual,
 			success : function(response) {
 				//controller.obtenerIntegrantes()
-				//$('#integranteReunion').empty();
+				$('#integranteReunion').empty();
 				for (var i = 0; i < response.length; i++) {
-		            $('#li'+response[i].id).remove();
+		            //$('#li'+response[i].id).remove();
 					$('#integranteReunion').append(
 							'<li id=li' + response[i].id + '> <input type="checkbox" name="rol" value='
 									+ response[i].id + ' id='+ response[i].id + '>' + response[i].nombre
