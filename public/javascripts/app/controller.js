@@ -248,13 +248,13 @@ var controller = {
 		});
 	},
 
-	crearSprint : function(numeroRelease) {
+	crearSprint : function(numeroRelease, fechaInicio, fechaFin) {
 		$.ajax({
 			type : 'GET',
 			contentType : 'application/json',
 			dataType : 'json',
 			url : '/crearSprint/' + controller.idProyectoActual + '/'
-					+ numeroRelease,
+					+ numeroRelease + '/' + fechaInicio + '/' + fechaFin,
 			success : function(response) {
 				// $("#dialog-sprint").close();
 				$("#dialog-sprintResponse").text(
