@@ -17,7 +17,7 @@ GET 	/reuniones/:idProyecto         controllers.Application.getReuniones(idProye
 GET		/eliminarTarea/:idProyecto/:idRelease/:idSprint/:id controllers.Application.eliminarTarea(idProyecto: Int, idRelease: Int, idSprint: Int, id: Int)
 GET 	/eliminarProyecto/:idProyecto controllers.Application.eliminarProyecto(idProyecto: Int)
 GET		/crearRelease/:idProyecto		controllers.Application.crearRelease(idProyecto: Int)
-GET		/crearSprint/:idProyecto/:numeroRelease     controllers.Application.crearSprint(idProyecto: Int, numeroRelease: Int) 
+GET		/crearSprint/:idProyecto/:numeroRelease/:fechaInicio/:fechaFin     controllers.Application.crearSprint(idProyecto: Int, numeroRelease: Int, fechaInicio:String, fechaFin:String) 
 GET		/eliminarReunion/:idProyecto/:idReunion controllers.Application.eliminarReunion(idProyecto: Int, idReunion: Int)
 GET		/tiposDeReunion				    controllers.Application.getTipoReuniones
 GET		/guardarReunion/:idProyecto/:idReunion/:fecha/:tipo/:nombre/:descripcion/:integrantes    controllers.Application.guardarReunion(idProyecto: Int,idReunion: Int,fecha:String,tipo:String,nombre:String,descripcion:String,integrantes:String)
