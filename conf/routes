@@ -24,3 +24,4 @@ GET     /agregarProyecto/:nombre    controllers.Application.agregarProyecto(nomb
 GET 	/integrantesReunion/:idProyecto controllers.Application.getIntegrantesReunion(idProyecto: Int)
 GET 	/usuariosReunion/:idProyecto/:idReunion controllers.Application.getObtenerUsuariosDeReunion(idProyecto: Int,idReunion: Int)
 GET 	/cambiarEstado/:idProyecto/:idRelease/:idSprint/:id/:idEstado controllers.Application.actualizarEstado(idProyecto: Int, idRelease: Int, idSprint: Int, id: Int, idEstado:Int)
+GET 	/agregarIntegrante/:idProyecto/:nombre/:tipo	controllers.Application.agregarColaborador(idProyecto: Int, nombre:String, tipo:String)

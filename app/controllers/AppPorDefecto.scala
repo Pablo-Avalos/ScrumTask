@@ -7,8 +7,9 @@ class AppPorDefecto {
   
   
   var idProyecto = 25
+  var proyectos = new ListBuffer[Project]
   
-  var integrante1 = new ScrumMaster("Pepe")
+  /*var integrante1 = new ScrumMaster("Pepe")
   integrante1.name = "Pepe"
   integrante1.id = 0
   
@@ -84,7 +85,7 @@ class AppPorDefecto {
   reunion2.tipoDeReunion = TipoDeReunion.Planning
   reunion3.tipoDeReunion = TipoDeReunion.Retrospective
 
-  var proyectos = new ListBuffer[Project]
+  
 
   var proyecto1 = new Project(1, "ScrumTask")
   proyecto1.tablero = tablero1
@@ -121,6 +122,8 @@ class AppPorDefecto {
 
   proyecto4.reuniones.+=(reunion1)
   proyecto4.reuniones.+=(reunion2)
+  
+  */
   
   def getTablero(idProyecto: Int): Tablero = {
     proyectos.find { proyecto => proyecto.id == idProyecto }.getOrElse(null).tablero
