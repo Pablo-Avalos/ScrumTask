@@ -14,12 +14,20 @@ object Application extends Controller {
 
   val appPorDefecto = new AppPorDefecto
   var idp = 3
+  
+  implicit val estadoWrites = new Writes[StateTask] {
+    def writes(estado: StateTask) = Json.obj(
+      "codigo" -> estado.codigo
+      )
+  }
+  
   implicit val tareaWrites = new Writes[Tarea] {
     def writes(tarea: Tarea) = Json.obj(
       "id" -> tarea.id,
       "nombre" -> tarea.nombre,
       "descripcion" -> tarea.descripcion,
-      "autor" -> tarea.autor //,"estado" -> tarea.estado
+      "autor" -> tarea.autor
+      ,"estado" -> tarea.estado
       )
   }
 
