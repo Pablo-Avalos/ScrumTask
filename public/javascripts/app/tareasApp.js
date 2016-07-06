@@ -32,8 +32,8 @@ $(document).ready(function() {
 });
 
 $(function() {
-	$("#tableroConTareas").sortable();
-	$("#tableroConTareas").disableSelection();
+	$("#sortable").sortable();
+	$("#sortable").disableSelection();
 });
 
 function agregarTarjeta() {
@@ -318,8 +318,7 @@ function nuevoBotonSprint(numeroRelease) {
 }
 
 function nuevoBotonTarea(numeroRelease,numeroSprint) {
-	var boton = $('<div><button id="agregarTarea'+numeroRelease+numeroSprint+'">Agregar tarea</button></div>').click(function () {
-		alert("hola");
+	var boton = $('<button id="agregarTarea'+numeroRelease+numeroSprint+'">Agregar tarea</button>').click(function () {
 		abrirDialogCrearTarea(numeroRelease, numeroSprint);
 	});
 	return boton
@@ -337,5 +336,11 @@ function agregarBotonesAsprint(release, idRelease){
 	for (var i = 0; i < release.listaSprints.length; i++) {
 		var sprint = $("#celdaSprint"+idRelease+i)
 		sprint.append(nuevoBotonTarea(idRelease, i))
+	}
+}
+
+function agregarTarea(sprint, tarea){
+	for (var i = 0; i < sprint.listaTareas.length; i++) {
+		sprint.listaTareas[i]
 	}
 }

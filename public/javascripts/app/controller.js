@@ -69,40 +69,43 @@ var controller = {
 								var celdaSprint = document.createElement("td");
 								celdaSprint.setAttribute("id", "celdaSprint" +i+j);
 
-//								style="overflow-y: scroll; height: 520px;"
-//									celdaSprint.setAttribute("style","overflow-y: scroll; height: 100px;" );
 								var textoCeldaSprint = document
 										.createTextNode("Sprint " + numerSpt);
 
 								celdaSprint.appendChild(textoCeldaSprint);
 
+								var divTareas = document.createElement("div");
 								var ullist = document.createElement("ul");
-								ullist.setAttribute("id", "tableroConTareas");
-								ullist.setAttribute("style","overflow-y: scroll; height: 150px;" );
-
+								divTareas.appendChild(ullist);
+								ullist.setAttribute("id", "tareas"+j);
+								ullist.setAttribute("class", "sortable")
+								ullist.setAttribute("style","height: 150px;" );
 								for (var h = 0; h < response.release[i].listaSprints[j].listaTareas.length; h++) {
 									var tarea = response.release[i].listaSprints[j].listaTareas[h];
-									// celdaSprint =
-									var celdaTareas = document
-											.createElement("div");
 
-									celdaTareas.setAttribute("id", "dialog");
-									celdaTareas.setAttribute("class", "column");
-									celdaTareas
-											.setAttribute("class", "portlet-content");
+									var celdaTareas = document.createElement("li");
+									celdaTareas.setAttribute("class", "ui-state-default");
+									var nombre = document.createElement("div");
+									nombre.appendChild(document.createTextNode(tarea.nombre))
 
-									var textoLista = document
-											.createTextNode("Id: " + tarea.id
+									var textoTarea = document.createTextNode(tarea.id
 													+ "\n" + " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
 													+ " Descripcion: "
 													+ tarea.descripcion);
+									celdaTareas.appendChild(textoTarea);
 
+									//var botonEliminar = document.createElement("button");
+									//botonEliminar.setAttribute("class", "x");
+
+									//celdaTareas.appendChild(document.createElement("button"));
 									// textoLista.setAttribute("id", "dialog");
-									celdaTareas.appendChild(textoLista);
+									//celdaTareas.appendChild(textoLista);
 									ullist.appendChild(celdaTareas);
+
+
 								}
-								celdaSprint.appendChild(ullist);
+								celdaSprint.appendChild(divTareas);
 								fila.appendChild(celdaSprint);
 							}
 
@@ -114,7 +117,10 @@ var controller = {
 						tabla.setAttribute("border", "2");
 
 						agregarBotonesAreleases(response);
-						
+
+					},
+					complete: function functionName() {
+							$(".sortable").sortable();
 					}
 				});
 	},

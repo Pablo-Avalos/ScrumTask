@@ -4,7 +4,7 @@ import scala.collection.mutable.ListBuffer
 case class Project(idP: Int, nombreP: String) {
   var id = idP
   var nombre = nombreP
-  var tablero = null: Tablero
+  var tablero = new Tablero(0)
   var colaboradores = new ListBuffer[Usuario]
   var reuniones = new ListBuffer[Reunion]
   var idsDisponiblesReunion = new ListBuffer[Int]
