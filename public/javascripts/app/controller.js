@@ -88,7 +88,17 @@ var controller = {
 									celdaTareas.setAttribute("class", "ui-state-default");
 									var nombre = document.createElement("div");
 									nombre.appendChild(document.createTextNode(tarea.nombre))
+                                      if(tarea.estado.codigo =3){
+                                     celdaTareas.setAttribute("style","background:white")  
+                                     }
+                                   else{
+                                     if(tarea.estado.codigo =2){
+                                     celdaTareas.setAttribute("style","background:yellow") 
 
+                                     }
+                                      else{celdaTareas.setAttribute("style","background:red")}
+
+                                     }
 									var textoTarea = document.createTextNode(tarea.id
 													+ "\n" + " " + "Nombre: "
 													+ tarea.nombre + "\n" + ""
