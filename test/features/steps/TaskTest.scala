@@ -80,5 +80,4 @@ class TaskTest extends ScalaDsl with EN {
   Then("""^La descripcion de la tarea debe ser "([^"]*)"$""") { (arg0: String) =>
     assertEquals(tarea.descripcion, arg0)
   }
-
 }
