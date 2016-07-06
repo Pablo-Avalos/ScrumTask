@@ -103,7 +103,7 @@
 														class="text ui-widget-content ui-corner-all"></textarea>
 													<br> <label for="name"><ins>Tipo de reunión:</ins></label> <br>
 													<select id="reunion-tipo"></select> <br>
-													<p><ins>Fecha:</ins><br><input type="text" id="fechareunion"></p> 
+													<p><ins>Fecha:</ins><br><input type="text" id="fechareunion"></p>
 												</td>
 												<td valign="top" id="integranteReunionTd">
 													<label for="integrantes"><ins>Integrantes:</ins></label>
@@ -164,8 +164,6 @@
 									<br>
 									<div>
 										<button id="create-release">Agregar Release</button>
-										<button id="create-sprint">Agregar Sprint</button>
-										<button id="create-user">Agregar Tarea</button>
 										<button id="eliminar-tarea">Eliminar Tarea</button>
 									</div>
 									<br>
@@ -194,12 +192,7 @@
 
 											<form>
 												<fieldset>
-													<label for="name">Numero Release</label> <input type="text"
-														name="n-release" id="n-release"
-														class="text ui-widget-content ui-corner-all"> <label
-														for="name">Numero Sprint</label> <input type="text"
-														name="n-sprint" id="n-sprint"
-														class="text ui-widget-content ui-corner-all"> <label
+													<label
 														for="name">Nombre</label> <input type="text" name="name"
 														id="name" class="text ui-widget-content ui-corner-all">
 													<label for="descripcion">Descripcion</label> <input
@@ -226,29 +219,6 @@
 												</fieldset>
 											</form>
 										</div>
-
-										<!--
-										<div>
-											<div id="dialog-form" title="Crear Tarea">
-												<p class="validateTips">Completar Campos</p>
-
-												<form>
-													<fieldset>
-														<label for="name">IdProjecto</label> <input type="text"
-															name="idProyecto" id="idProyecto"
-															class="text ui-widget-content ui-corner-all"> <label
-															for="name">Nombre</label> <input type="text" name="name"
-															id="name" class="text ui-widget-content ui-corner-all">
-														<label for="descripcion">Descripcion</label> <input
-															type="text" name="descripcion" id="descripcion"
-															class="text ui-widget-content ui-corner-all"> <input
-															type="submit" tabindex="-1"
-															style="position: absolute; top: -1000px">
-													</fieldset>
-												</form>
-											</div>
-											<button id="create-user">Agregar Tarea</button>
-										</div> -->
 
 										<div id="confirmarEliminarTarea" title="Eliminar tarea">
 											<p>¿Desea eliminar por completo la tarea?</p>
